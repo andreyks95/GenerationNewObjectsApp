@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GenerationNewObjectsApp
 {
-    public partial class Form1 : Form
+    public partial class TechEconomcIndicatorsForm : Form
     {
-        public Form1()
+        public TechEconomcIndicatorsForm()
         {
             InitializeComponent();
         }

@@ -16,7 +16,12 @@ namespace GenerationNewObjectsApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.Run(new IndicatorsExpertForm());
+            //Application.Run(new MorphAnalysisForm());
+            //Application.Run(new GenerationEvaluationTables());
+            //Application.Run(new GenerationObjects());
+            // Application.Run(new RatingObjectsForm());
+            Application.Run(new MorphTable());
         }
     }
 }
