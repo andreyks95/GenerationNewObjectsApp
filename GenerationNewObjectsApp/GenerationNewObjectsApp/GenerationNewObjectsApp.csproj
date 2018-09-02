@@ -132,6 +132,12 @@
     <Compile Include="New forms\ValueTable.Designer.cs">
       <DependentUpon>ValueTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="TablesForms\Objects\TableObjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TablesForms\Objects\TableObjects.Designer.cs">
+      <DependentUpon>TableObjects.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="New forms\AssessmentSolutionForm.resx">
       <DependentUpon>AssessmentSolutionForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +188,9 @@
     </Compile>
     <EmbeddedResource Include="New forms\ValueTable.resx">
       <DependentUpon>ValueTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TablesForms\Objects\TableObjects.resx">
+      <DependentUpon>TableObjects.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

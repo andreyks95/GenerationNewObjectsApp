@@ -21,7 +21,8 @@ namespace GenerationNewObjectsApp
             //Application.Run(new GenerationEvaluationTables());
             //Application.Run(new GenerationObjects());
             // Application.Run(new RatingObjectsForm());
-            Application.Run(new MorphTable());
+            //Application.Run(new MorphTable());
+            Application.Run();
         }
     }
 }
