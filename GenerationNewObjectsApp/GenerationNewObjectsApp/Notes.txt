@@ -1,0 +1,2 @@
+1. Проект EntityFramework6_ConsoleApp - тренировочный
+2. Прокт GenerationNewObjectsApp - старый проект, который возможно будет заменён
