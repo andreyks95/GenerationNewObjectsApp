@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MorphAnalysis.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,17 +20,29 @@ namespace MorphAnalysis.TablesDataInitialization
 
         private MorphModel db;
 
+
+        //кешування рішень функцій
+        private CacheData solOfFuncCacheData = CacheData.GetInstance();
+
+        //Завантажити всі відібрані функції з ОЗУ
+        List<Function> funcList;
+
         public TableSolutions()
         {
             InitializeComponent();
 
             db = new MorphModel();
+
+            funcList = solOfFuncCacheData.getListFunction;
         }
 
         private void TableSolutions_Load(object sender, EventArgs e)
         {
             db.Solutions.Load();
             dataGridView1.DataSource = db.Solutions.Local.ToBindingList();
+
+            //Заповнити комбо-бокс тільки іменами функції
+            comboBox1.Items.AddRange(funcList.Select(f=>f.name).ToArray());
         }
 
         //Add
@@ -102,6 +115,45 @@ namespace MorphAnalysis.TablesDataInitialization
             textBox1.Text = sol.name;
             textBox2.Text = sol.characteristic;
             textBox3.Text = sol.bibliographic_description;
+        }
+
+        //Додавання функцій та їх технічних рішень
+        private void buttonAddSolutionsOfFunctionsToList_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null) return;
+
+            Solution sol = dataGridView1.CurrentRow.DataBoundItem as Solution;
+
+            if (sol == null)
+            {
+                MessageBox.Show("Рішення для функції не обрано!", "Помилка");
+                return;
+            }
+
+            //Знаходимо функцію, яку вибрав користувач в базі даних. для зв'язки
+            string selectedFuncName = comboBox1.SelectedItem.ToString();
+
+            Function selectedFunc = funcList.FirstOrDefault(f => f.name == selectedFuncName);
+            
+            if(selectedFunc == null)
+            {
+                MessageBox.Show("Обраної функції не існує в базі даних! \n Оберіть існуючу функцію!", "Помилка вибору функції");
+                return;
+            }
+
+            //Створюємо об'єкт де функція має своє рішення
+            SolutionsOfFunction solOfFunc = new SolutionsOfFunction()
+            {
+                Solution = sol,
+                Function = selectedFunc
+            };
+
+            //Зберегти в локальне сховище
+            solOfFuncCacheData.AddSolutionOfFunctionToList(solOfFunc);
+
+            //Зберегти до бази даних
+            //db.SolutionsOfFunctions.AddOrUpdate(solOfFunc);
+            
         }
     }
 }
