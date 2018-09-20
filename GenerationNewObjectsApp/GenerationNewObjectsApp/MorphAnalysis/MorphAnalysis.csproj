@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelperClasses\CacheData.cs" />
     <Compile Include="TablesDataInitialization\TableClassifications.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +96,18 @@
     </Compile>
     <Compile Include="TablesDataInitialization\TableSolutions.Designer.cs">
       <DependentUpon>TableSolutions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TablesExpertEvaluation\HelperAskCountExpertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TablesExpertEvaluation\HelperAskCountExpertForm.Designer.cs">
+      <DependentUpon>HelperAskCountExpertForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TablesExpertEvaluation\TableFunctionsSolutions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TablesExpertEvaluation\TableFunctionsSolutions.Designer.cs">
+      <DependentUpon>TableFunctionsSolutions.cs</DependentUpon>
     </Compile>
     <Compile Include="ЕntityСlasses\Classification.cs" />
     <Compile Include="Form1.cs">
@@ -147,6 +160,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TablesDataInitialization\TableSolutions.resx">
       <DependentUpon>TableSolutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TablesExpertEvaluation\HelperAskCountExpertForm.resx">
+      <DependentUpon>HelperAskCountExpertForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TablesExpertEvaluation\TableFunctionsSolutions.resx">
+      <DependentUpon>TableFunctionsSolutions.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
