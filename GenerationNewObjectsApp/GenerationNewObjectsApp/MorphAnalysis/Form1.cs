@@ -1,4 +1,5 @@
 ﻿using MorphAnalysis.TablesDataInitialization;
+using MorphAnalysis.TablesExpertEvaluation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,6 +62,16 @@ namespace MorphAnalysis
         private void таблицяМодифікаційToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new TableModifications().Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int value;
+            if (!int.TryParse(textBoxCountExpert.Text, out value))
+                MessageBox.Show("Кількість експертів повинно бути числом і менше або дорівнює 10", "Помилка введення");
+            else
+                new TableFunctionsSolutions(value).Show();
+                
         }
     }
 }
