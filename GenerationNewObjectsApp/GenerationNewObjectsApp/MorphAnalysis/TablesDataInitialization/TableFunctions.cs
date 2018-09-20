@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MorphAnalysis.HelperClasses;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,9 @@ namespace MorphAnalysis.TablesDataInitialization
         private string id;
 
         private MorphModel db;
+
+        //кешування функцій
+        private CacheData funcCacheData = CacheData.GetInstance();
 
         public TableFunctions()
         {
@@ -102,5 +106,16 @@ namespace MorphAnalysis.TablesDataInitialization
             textBox2.Text = Convert.ToString(func.characteristics);
         }
 
+        private void buttonAddFuncToList_Click(object sender, EventArgs e)
+        {
+            var func = dataGridView1.CurrentRow.DataBoundItem as Function;
+            if(func == null)
+            {
+                MessageBox.Show("Функція не обрана!", "Помилка");
+                return;
+            }
+            else
+                funcCacheData.AddFunctionToList(func);
+        }
     }
 }
