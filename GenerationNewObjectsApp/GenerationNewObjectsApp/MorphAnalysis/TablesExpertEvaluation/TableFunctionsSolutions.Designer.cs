@@ -32,12 +32,20 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.buttonCalcSols = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonCalcFuncs = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.buttonCalcFuncs);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -65,6 +73,8 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.buttonCalcSols);
             this.panel2.Location = new System.Drawing.Point(0, 295);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(784, 50);
@@ -89,6 +99,46 @@
             this.dataGridView2.MouseEnter += new System.EventHandler(this.dataGridView2_Enter);
             this.dataGridView2.MouseLeave += new System.EventHandler(this.dataGridView2_MouseLeave);
             // 
+            // buttonCalcSols
+            // 
+            this.buttonCalcSols.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.buttonCalcSols.Location = new System.Drawing.Point(350, 13);
+            this.buttonCalcSols.Name = "buttonCalcSols";
+            this.buttonCalcSols.Size = new System.Drawing.Size(147, 30);
+            this.buttonCalcSols.TabIndex = 0;
+            this.buttonCalcSols.Text = "Розрахунок рішень";
+            this.buttonCalcSols.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(332, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Розрахувати вагу рішень в межах обраної функції";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Location = new System.Drawing.Point(15, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(178, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Розрахувати вагу функцій";
+            // 
+            // buttonCalcFuncs
+            // 
+            this.buttonCalcFuncs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.buttonCalcFuncs.Location = new System.Drawing.Point(199, 12);
+            this.buttonCalcFuncs.Name = "buttonCalcFuncs";
+            this.buttonCalcFuncs.Size = new System.Drawing.Size(152, 30);
+            this.buttonCalcFuncs.TabIndex = 1;
+            this.buttonCalcFuncs.Text = "Розрахунок функцій";
+            this.buttonCalcFuncs.UseVisualStyleBackColor = true;
+            // 
             // TableFunctionsSolutions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,7 +152,11 @@
             this.Name = "TableFunctionsSolutions";
             this.Text = "TableFunctionsSolutions";
             this.Load += new System.EventHandler(this.TableFunctionsSolutions_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
@@ -114,5 +168,9 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Button buttonCalcFuncs;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonCalcSols;
     }
 }

@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HelperClasses\CacheData.cs" />
+    <Compile Include="HelperClasses\Expert.cs" />
+    <Compile Include="HelperClasses\Normalizer.cs" />
     <Compile Include="TablesDataInitialization\TableClassifications.cs">
       <SubType>Form</SubType>
     </Compile>
