@@ -47,6 +47,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
             //    dataGridView1.Columns.Add("Expert" + i, "Експ. № " + (i + 1));
         }
 
+        //
         private void FillDgvExperts(DataGridView dgv, string nameFirstColumn)
         {
             dgv.Columns.Add("FirstCol", nameFirstColumn);
@@ -70,11 +71,12 @@ namespace MorphAnalysis.TablesExpertEvaluation
         {
             if (e.Row.Index >= 0)
             {
-                //Исключение здесь возникло
+                //Дізнаємося ім'я строки
                 string firstCellValue = e.Row.Cells[0].Value ?. ToString(); ;
 
                 if (firstCellValue is null) return;
 
+               
                 //string firstCellValue = e.Row.Cells[0].Value.ToString();
 
                 //отримаємо функцію для запиту
@@ -90,12 +92,28 @@ namespace MorphAnalysis.TablesExpertEvaluation
                                 where selectedFunc.id_function == sol.id_func
                                 select new { sol.name, sol.weight };
 
+                dataGridView2.Rows.Clear();
 
-                //TODO: Подумать как правильно отобразить данные здесь
+                foreach (var item in getResult)
+                    dataGridView2.Rows.Add(item.name);
+
+                
                 //TODO: сделать проверку ячеек на ввод только чисел (можно и дабл можно и инт)
                 //Как потом вытащить оценки? Как их нормировать? Как сново отобразить новый столбец с нормированными усредёнными оценками?
-               // this.dataGridView2.DataSource = getResult.ToList();
+               
+            
+                // this.dataGridView2.DataSource = getResult.ToList();
             }
+        }
+
+        private void dataGridView2_Enter(object sender, EventArgs e)
+        {
+            dataGridView1.Enabled = false;
+        }
+
+        private void dataGridView2_MouseLeave(object sender, EventArgs e)
+        {
+            dataGridView1.Enabled = true;
         }
     }
 }
