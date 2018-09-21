@@ -17,6 +17,8 @@ namespace MorphAnalysis
         public Form1()
         {
             InitializeComponent();
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,14 +66,52 @@ namespace MorphAnalysis
             new TableModifications().Show();
         }
 
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            button3.Enabled = false;
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
+            int value = int.Parse(textBoxCountExpert.Text);
+            new TableFunctionsSolutions(value).Show();
+            button3.Enabled = false;
+        }
+
+        private void textBoxCountExpert_KeyDown(object sender, KeyEventArgs e)
+        {
             int value;
-            if (!int.TryParse(textBoxCountExpert.Text, out value))
-                MessageBox.Show("Кількість експертів повинно бути числом і менше або дорівнює 10", "Помилка введення");
-            else
-                new TableFunctionsSolutions(value).Show();
-                
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBoxCountExpert.Text is null || textBoxCountExpert.Text == "")
+                {
+                    MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
+                    button3.Enabled = false;
+                }
+                else
+                {
+                    if (!int.TryParse(textBoxCountExpert.Text, out value))
+                    {
+                        MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
+                        button3.Enabled = false;
+                    }
+                    else
+                    {
+                        if (value > 0 && value <= 10)
+                        {
+                            button3.Enabled = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
+                            button3.Enabled = false;
+                        }
+                    }
+                }
+            }
+
         }
     }
 }
