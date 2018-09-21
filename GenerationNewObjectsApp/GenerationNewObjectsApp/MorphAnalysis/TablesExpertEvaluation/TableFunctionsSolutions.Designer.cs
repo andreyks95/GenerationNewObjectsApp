@@ -108,6 +108,7 @@
             this.buttonCalcSols.TabIndex = 0;
             this.buttonCalcSols.Text = "Розрахунок рішень";
             this.buttonCalcSols.UseVisualStyleBackColor = true;
+            this.buttonCalcSols.Click += new System.EventHandler(this.buttonCalcSols_Click);
             // 
             // label1
             // 
@@ -138,6 +139,7 @@
             this.buttonCalcFuncs.TabIndex = 1;
             this.buttonCalcFuncs.Text = "Розрахунок функцій";
             this.buttonCalcFuncs.UseVisualStyleBackColor = true;
+            this.buttonCalcFuncs.Click += new System.EventHandler(this.buttonCalcFuncs_Click);
             // 
             // TableFunctionsSolutions
             // 

@@ -72,11 +72,11 @@ namespace MorphAnalysis.TablesExpertEvaluation
             if (e.Row.Index >= 0)
             {
                 //Дізнаємося ім'я 0-ї комірки
-                string firstCellValue = e.Row.Cells[0].Value ?. ToString(); ;
+                string firstCellValue = e.Row.Cells[0].Value?.ToString(); ;
 
                 if (firstCellValue is null) return;
 
-               
+
                 //string firstCellValue = e.Row.Cells[0].Value.ToString();
 
                 //отримаємо функцію для запиту
@@ -99,11 +99,11 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 foreach (var item in getResult)
                     dataGridView2.Rows.Add(item.name);
 
-                
+
                 //TODO: сделать проверку ячеек на ввод только чисел (можно и дабл можно и инт)
                 //Как потом вытащить оценки? Как их нормировать? Как сново отобразить новый столбец с нормированными усредёнными оценками?
-               
-            
+
+
                 // this.dataGridView2.DataSource = getResult.ToList();
             }
         }
@@ -149,5 +149,30 @@ namespace MorphAnalysis.TablesExpertEvaluation
         }
 
         #endregion
+
+        private void buttonCalcSols_Click(object sender, EventArgs e)
+        {
+            //TODO: Создать нового эксперта и добавить его в список експертов для нормализации
+            //Написать класс для нормализации
+            List<Expert> experts = new List<Expert>();
+            //пересуваємося по стовпцям
+            for (int col = 0; col < countOfExpert; col++)
+            {
+                Expert expert = new Expert();
+                //пересуваємося по рядках
+                for (int row = 0; row < dataGridView2.Rows.Count; row++)
+                {
+                    double value = Convert.ToDouble(dataGridView2[col+1, row].Value); //col+1 тому що в 1-й комірці назва ф-ї
+                    expert.AddValue(value);
+                }
+                experts.Add(expert);
+            }
+
+        }
+
+        private void buttonCalcFuncs_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
