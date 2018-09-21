@@ -58,6 +58,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(784, 245);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView1.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dataGridView1_RowStateChanged);
             // 
             // panel2
@@ -83,6 +84,7 @@
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(784, 214);
             this.dataGridView2.TabIndex = 3;
+            this.dataGridView2.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             this.dataGridView2.Enter += new System.EventHandler(this.dataGridView2_Enter);
             this.dataGridView2.MouseEnter += new System.EventHandler(this.dataGridView2_Enter);
             this.dataGridView2.MouseLeave += new System.EventHandler(this.dataGridView2_MouseLeave);
