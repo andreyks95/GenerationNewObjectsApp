@@ -148,6 +148,8 @@ namespace MorphAnalysis.TablesDataInitialization
                 Function = selectedFunc
             };
 
+            MessageBox.Show("Рішення: " + solOfFunc.Solution.name + " для функції: " + solOfFunc.Function.name + " додано для оцінювання!", "Підтверджено");
+            
             //Зберегти в локальне сховище
             solOfFuncCacheData.AddSolutionOfFunctionToList(solOfFunc);
 
