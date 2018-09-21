@@ -109,13 +109,16 @@ namespace MorphAnalysis.TablesDataInitialization
         private void buttonAddFuncToList_Click(object sender, EventArgs e)
         {
             var func = dataGridView1.CurrentRow.DataBoundItem as Function;
-            if(func == null)
+            if (func == null)
             {
                 MessageBox.Show("Функція не обрана!", "Помилка");
                 return;
             }
             else
+            {
+                MessageBox.Show("Функцію " + func.name + " додано для оцінювання!", "Підтверджено");
                 funcCacheData.AddFunctionToList(func);
+            }
         }
     }
 }
