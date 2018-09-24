@@ -70,15 +70,18 @@ namespace MorphAnalysis.TablesExpertEvaluation
             //dataGridView1.DataSource = funcList.Select(f => new { f.name, f.characteristics, f.weight } ).ToList();
         }
 
-        //Відображаємо дочірні записи згідно обраного рядку батьківської
+        //Відображаємо дочірні записи згідно обраного рядку батьківської таблиці (рішення для функцій)
         private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
             if (e.Row.Index >= 0)
             {
-                //Дізнаємося ім'я 0-ї комірки
+                //Дізнаємося ім'я 0-ї комірки. Назва функції
                 string firstCellValue = e.Row.Cells[0].Value?.ToString(); ;
 
                 if (firstCellValue is null) return;
+
+                
+                label1.Text = "Розрахувати вагу рішень в межах обраної функції:" + "\n" + firstCellValue;
 
 
                 //string firstCellValue = e.Row.Cells[0].Value.ToString();
@@ -129,126 +132,29 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
         #region Розрахунок ваги елементів відносно один одного 
 
-
         //Розрахунок для рішень обраної функції
         private void buttonCalcSols_Click(object sender, EventArgs e)
         {
+            //отримаємо оцінки з таблиці
+            //List<Expert> experts = configDGV.GetExpertColumnEstimates(dataGridView2);
+            //класс нормалізації
+            //Normalizer normalizer = new Normalizer();
+            ////передати експертів
+            ////отримати нормовані оцінки
+            //experts = normalizer.CalcNormalizeExpertsEstimates(experts);
+            //розрахуємо середнє значення стовбців та виконаємо їх нормалізацію
+            //double[] rowsAvgCache = configDGV.GetAvgValuesRows(experts);
+            //перебудуємо таблицю
+            //configDGV.RebuildTableDGV(dataGridView2, experts, rowsAvgCache);
 
-            List<Expert> experts = new List<Expert>();
-            //пересуваємося по стовпцям
-            //Зберігаємо кожний стовбець значень експертів. Для нормування
-            for (int col = 0; col < countOfExpert; col++)
-            {
-                Expert expert = new Expert();
-                //пересуваємося по рядках
-                for (int row = 0; row < dataGridView2.Rows.Count; row++)
-                {
-                    double value = Convert.ToDouble(dataGridView2[col+1, row].Value); //col+1 тому що в 1-й комірці назва ф-ї
-                    expert.AddValue(value);
-                }
-                experts.Add(expert);
-            }
-
-            
-            Normalizer normalizer = new Normalizer();
-            //передати експертів
-            //отримати нормовані оцінки
-            experts = normalizer.CalcNormalizeExpertsEstimates(experts);
-
-            //Розрахувати середнє значення рядків та знову нормалізувати їх
-            double[] rowArrayCache = new double[experts.Count];
-            double[] rowsAvgCache = new double[experts[0].getEstimates.Length];
-            //перебудуємо dgv з нормаваними оцінками
-            for (int row = 0; row < experts[0].getEstimates.Length; row++)
-            {
-                //пересуваємося по рядках
-                for (int col = 0; col < experts.Count; col++)
-                {
-                   rowArrayCache[col] = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
-                }
-                rowsAvgCache[row] = normalizer.CalcAvg(rowArrayCache);
-            }
-            rowsAvgCache = normalizer.CalcNormalizeEstimates(rowsAvgCache);
-
-
-            //перебудуємо dgv з нормаваними оцінками
-            for (int col = 0; col < countOfExpert + 1; col++)
-            {
-                //пересуваємося по рядках
-                for (int row = 0; row < dataGridView2.Rows.Count; row++)
-                {
-                    if (col == countOfExpert)
-                        dataGridView2[col+1, row].Value = rowsAvgCache[row];
-                    else
-                        dataGridView2[col + 1, row].Value = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
-                }
-            }
-            dataGridView2.Columns[countOfExpert + 1].Visible = true;
-
+            configDGV.RebuildTableDGV(dataGridView2);
         }
-
 
         //Розрахунок для функцій 
-        private void buttonCalcFuncs_Click(object sender, EventArgs e)
-        {
-
-            List<Expert> experts = new List<Expert>();
-            //пересуваємося по стовпцям
-            //Зберігаємо кожний стовбець значень експертів. Для нормування
-            for (int col = 0; col < countOfExpert; col++)
-            {
-                Expert expert = new Expert();
-                //пересуваємося по рядках
-                for (int row = 0; row < dataGridView1.Rows.Count; row++)
-                {
-                    double value = Convert.ToDouble(dataGridView1[col + 1, row].Value); //col+1 тому що в 1-й комірці назва ф-ї
-                    expert.AddValue(value);
-                }
-                experts.Add(expert);
-            }
-
-
-            Normalizer normalizer = new Normalizer();
-            //передати експертів
-            //отримати нормовані оцінки
-            experts = normalizer.CalcNormalizeExpertsEstimates(experts);
-
-            //TODO: HERE
-
-            //Розрахувати середнє значення рядків та знову нормалізувати їх
-            double[] rowArrayCache = new double[experts.Count];
-            double[] rowsAvgCache = new double[experts[0].getEstimates.Length];
-            //перебудуємо dgv з нормаваними оцінками
-            for (int row = 0; row < experts[0].getEstimates.Length; row++)
-            {
-                //пересуваємося по рядках
-                for (int col = 0; col < experts.Count; col++)
-                {
-                    rowArrayCache[col] = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
-                }
-                rowsAvgCache[row] = normalizer.CalcAvg(rowArrayCache);
-            }
-            rowsAvgCache = normalizer.CalcNormalizeEstimates(rowsAvgCache);
-
-
-            //перебудуємо dgv з нормаваними оцінками
-            for (int col = 0; col < countOfExpert + 1; col++)
-            {
-                //пересуваємося по рядках
-                for (int row = 0; row < dataGridView1.Rows.Count; row++)
-                {
-                    if (col == countOfExpert)
-                        dataGridView1[col + 1, row].Value = rowsAvgCache[row];
-                    else
-                        dataGridView1[col + 1, row].Value = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
-                }
-            }
-            dataGridView1.Columns[countOfExpert + 1].Visible = true;
-
-        }
+        private void buttonCalcFuncs_Click(object sender, EventArgs e) =>         
+            configDGV.RebuildTableDGV(dataGridView1);
 
         #endregion
-
 
     }
 }

@@ -105,16 +105,16 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Location = new System.Drawing.Point(3, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(332, 17);
+            this.label1.Size = new System.Drawing.Size(336, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Розрахувати вагу рішень в межах обраної функції";
+            this.label1.Text = "Розрахувати вагу рішень в межах обраної функції:";
             // 
             // buttonCalcSols
             // 
             this.buttonCalcSols.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonCalcSols.Location = new System.Drawing.Point(350, 13);
+            this.buttonCalcSols.Location = new System.Drawing.Point(352, 11);
             this.buttonCalcSols.Name = "buttonCalcSols";
             this.buttonCalcSols.Size = new System.Drawing.Size(147, 30);
             this.buttonCalcSols.TabIndex = 0;
