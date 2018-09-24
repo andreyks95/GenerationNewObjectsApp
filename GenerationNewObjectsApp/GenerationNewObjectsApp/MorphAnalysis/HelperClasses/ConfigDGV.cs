@@ -11,6 +11,8 @@ namespace MorphAnalysis.HelperClasses
     {
         private readonly int countOfExpert = 1;
 
+        private Normalizer normalizer = new Normalizer();
+
         public ConfigDGV(int countOfExpert = 1)
         {
             this.countOfExpert = countOfExpert;
@@ -58,7 +60,6 @@ namespace MorphAnalysis.HelperClasses
 
         #endregion
 
-
         #region Перірка комірок на введення числових даних
 
         //Перевірка комірок тільки на ввведення числових даних
@@ -93,5 +94,86 @@ namespace MorphAnalysis.HelperClasses
 
         #endregion
 
+        #region отримання значень по стовбцям. Нормалізація даних. Перебудова таблиці з новими значеннями 
+
+        ////Зберігаємо кожний стовбець значень експертів. Для нормування
+        public List<Expert> GetExpertColumnEstimates(DataGridView dgv)
+        {
+            List<Expert> experts = new List<Expert>();
+            //пересуваємося по стовпцям
+            //Зберігаємо кожний стовбець значень експертів. Для нормування
+            for (int col = 0; col < countOfExpert; col++)
+            {
+                Expert expert = new Expert();
+                //пересуваємося по рядках
+                for (int row = 0; row < dgv.Rows.Count; row++)
+                {
+                    double value = Convert.ToDouble(dgv[col + 1, row].Value); //col+1 тому що в 1-й комірці назва ф-ї
+                    expert.AddValue(value);
+                }
+                experts.Add(expert);
+            }
+
+            return experts;
+        }
+
+        //Розрахуємо середнє значення для кожного рядка dgv і нормуємо їх по стовбцю
+        public double[] GetAvgValuesRows(List<Expert> experts)
+        {
+            //Розрахувати середнє значення рядків та знову нормалізувати їх
+            double[] rowArrayCache = new double[experts.Count];
+            double[] rowsAvgCache = new double[experts[0].getEstimates.Length];
+            //перебудуємо dgv з нормаваними оцінками
+            for (int row = 0; row < experts[0].getEstimates.Length; row++)
+            {
+                //пересуваємося по рядках
+                for (int col = 0; col < experts.Count; col++)
+                {
+                    rowArrayCache[col] = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
+                }
+                rowsAvgCache[row] = normalizer.CalcAvg(rowArrayCache);
+            }
+             rowsAvgCache = normalizer.CalcNormalizeEstimates(rowsAvgCache);
+            return rowsAvgCache;
+        }
+
+        //Перебудуємо таблицю з відображенням норманих оцінок і середніх нормованих оцінок (вагу)
+        public void RebuildTableDGV(DataGridView dgv, List<Expert> experts, double[] rowsAvgCache)
+        {
+            //перебудуємо dgv з нормаваними оцінками
+            for (int col = 0; col < countOfExpert + 1; col++)
+            {
+                //пересуваємося по рядках
+                for (int row = 0; row < dgv.Rows.Count; row++)
+                {
+                    if (col == countOfExpert)
+                        dgv[col + 1, row].Value = rowsAvgCache[row];
+                    else
+                        dgv[col + 1, row].Value = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
+                }
+            }
+
+            //Відобразимо стовбець "Вага"
+            dgv.Columns[countOfExpert + 1].Visible = true;
+        }
+
+        //Перебудуємо таблицю з відображенням норманих оцінок і середніх нормованих оцінок (вагу)
+        public void RebuildTableDGV(DataGridView dgv)
+        {
+            //отримати оцінки кожного експерта по стовбцям
+            List<Expert> experts = this.GetExpertColumnEstimates(dgv);
+
+            //передати експертів
+            //отримати нормовані оцінки
+            experts = normalizer.CalcNormalizeExpertsEstimates(experts);
+
+            //отримати середні нормалізовані оцінки
+            double[] rowsAvgCache = this.GetAvgValuesRows(experts);
+
+            //Перебудувати таблицю з новими значеннями
+            this.RebuildTableDGV(dgv, experts, rowsAvgCache);
+        }
+
+        #endregion
     }
 }
