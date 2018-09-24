@@ -35,25 +35,39 @@ namespace MorphAnalysis.HelperClasses
             return instance;
         }
 
+
         #region функції додавання елементів в список
+
+        //Узагальнений метод
+        public bool CanAdd<T>(List<T> list, T element)
+        {
+            if (!list.Contains(element))
+            {
+                list.Add(element);
+                return true;
+            }
+            return false;
+        }
+
 
         //Додавання функцій в список
         public bool AddFunctionToList(Function func)
         {
             if (func == null) return false;
-
-            funcList.Add(func);
-            return true;
+            return CanAdd<Function>(funcList, func);
         }
 
         //Додавання функції та її рішення в список
         public bool AddSolutionOfFunctionToList(SolutionsOfFunction solOfFunc)
         {
-
             if (solOfFunc == null) return false;
 
-            solOfFuncList.Add(solOfFunc);
-            return true;
+            foreach (SolutionsOfFunction item in solOfFuncList)
+            {
+                if (item.Solution.name == solOfFunc.Solution.name && item.Function.name == solOfFunc.Function.name)
+                    return false;
+            }
+            return CanAdd<SolutionsOfFunction>(solOfFuncList, solOfFunc);
         }
 
         #endregion
