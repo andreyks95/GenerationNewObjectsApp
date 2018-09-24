@@ -26,6 +26,10 @@ namespace MorphAnalysis.TablesExpertEvaluation
         //Отримаємо кількість експертів
         private int countOfExpert = 1;
 
+        //Додаткове розширення (налаштування) DataGridView
+
+        private ConfigDGV configDGV;
+
         public TableFunctionsSolutions()
         {
             InitializeComponent();
@@ -41,23 +45,22 @@ namespace MorphAnalysis.TablesExpertEvaluation
         public TableFunctionsSolutions(int countOfExpert) : this()
         {
             this.countOfExpert = countOfExpert;
+
+           configDGV = new ConfigDGV(countOfExpert);
         }
 
-        //
-        private void FillDgvExperts(DataGridView dgv, string nameFirstColumn)
-        {
-            dgv.Columns.Add("FirstCol", nameFirstColumn);
-            for (int i = 0; i < countOfExpert; i++)
-                dgv.Columns.Add("Expert" + i, "Експ. № " + (i + 1));
-        }
 
         private void TableFunctionsSolutions_Load(object sender, EventArgs e)
         {
-            FillDgvExperts(dataGridView1, "Функції");
-            FillDgvExperts(dataGridView2, "Рішення функції");
+            //побудова стобців
+            configDGV.FillDgvManyExperts(new[] { dataGridView1, dataGridView2 }, new[] { "Функції", "Рішення функції" });
 
-            dataGridView1.Columns[0].ReadOnly = true;
-            dataGridView2.Columns[0].ReadOnly = true;
+            //Налаштування стовбців тільки для читання
+            configDGV.SetColumnsDgvManyOnlyRead(new [] { dataGridView1, dataGridView2 }, 0, countOfExpert + 1);
+
+            //Скриємо від користувача стовбець "Вага" до розрахунку
+            dataGridView1.Columns[countOfExpert + 1].Visible = false;
+            dataGridView2.Columns[countOfExpert + 1].Visible = false;
 
             //відображаємо в dgv всі обрані користувачем ф-ї
             foreach (var list in funcList)
@@ -67,6 +70,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
             //dataGridView1.DataSource = funcList.Select(f => new { f.name, f.characteristics, f.weight } ).ToList();
         }
 
+        //Відображаємо дочірні записи згідно обраного рядку батьківської
         private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
             if (e.Row.Index >= 0)
@@ -99,63 +103,40 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 foreach (var item in getResult)
                     dataGridView2.Rows.Add(item.name);
 
-
-                //TODO: сделать проверку ячеек на ввод только чисел (можно и дабл можно и инт)
-                //Как потом вытащить оценки? Как их нормировать? Как сново отобразить новый столбец с нормированными усредёнными оценками?
-
-
                 // this.dataGridView2.DataSource = getResult.ToList();
             }
         }
 
         #region Додаткове налаштування dgv's
 
-        private void dataGridView2_Enter(object sender, EventArgs e)
-        {
+        //Вимикаємо фокус на dgv1 коли редагуємо dgv2
+        private void dataGridView2_Enter(object sender, EventArgs e) =>
             dataGridView1.Enabled = false;
-        }
 
-        private void dataGridView2_MouseLeave(object sender, EventArgs e)
-        {
+        //Вмикаємо фокус на dgv1 коли покидаємо dgv2
+        private void dataGridView2_MouseLeave(object sender, EventArgs e) =>
             dataGridView1.Enabled = true;
-        }
 
-        private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (e.ColumnIndex > 0)
-            {
-                if (!IsDigits(e.FormattedValue))  // IsNumeric will be your method where you will check for numebrs 
-                {
-                    MessageBox.Show("Введіть тільки числові дані!");
-                    dataGridView1.CurrentCell.Value = 0;
-                    e.Cancel = true;
+        //Перевірка комірок тільки на ввведення числових даних
+        private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) =>
+            configDGV.CellValidating(dataGridView1, sender, e);           
 
-                }
-
-            }
-        }
-
-        private bool IsDigits(object obj)
-        {
-            string value = Convert.ToString(obj);
-
-            int i;
-            double d;
-
-            if (double.TryParse(value, out d) || int.TryParse(value, out i))
-                return true;
-            else
-                return false;
-        }
+        private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) =>
+            configDGV.CellValidating(dataGridView2, sender, e);
 
         #endregion
 
+
+        #region Розрахунок ваги елементів відносно один одного 
+
+
+        //Розрахунок для рішень обраної функції
         private void buttonCalcSols_Click(object sender, EventArgs e)
         {
-            //TODO: Создать нового эксперта и добавить его в список експертов для нормализации
-            //Написать класс для нормализации
+
             List<Expert> experts = new List<Expert>();
             //пересуваємося по стовпцям
+            //Зберігаємо кожний стовбець значень експертів. Для нормування
             for (int col = 0; col < countOfExpert; col++)
             {
                 Expert expert = new Expert();
@@ -168,11 +149,106 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 experts.Add(expert);
             }
 
+            
+            Normalizer normalizer = new Normalizer();
+            //передати експертів
+            //отримати нормовані оцінки
+            experts = normalizer.CalcNormalizeExpertsEstimates(experts);
+
+            //Розрахувати середнє значення рядків та знову нормалізувати їх
+            double[] rowArrayCache = new double[experts.Count];
+            double[] rowsAvgCache = new double[experts[0].getEstimates.Length];
+            //перебудуємо dgv з нормаваними оцінками
+            for (int row = 0; row < experts[0].getEstimates.Length; row++)
+            {
+                //пересуваємося по рядках
+                for (int col = 0; col < experts.Count; col++)
+                {
+                   rowArrayCache[col] = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
+                }
+                rowsAvgCache[row] = normalizer.CalcAvg(rowArrayCache);
+            }
+            rowsAvgCache = normalizer.CalcNormalizeEstimates(rowsAvgCache);
+
+
+            //перебудуємо dgv з нормаваними оцінками
+            for (int col = 0; col < countOfExpert + 1; col++)
+            {
+                //пересуваємося по рядках
+                for (int row = 0; row < dataGridView2.Rows.Count; row++)
+                {
+                    if (col == countOfExpert)
+                        dataGridView2[col+1, row].Value = rowsAvgCache[row];
+                    else
+                        dataGridView2[col + 1, row].Value = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
+                }
+            }
+            dataGridView2.Columns[countOfExpert + 1].Visible = true;
+
         }
 
+
+        //Розрахунок для функцій 
         private void buttonCalcFuncs_Click(object sender, EventArgs e)
         {
 
+            List<Expert> experts = new List<Expert>();
+            //пересуваємося по стовпцям
+            //Зберігаємо кожний стовбець значень експертів. Для нормування
+            for (int col = 0; col < countOfExpert; col++)
+            {
+                Expert expert = new Expert();
+                //пересуваємося по рядках
+                for (int row = 0; row < dataGridView1.Rows.Count; row++)
+                {
+                    double value = Convert.ToDouble(dataGridView1[col + 1, row].Value); //col+1 тому що в 1-й комірці назва ф-ї
+                    expert.AddValue(value);
+                }
+                experts.Add(expert);
+            }
+
+
+            Normalizer normalizer = new Normalizer();
+            //передати експертів
+            //отримати нормовані оцінки
+            experts = normalizer.CalcNormalizeExpertsEstimates(experts);
+
+            //TODO: HERE
+
+            //Розрахувати середнє значення рядків та знову нормалізувати їх
+            double[] rowArrayCache = new double[experts.Count];
+            double[] rowsAvgCache = new double[experts[0].getEstimates.Length];
+            //перебудуємо dgv з нормаваними оцінками
+            for (int row = 0; row < experts[0].getEstimates.Length; row++)
+            {
+                //пересуваємося по рядках
+                for (int col = 0; col < experts.Count; col++)
+                {
+                    rowArrayCache[col] = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
+                }
+                rowsAvgCache[row] = normalizer.CalcAvg(rowArrayCache);
+            }
+            rowsAvgCache = normalizer.CalcNormalizeEstimates(rowsAvgCache);
+
+
+            //перебудуємо dgv з нормаваними оцінками
+            for (int col = 0; col < countOfExpert + 1; col++)
+            {
+                //пересуваємося по рядках
+                for (int row = 0; row < dataGridView1.Rows.Count; row++)
+                {
+                    if (col == countOfExpert)
+                        dataGridView1[col + 1, row].Value = rowsAvgCache[row];
+                    else
+                        dataGridView1[col + 1, row].Value = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
+                }
+            }
+            dataGridView1.Columns[countOfExpert + 1].Visible = true;
+
         }
+
+        #endregion
+
+
     }
 }
