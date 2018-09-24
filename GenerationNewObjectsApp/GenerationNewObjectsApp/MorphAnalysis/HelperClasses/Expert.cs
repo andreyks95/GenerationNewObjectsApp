@@ -11,11 +11,12 @@ namespace MorphAnalysis.HelperClasses
 
         private double[] values = new double[0];
 
-        private void setEstimates()
+        /*private void setEstimates()
         {
 
-        }
+        }*/
 
+         //Додаємо значення оцінки, яку виставив експерт елементу по стовбцю
         public void AddValue(double value)
         {
             double[] newList = new double[values.Length + 1];
@@ -27,6 +28,18 @@ namespace MorphAnalysis.HelperClasses
             values = newList;
         }
 
+        public void AddValueRange(double[] array)
+        {
+            values = array;
+        }
+
+        //отримаємо оцінки по стовцю, що оцінював експерт
         public double[] getEstimates => values;
+
+        //Призначаємо нові оцінки 
+        public double[] setEstimates
+        {
+            set { values = value; }
+        }
     }
 }
