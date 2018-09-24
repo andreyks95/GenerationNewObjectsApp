@@ -116,8 +116,12 @@ namespace MorphAnalysis.TablesDataInitialization
             }
             else
             {
-                MessageBox.Show("Функцію " + func.name + " додано для оцінювання!", "Підтверджено");
-                funcCacheData.AddFunctionToList(func);
+                
+                
+                if(funcCacheData.AddFunctionToList(func))
+                    MessageBox.Show("Функцію " + func.name + " додано для оцінювання!", "Підтверджено");
+                else
+                    MessageBox.Show("Функцію " + func.name + " вже занесено для оцінювання!", "Відхилено");
             }
         }
     }
