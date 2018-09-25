@@ -31,6 +31,12 @@ namespace MorphAnalysis.TablesDataInitialization
             db.Goals.Load();
             dataGridView1.DataSource = db.Goals.Local.ToBindingList();
 
+            //Перейменувати заголовки стовбців
+            dataGridView1.Columns[0].HeaderText = "ID";
+            dataGridView1.Columns[1].HeaderText = "Назва";
+            dataGridView1.Columns[2].HeaderText = "Характеристика";
+            dataGridView1.Columns[3].HeaderText = "Вага";
+
             //Cховати стовбці
             dataGridView1.Columns[4].Visible = false;
 

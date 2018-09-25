@@ -44,6 +44,12 @@ namespace MorphAnalysis.TablesDataInitialization
             //Заповнити комбо-бокс тільки іменами функції
             comboBox1.Items.AddRange(funcList.Select(f=>f.name).ToArray());
 
+            //Перейменувати заголовки стовбців
+            dataGridView1.Columns[0].HeaderText = "ID";
+            dataGridView1.Columns[1].HeaderText = "Назва";
+            dataGridView1.Columns[2].HeaderText = "Характеристика";
+            dataGridView1.Columns[3].HeaderText = "Бібліографічний опис";
+
             //Cховати стовбці
             dataGridView1.Columns[4].Visible = false;
             dataGridView1.Columns[5].Visible = false;

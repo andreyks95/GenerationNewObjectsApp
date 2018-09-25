@@ -34,6 +34,7 @@ namespace MorphAnalysis.TablesDataInitialization
             //Перейменувати заголовки стовбців
             dataGridView1.Columns[0].HeaderText = "ID";
             dataGridView1.Columns[1].HeaderText = "Назва";
+            dataGridView1.Columns[2].HeaderText = "Опис";
 
             //Cховати стовбці
             dataGridView1.Columns[3].Visible = false;
