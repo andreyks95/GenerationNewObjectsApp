@@ -215,13 +215,13 @@ namespace MorphAnalysis.TablesExpertEvaluation
             string nameSolution = null;
             decimal weightSolution = 0;
 
-            int firstIndex = dataGridView1.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
-            int lastIndex = dataGridView1.Columns.GetLastColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
+            int firstIndex = dataGridView2.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
+            int lastIndex = dataGridView2.Columns.GetLastColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
 
             for (int i = 0; i < dataGridView2.Rows.Count; i++)
             {
-                nameSolution = Convert.ToString(dataGridView1[firstIndex, i].Value);
-                weightSolution = Convert.ToDecimal(dataGridView1[lastIndex, i].Value);
+                nameSolution = Convert.ToString(dataGridView2[firstIndex, i].Value);
+                weightSolution = Convert.ToDecimal(dataGridView2[lastIndex, i].Value);
 
                 if (nameSolution != null && weightSolution >= 0 && weightSolution <= 1 && weightSolution >= valueFilter)
                 {
@@ -236,6 +236,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                             " " + selectedSolOfFunc.Solution.weight + " " + selectedSolOfFunc.rating);*/
                 }
             }
+            MessageBox.Show("Дані успішно додані", "Підтверджено");
 
         }
 
@@ -275,6 +276,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     //Console.WriteLine("Func " + func.id_function + ": " + func.name + " " + func.weight);
                 }
             }
+            MessageBox.Show("Дані успішно додані", "Підтверджено");
         }
 
 
