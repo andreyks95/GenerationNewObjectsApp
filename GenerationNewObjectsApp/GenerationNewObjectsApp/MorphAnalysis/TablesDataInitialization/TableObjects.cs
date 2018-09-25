@@ -29,6 +29,11 @@ namespace MorphAnalysis.TablesDataInitialization
         {
             db.MorphObjects.Load();
             dataGridView1.DataSource = db.MorphObjects.Local.ToBindingList();
+
+            //Сховати стовбці
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[4].Visible = false;
+            dataGridView1.Columns[3].Visible = false;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

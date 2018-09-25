@@ -29,6 +29,21 @@ namespace MorphAnalysis.TablesDataInitialization
         {
             db.Classifications.Load();
             dataGridView1.DataSource = db.Classifications.Local.ToBindingList();
+
+
+            //Перейменувати заголовки стовбців
+            dataGridView1.Columns[0].HeaderText = "ID";
+            dataGridView1.Columns[1].HeaderText = "Назва";
+
+            //Cховати стовбці
+            dataGridView1.Columns[3].Visible = false;
+            dataGridView1.Columns[4].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[6].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

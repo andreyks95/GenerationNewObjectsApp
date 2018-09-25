@@ -34,6 +34,15 @@ namespace MorphAnalysis.TablesDataInitialization
         {
             db.Functions.Load();
             dataGridView1.DataSource = db.Functions.Local.ToBindingList();
+
+            //Сховати стовбці
+            dataGridView1.Columns[3].Visible = true;
+            dataGridView1.Columns[4].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[6].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+
+
         }
 
         //Add

@@ -43,6 +43,14 @@ namespace MorphAnalysis.TablesDataInitialization
 
             //Заповнити комбо-бокс тільки іменами функції
             comboBox1.Items.AddRange(funcList.Select(f=>f.name).ToArray());
+
+            //Cховати стовбці
+            dataGridView1.Columns[4].Visible = false;
+            dataGridView1.Columns[5].Visible = false;
+            dataGridView1.Columns[6].Visible = false;
+            dataGridView1.Columns[7].Visible = false;
+            dataGridView1.Columns[8].Visible = false;
+            dataGridView1.Columns[9].Visible = false;
         }
 
         //Add

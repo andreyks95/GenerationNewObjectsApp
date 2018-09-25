@@ -30,6 +30,10 @@ namespace MorphAnalysis.TablesDataInitialization
         {
             db.Goals.Load();
             dataGridView1.DataSource = db.Goals.Local.ToBindingList();
+
+            //Cховати стовбці
+            dataGridView1.Columns[4].Visible = false;
+
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
