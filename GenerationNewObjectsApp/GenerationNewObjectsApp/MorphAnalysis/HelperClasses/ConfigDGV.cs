@@ -97,7 +97,7 @@ namespace MorphAnalysis.HelperClasses
         #region отримання значень по стовбцям. Нормалізація даних. Перебудова таблиці з новими значеннями 
 
         ////Зберігаємо кожний стовбець значень експертів. Для нормування
-        public List<Expert> GetExpertColumnEstimates(DataGridView dgv)
+        public List<Expert> GetExpertsColumnsEstimates(DataGridView dgv)
         {
             List<Expert> experts = new List<Expert>();
             //пересуваємося по стовпцям
@@ -129,7 +129,7 @@ namespace MorphAnalysis.HelperClasses
                 //пересуваємося по рядках
                 for (int col = 0; col < experts.Count; col++)
                 {
-                    rowArrayCache[col] = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї
+                    rowArrayCache[col] = experts[col].getEstimates[row]; //col+1 тому що в 1-й комірці назва ф-ї, рішення
                 }
                 rowsAvgCache[row] = normalizer.CalcAvg(rowArrayCache);
             }
@@ -161,7 +161,7 @@ namespace MorphAnalysis.HelperClasses
         public void RebuildTableDGV(DataGridView dgv)
         {
             //отримати оцінки кожного експерта по стовбцям
-            List<Expert> experts = this.GetExpertColumnEstimates(dgv);
+            List<Expert> experts = this.GetExpertsColumnsEstimates(dgv);
 
             //передати експертів
             //отримати нормовані оцінки
