@@ -17,6 +17,12 @@ namespace MorphAnalysis.HelperClasses
         //Кеш для зберігання функцій та їх рішень 
         private List<SolutionsOfFunction> solOfFuncList;
 
+        //Кеш для зберігання функцій в морфологічну таблицю
+        private List<Function> funcListMorphTable;
+
+        //Кеш для зберігання рішень функцій в морфологічну таблицю
+        private List<SolutionsOfFunction> solOfFuncListMorphTable;
+
         private static CacheData instance;
 
         #endregion
@@ -26,6 +32,8 @@ namespace MorphAnalysis.HelperClasses
         {
             funcList = new List<Function>();
             solOfFuncList = new List<SolutionsOfFunction>();
+            funcListMorphTable = new List<Function>();
+            solOfFuncListMorphTable = new List<SolutionsOfFunction>();
         }
 
         public static CacheData GetInstance()
@@ -51,14 +59,17 @@ namespace MorphAnalysis.HelperClasses
 
 
         //Додавання функцій в список
-        public bool AddFunctionToList(Function func)
+        public bool AddFunctionToList(Function func, bool ToMorphTable = false)
         {
             if (func == null) return false;
-            return CanAdd<Function>(funcList, func);
+            if (ToMorphTable)
+                return CanAdd<Function>(funcListMorphTable, func);
+            else
+                return CanAdd<Function>(funcList, func);
         }
 
         //Додавання функції та її рішення в список
-        public bool AddSolutionOfFunctionToList(SolutionsOfFunction solOfFunc)
+        public bool AddSolutionOfFunctionToList(SolutionsOfFunction solOfFunc, bool ToMorphTable = false)
         {
             if (solOfFunc == null) return false;
 
@@ -67,7 +78,10 @@ namespace MorphAnalysis.HelperClasses
                 if (item.Solution.name == solOfFunc.Solution.name && item.Function.name == solOfFunc.Function.name)
                     return false;
             }
-            return CanAdd<SolutionsOfFunction>(solOfFuncList, solOfFunc);
+            if (ToMorphTable)
+                return CanAdd<SolutionsOfFunction>(solOfFuncListMorphTable, solOfFunc);
+            else
+                return CanAdd<SolutionsOfFunction>(solOfFuncList, solOfFunc);
         }
 
         #endregion
@@ -94,6 +108,28 @@ namespace MorphAnalysis.HelperClasses
                     return solOfFuncList;
                 else
                     throw new Exception("Помилка! Пустий список функцій та їх рішень!");
+            }
+        }
+
+        public List<Function> getListFunctionMorphTable
+        {
+            get
+            {
+                if (funcListMorphTable.Count > 0)
+                    return funcListMorphTable;
+                else
+                    throw new Exception("Помилка! Пустий список функцій для передачі в морфологічну таблицю!");
+            }
+        }
+
+        public List<SolutionsOfFunction> getListSolutionOfFunctionMorphTable
+        {
+            get
+            {
+                if (solOfFuncListMorphTable.Count > 0)
+                    return solOfFuncListMorphTable;
+                else
+                    throw new Exception("Помилка! Пустий список функцій та їх рішень для передачі в морфологічну таблицю!");
             }
         }
 
