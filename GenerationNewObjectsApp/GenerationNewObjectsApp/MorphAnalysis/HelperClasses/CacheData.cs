@@ -32,6 +32,7 @@ namespace MorphAnalysis.HelperClasses
         {
             funcList = new List<Function>();
             solOfFuncList = new List<SolutionsOfFunction>();
+
             funcListMorphTable = new List<Function>();
             solOfFuncListMorphTable = new List<SolutionsOfFunction>();
         }
@@ -73,15 +74,26 @@ namespace MorphAnalysis.HelperClasses
         {
             if (solOfFunc == null) return false;
 
-            foreach (SolutionsOfFunction item in solOfFuncList)
+            if (ToMorphTable)
+            {
+                if (FindSimiliarSolutionOfFunction(solOfFuncListMorphTable, solOfFunc)) return false;
+                return CanAdd<SolutionsOfFunction>(solOfFuncListMorphTable, solOfFunc);
+            }
+            else
+            {
+                if (FindSimiliarSolutionOfFunction(solOfFuncList, solOfFunc)) return false;
+                return CanAdd<SolutionsOfFunction>(solOfFuncList, solOfFunc);
+            }
+        }
+
+        private bool FindSimiliarSolutionOfFunction(List<SolutionsOfFunction> list, SolutionsOfFunction solOfFunc)
+        {
+            foreach (SolutionsOfFunction item in list)
             {
                 if (item.Solution.name == solOfFunc.Solution.name && item.Function.name == solOfFunc.Function.name)
-                    return false;
+                    return true;
             }
-            if (ToMorphTable)
-                return CanAdd<SolutionsOfFunction>(solOfFuncListMorphTable, solOfFunc);
-            else
-                return CanAdd<SolutionsOfFunction>(solOfFuncList, solOfFunc);
+            return false;
         }
 
         #endregion
