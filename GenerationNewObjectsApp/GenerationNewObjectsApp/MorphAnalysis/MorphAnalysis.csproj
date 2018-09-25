@@ -106,6 +106,12 @@
     <Compile Include="TablesExpertEvaluation\HelperAskCountExpertForm.Designer.cs">
       <DependentUpon>HelperAskCountExpertForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TablesExpertEvaluation\MorphTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TablesExpertEvaluation\MorphTable.Designer.cs">
+      <DependentUpon>MorphTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="TablesExpertEvaluation\TableFunctionsSolutions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TablesExpertEvaluation\HelperAskCountExpertForm.resx">
       <DependentUpon>HelperAskCountExpertForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TablesExpertEvaluation\MorphTable.resx">
+      <DependentUpon>MorphTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TablesExpertEvaluation\TableFunctionsSolutions.resx">
       <DependentUpon>TableFunctionsSolutions.cs</DependentUpon>

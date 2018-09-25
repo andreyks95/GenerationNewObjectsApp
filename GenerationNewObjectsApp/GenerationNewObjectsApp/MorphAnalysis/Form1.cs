@@ -1,4 +1,5 @@
-﻿using MorphAnalysis.TablesDataInitialization;
+﻿using MorphAnalysis.HelperClasses;
+using MorphAnalysis.TablesDataInitialization;
 using MorphAnalysis.TablesExpertEvaluation;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,16 @@ namespace MorphAnalysis
 {
     public partial class Form1 : Form
     {
+        private CacheData cacheData = CacheData.GetInstance();
+
         public Form1()
         {
             InitializeComponent();
 
 
         }
+
+        #region Таблиці ініціалізації даних
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -66,17 +71,19 @@ namespace MorphAnalysis
             new TableModifications().Show();
         }
 
+        #endregion
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            button3.Enabled = false;
+            buttonSolsFuncs.Enabled = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonSolsFuncs_Click(object sender, EventArgs e)
         {
             int value = int.Parse(textBoxCountExpert.Text);
             new TableFunctionsSolutions(value).Show();
-            button3.Enabled = false;
+            buttonSolsFuncs.Enabled = false;
+            buttonMorphTable.Enabled = true;
         }
 
         private void textBoxCountExpert_KeyDown(object sender, KeyEventArgs e)
@@ -88,30 +95,37 @@ namespace MorphAnalysis
                 if (textBoxCountExpert.Text is null || textBoxCountExpert.Text == "")
                 {
                     MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                    button3.Enabled = false;
+                    buttonSolsFuncs.Enabled = false;
                 }
                 else
                 {
                     if (!int.TryParse(textBoxCountExpert.Text, out value))
                     {
                         MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                        button3.Enabled = false;
+                        buttonSolsFuncs.Enabled = false;
                     }
                     else
                     {
                         if (value > 0 && value <= 10)
                         {
-                            button3.Enabled = true;
+                            buttonSolsFuncs.Enabled = true;
                         }
                         else
                         {
                             MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                            button3.Enabled = false;
+                            buttonSolsFuncs.Enabled = false;
                         }
                     }
                 }
             }
 
+        }
+
+        private void buttonMorphTable_Click(object sender, EventArgs e)
+        {
+            if (cacheData.getListSolutionOfFunctionMorphTable.Count > 0
+                || cacheData.getListFunctionMorphTable.Count > 0)
+                new MorphTable().Show();
         }
     }
 }

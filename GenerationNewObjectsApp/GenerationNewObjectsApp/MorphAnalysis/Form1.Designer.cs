@@ -37,10 +37,11 @@
             this.таблицяЦілейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяПараметриЦілейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяКласифікаційToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonSolsFuncs = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonMorphTable = new System.Windows.Forms.Button();
             this.textBoxCountExpert = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
@@ -121,15 +122,15 @@
             this.таблицяКласифікаційToolStripMenuItem.Text = "Таблиця класифікацій";
             this.таблицяКласифікаційToolStripMenuItem.Click += new System.EventHandler(this.таблицяКласифікаційToolStripMenuItem_Click);
             // 
-            // button3
+            // buttonSolsFuncs
             // 
-            this.button3.Location = new System.Drawing.Point(11, 88);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(113, 41);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Таблиця функцій та їх рішень";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonSolsFuncs.Location = new System.Drawing.Point(11, 88);
+            this.buttonSolsFuncs.Name = "buttonSolsFuncs";
+            this.buttonSolsFuncs.Size = new System.Drawing.Size(113, 41);
+            this.buttonSolsFuncs.TabIndex = 4;
+            this.buttonSolsFuncs.Text = "Таблиця функцій та їх рішень";
+            this.buttonSolsFuncs.UseVisualStyleBackColor = true;
+            this.buttonSolsFuncs.Click += new System.EventHandler(this.buttonSolsFuncs_Click);
             // 
             // label1
             // 
@@ -155,8 +156,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonMorphTable);
             this.tabPage1.Controls.Add(this.textBoxCountExpert);
-            this.tabPage1.Controls.Add(this.button3);
+            this.tabPage1.Controls.Add(this.buttonSolsFuncs);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -165,6 +167,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonMorphTable
+            // 
+            this.buttonMorphTable.Enabled = false;
+            this.buttonMorphTable.Location = new System.Drawing.Point(11, 159);
+            this.buttonMorphTable.Name = "buttonMorphTable";
+            this.buttonMorphTable.Size = new System.Drawing.Size(102, 38);
+            this.buttonMorphTable.TabIndex = 7;
+            this.buttonMorphTable.Text = "Морфологічна таблиця";
+            this.buttonMorphTable.UseVisualStyleBackColor = true;
+            this.buttonMorphTable.Click += new System.EventHandler(this.buttonMorphTable_Click);
             // 
             // textBoxCountExpert
             // 
@@ -215,12 +228,13 @@
         private System.Windows.Forms.ToolStripMenuItem таблицяПараметриЦілейToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem таблицяКласифікаційToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem таблицяМодифікаційToolStripMenuItem;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonSolsFuncs;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox textBoxCountExpert;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button buttonMorphTable;
     }
 }
 
