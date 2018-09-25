@@ -65,7 +65,7 @@ namespace MorphAnalysis.HelperClasses
         //Перевірка комірок тільки на ввведення числових даних
         public void CellValidating(DataGridView dgv, object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex > 0 && e.ColumnIndex < countOfExpert + 1)
+            if (e.ColumnIndex > 0)// && e.ColumnIndex < countOfExpert + 1)
             {
                 //Перевіряємо чи є значення в комірці числовим
                 if (!IsDigits(e.FormattedValue))
