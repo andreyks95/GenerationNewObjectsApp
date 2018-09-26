@@ -228,7 +228,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     SolutionsOfFunction selectedSolOfFunc = getResultQuerySolOfFunc.FirstOrDefault(s => s.Solution.name == nameSolution);
                     if (selectedSolOfFunc is null) return;
                     selectedSolOfFunc.Solution.weight = weightSolution;
-                    selectedSolOfFunc.rating = weightSolution;
+                    //selectedSolOfFunc.rating = weightSolution;
 
                     cacheData.AddSolutionOfFunctionToList(selectedSolOfFunc, true);
                     /*Console.WriteLine("selectedSolOfFunc" + selectedSolOfFunc.Function.id_function + ": " + selectedSolOfFunc.Function.name +
