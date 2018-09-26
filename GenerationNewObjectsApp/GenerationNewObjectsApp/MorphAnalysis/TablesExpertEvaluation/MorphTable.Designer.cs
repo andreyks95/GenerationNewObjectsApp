@@ -32,15 +32,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.buttonSaveRating = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.buttonSaveRating);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.MinimumSize = new System.Drawing.Size(0, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 60);
+            this.panel1.Size = new System.Drawing.Size(784, 50);
             this.panel1.TabIndex = 0;
             // 
             // dataGridView1
@@ -68,11 +74,31 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Desktop;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 60);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 51);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(784, 501);
+            this.dataGridView1.Size = new System.Drawing.Size(784, 510);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
+            // 
+            // buttonSaveRating
+            // 
+            this.buttonSaveRating.Location = new System.Drawing.Point(252, 12);
+            this.buttonSaveRating.Name = "buttonSaveRating";
+            this.buttonSaveRating.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveRating.TabIndex = 0;
+            this.buttonSaveRating.Text = "Розрахунок";
+            this.buttonSaveRating.UseVisualStyleBackColor = true;
+            this.buttonSaveRating.Click += new System.EventHandler(this.buttonSaveRating_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(229, 26);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Структурна формула розрахунку виконання\r\nфункцій технічним рішенням";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MorphTable
             // 
@@ -84,6 +110,8 @@
             this.Name = "MorphTable";
             this.Text = "MorphTable";
             this.Load += new System.EventHandler(this.MorphTable_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -93,5 +121,7 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonSaveRating;
     }
 }
