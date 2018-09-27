@@ -175,6 +175,29 @@ namespace MorphAnalysis.TablesExpertEvaluation
             }
         }
 
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            decimal value;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBox2.Text is null || textBox2.Text == "")
+                    MessageBox.Show("Введене значення повинне бути числом!", "Помилка введення");
+                else
+                {
+                    if (!decimal.TryParse(textBox2.Text, out value))
+                        MessageBox.Show("Введене значення повинне бути числом!", "Помилка введення");
+                    else
+                    {
+                        if (value >= 0 && value <= 1)
+                            valueFilter = value;
+                        else
+                            MessageBox.Show("Вага повинна бути >=0 && <=1", "Помилка введення");
+                    }
+                }
+            }
+        }
+
         #endregion
 
 
@@ -292,6 +315,5 @@ namespace MorphAnalysis.TablesExpertEvaluation
         //}
 
         #endregion
-
     }
 }

@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonSaveResultFuncs = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonCalcFuncs = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSaveResultSolutionsOfFunc = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonCalcSols = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -60,6 +60,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(984, 50);
             this.panel1.TabIndex = 0;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(620, 22);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(85, 20);
+            this.textBox2.TabIndex = 5;
+            this.textBox2.Text = "0";
+            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             // 
             // buttonSaveResultFuncs
             // 
@@ -136,6 +145,15 @@
             this.panel2.Size = new System.Drawing.Size(984, 50);
             this.panel2.TabIndex = 2;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(620, 21);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(85, 20);
+            this.textBox1.TabIndex = 4;
+            this.textBox1.Text = "0";
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            // 
             // buttonSaveResultSolutionsOfFunc
             // 
             this.buttonSaveResultSolutionsOfFunc.Enabled = false;
@@ -197,24 +215,6 @@
             this.dataGridView2.Enter += new System.EventHandler(this.dataGridView2_Enter);
             this.dataGridView2.MouseEnter += new System.EventHandler(this.dataGridView2_Enter);
             this.dataGridView2.MouseLeave += new System.EventHandler(this.dataGridView2_MouseLeave);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(620, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(85, 20);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "0";
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(620, 22);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(85, 20);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.Text = "0";
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // TableFunctionsSolutions
             // 
