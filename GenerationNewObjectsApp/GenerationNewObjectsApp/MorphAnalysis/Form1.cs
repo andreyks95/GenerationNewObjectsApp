@@ -20,8 +20,6 @@ namespace MorphAnalysis
         public Form1()
         {
             InitializeComponent();
-
-
         }
 
         #region Таблиці ініціалізації даних
@@ -75,15 +73,25 @@ namespace MorphAnalysis
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            buttonSolsFuncs.Enabled = false;
+            DisabledEnabledButtons();
         }
 
+        //Відображення таблиці для оцінювання експертами функцій та їх рішень
         private void buttonSolsFuncs_Click(object sender, EventArgs e)
         {
             int value = int.Parse(textBoxCountExpert.Text);
             new TableFunctionsSolutions(value).Show();
             buttonSolsFuncs.Enabled = false;
             buttonMorphTable.Enabled = true;
+        }
+
+        //Відображення таблиці для оцінювання експертами цілей та їх параметрів
+        private void buttonParamsGoals_Click(object sender, EventArgs e)
+        {
+            int value = int.Parse(textBoxCountExpert.Text);
+            new TableParametersOfGoals(value).Show();
+            buttonParamsGoals.Enabled = false;
+            //И Дальше здесь включить другие морф. таблицы оценивания тех. решений и их модификаций
         }
 
         private void textBoxCountExpert_KeyDown(object sender, KeyEventArgs e)
@@ -95,25 +103,25 @@ namespace MorphAnalysis
                 if (textBoxCountExpert.Text is null || textBoxCountExpert.Text == "")
                 {
                     MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                    buttonSolsFuncs.Enabled = false;
+                    DisabledEnabledButtons();
                 }
                 else
                 {
                     if (!int.TryParse(textBoxCountExpert.Text, out value))
                     {
                         MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                        buttonSolsFuncs.Enabled = false;
+                        DisabledEnabledButtons();
                     }
                     else
                     {
                         if (value > 0 && value <= 10)
                         {
-                            buttonSolsFuncs.Enabled = true;
+                            DisabledEnabledButtons(true);
                         }
                         else
                         {
                             MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                            buttonSolsFuncs.Enabled = false;
+                            DisabledEnabledButtons();
                         }
                     }
                 }
@@ -121,11 +129,20 @@ namespace MorphAnalysis
 
         }
 
+        private void DisabledEnabledButtons(bool enabled = false)
+        {
+            buttonSolsFuncs.Enabled = enabled;
+            buttonParamsGoals.Enabled = enabled;
+        }
+
+
+        //Відображення морфологічної таблиці
         private void buttonMorphTable_Click(object sender, EventArgs e)
         {
             if (cacheData.getListSolutionOfFunctionMorphTable.Count > 0
                 || cacheData.getListFunctionMorphTable.Count > 0)
                 new MorphTable().Show();
         }
+
     }
 }

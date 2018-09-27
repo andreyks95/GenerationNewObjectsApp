@@ -118,6 +118,12 @@
     <Compile Include="TablesExpertEvaluation\TableFunctionsSolutions.Designer.cs">
       <DependentUpon>TableFunctionsSolutions.cs</DependentUpon>
     </Compile>
+    <Compile Include="TablesExpertEvaluation\TableParametersOfGoals.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TablesExpertEvaluation\TableParametersOfGoals.Designer.cs">
+      <DependentUpon>TableParametersOfGoals.cs</DependentUpon>
+    </Compile>
     <Compile Include="ЕntityСlasses\Classification.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TablesExpertEvaluation\TableFunctionsSolutions.resx">
       <DependentUpon>TableFunctionsSolutions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TablesExpertEvaluation\TableParametersOfGoals.resx">
+      <DependentUpon>TableParametersOfGoals.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

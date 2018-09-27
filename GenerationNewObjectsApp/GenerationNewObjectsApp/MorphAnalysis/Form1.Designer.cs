@@ -41,12 +41,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonParamsGoals = new System.Windows.Forms.Button();
             this.buttonMorphTable = new System.Windows.Forms.Button();
             this.textBoxCountExpert = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -124,7 +127,7 @@
             // 
             // buttonSolsFuncs
             // 
-            this.buttonSolsFuncs.Location = new System.Drawing.Point(11, 88);
+            this.buttonSolsFuncs.Location = new System.Drawing.Point(16, 29);
             this.buttonSolsFuncs.Name = "buttonSolsFuncs";
             this.buttonSolsFuncs.Size = new System.Drawing.Size(113, 41);
             this.buttonSolsFuncs.TabIndex = 4;
@@ -137,9 +140,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(8, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 39);
+            this.label1.Size = new System.Drawing.Size(365, 13);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Введіть кількість експертів \r\nдля оцінювання функцій \r\nта їх технічних рішень";
+            this.label1.Text = "Введіть кількість експертів  для оцінювання таблиць на першому етапі";
             // 
             // tabControl1
             // 
@@ -156,9 +159,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.buttonMorphTable);
             this.tabPage1.Controls.Add(this.textBoxCountExpert);
-            this.tabPage1.Controls.Add(this.buttonSolsFuncs);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -168,10 +171,31 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonParamsGoals);
+            this.groupBox1.Controls.Add(this.buttonSolsFuncs);
+            this.groupBox1.Location = new System.Drawing.Point(8, 64);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(445, 93);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Таблиці для оцінювання експертами тех. рішень та цілей";
+            // 
+            // buttonParamsGoals
+            // 
+            this.buttonParamsGoals.Location = new System.Drawing.Point(157, 29);
+            this.buttonParamsGoals.Name = "buttonParamsGoals";
+            this.buttonParamsGoals.Size = new System.Drawing.Size(98, 41);
+            this.buttonParamsGoals.TabIndex = 8;
+            this.buttonParamsGoals.Text = "Таблиця цілей та їх параметрів";
+            this.buttonParamsGoals.UseVisualStyleBackColor = true;
+            this.buttonParamsGoals.Click += new System.EventHandler(this.buttonParamsGoals_Click);
+            // 
             // buttonMorphTable
             // 
             this.buttonMorphTable.Enabled = false;
-            this.buttonMorphTable.Location = new System.Drawing.Point(11, 159);
+            this.buttonMorphTable.Location = new System.Drawing.Point(11, 181);
             this.buttonMorphTable.Name = "buttonMorphTable";
             this.buttonMorphTable.Size = new System.Drawing.Size(102, 38);
             this.buttonMorphTable.TabIndex = 7;
@@ -181,7 +205,7 @@
             // 
             // textBoxCountExpert
             // 
-            this.textBoxCountExpert.Location = new System.Drawing.Point(10, 59);
+            this.textBoxCountExpert.Location = new System.Drawing.Point(8, 38);
             this.textBoxCountExpert.Name = "textBoxCountExpert";
             this.textBoxCountExpert.Size = new System.Drawing.Size(146, 20);
             this.textBoxCountExpert.TabIndex = 6;
@@ -213,6 +237,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,6 +260,8 @@
         private System.Windows.Forms.TextBox textBoxCountExpert;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button buttonMorphTable;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonParamsGoals;
     }
 }
 
