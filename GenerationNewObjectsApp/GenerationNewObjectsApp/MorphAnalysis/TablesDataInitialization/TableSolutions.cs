@@ -41,6 +41,7 @@ namespace MorphAnalysis.TablesDataInitialization
             db.Solutions.Load();
             dataGridView1.DataSource = db.Solutions.Local.ToBindingList();
 
+            comboBox1.Items.Clear();
             //Заповнити комбо-бокс тільки іменами функції
             comboBox1.Items.AddRange(funcList.Select(f=>f.name).ToArray());
 
