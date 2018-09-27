@@ -40,6 +40,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.buttonAddParameterToList = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -47,7 +50,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.groupBox1);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.buttonAddParameterToList);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label3);
@@ -56,7 +62,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(297, 307);
+            this.panel1.Size = new System.Drawing.Size(297, 376);
             this.panel1.TabIndex = 0;
             // 
             // groupBox1
@@ -163,15 +169,43 @@
             this.dataGridView1.Location = new System.Drawing.Point(297, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(503, 307);
+            this.dataGridView1.Size = new System.Drawing.Size(503, 376);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(13, 248);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(267, 21);
+            this.comboBox1.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 224);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(254, 91);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "зв\'язати даний параметр цілі з цілью:\r\n\r\n\r\n\r\nі занести обраний параметр цілі для " +
+    "оцінювання \r\nекспертами щодо її важливості \r\nпри побудові об\'єкту";
+            // 
+            // buttonAddParameterToList
+            // 
+            this.buttonAddParameterToList.Location = new System.Drawing.Point(11, 328);
+            this.buttonAddParameterToList.Name = "buttonAddParameterToList";
+            this.buttonAddParameterToList.Size = new System.Drawing.Size(106, 23);
+            this.buttonAddParameterToList.TabIndex = 11;
+            this.buttonAddParameterToList.Text = "Занести";
+            this.buttonAddParameterToList.UseVisualStyleBackColor = true;
+            this.buttonAddParameterToList.Click += new System.EventHandler(this.buttonAddParameterToList_Click);
             // 
             // TableParametersGoals
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 307);
+            this.ClientSize = new System.Drawing.Size(800, 376);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Name = "TableParametersGoals";
@@ -198,5 +232,8 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonEdit;
         private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonAddParameterToList;
     }
 }

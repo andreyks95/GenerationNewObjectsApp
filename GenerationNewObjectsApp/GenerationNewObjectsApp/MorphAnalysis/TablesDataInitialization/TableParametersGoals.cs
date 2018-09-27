@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using MorphAnalysis.HelperClasses;
 
 namespace MorphAnalysis.TablesDataInitialization
 {
@@ -19,18 +20,30 @@ namespace MorphAnalysis.TablesDataInitialization
 
         private MorphModel db;
 
+        //кешування 
+        private CacheData cacheData = CacheData.GetInstance();
+
+        //Завантажити всі відібрані цілі з ОЗУ
+        List<Goal> goals;
+
         public TableParametersGoals()
         {
             InitializeComponent();
 
             db = new MorphModel();
+
+            goals = cacheData.getListGoal;
         }
 
         private void ParametersGoals_Load(object sender, EventArgs e)
         {
             db.ParametersGoals.Load();
             dataGridView1.DataSource = db.ParametersGoals.Local.ToBindingList();
-            
+
+            comboBox1.Items.Clear();
+            //Заповнити комбо-бокс тільки іменами цілей
+            comboBox1.Items.AddRange(goals.Select(g => g.name).ToArray());
+
             //Перейменувати заголовки стовбців
             dataGridView1.Columns[0].HeaderText = "ID";
             dataGridView1.Columns[1].HeaderText = "Назва";
@@ -110,6 +123,48 @@ namespace MorphAnalysis.TablesDataInitialization
             db.SaveChanges();
 
             dataGridView1.Refresh();
+        }
+
+        //Додавання параметрів цілей до списку
+        private void buttonAddParameterToList_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow == null) return;
+
+            ParametersGoal paramGoal = dataGridView1.CurrentRow.DataBoundItem as ParametersGoal;
+
+            if (paramGoal == null)
+            {
+                MessageBox.Show("Параметр для цілі не обрано!", "Помилка");
+                return;
+            }
+
+            //Знаходимо ціль, яку вибрав користувач в базі даних. для зв'язки
+            string selectedGoalName = comboBox1.SelectedItem.ToString();
+
+            Goal selectedGoal = goals.FirstOrDefault(g => g.name == selectedGoalName);
+
+            if (selectedGoal == null)
+            {
+                MessageBox.Show("Обраної цілі не існує в базі даних! \n Оберіть існуючу ціль!", "Помилка вибору цілі");
+                return;
+            }
+
+            //Закріплюємо за параметром обрану користувачем ціль
+            ParametersGoal newParamGoal = new ParametersGoal()
+            {
+                id_parameter = paramGoal.id_parameter,
+                name = paramGoal.name,
+                unit = paramGoal.unit,
+                Goal = selectedGoal
+            };
+
+            //Зберегти в локальне сховище
+            if (cacheData.AddParameterGoalToList(newParamGoal))
+                MessageBox.Show("Параметр: " + newParamGoal.name + " для цілі: " + newParamGoal.Goal.name + " додано для оцінювання!", "Підтверджено");
+            else
+                MessageBox.Show("Параметр: " + newParamGoal.name + " для цілі: " + newParamGoal.Goal.name + " вже занесено для оцінювання!", "Відхилено");
+            //Зберегти до бази даних
+            //db.SolutionsOfFunctions.AddOrUpdate(solOfFunc);
         }
     }
 }
