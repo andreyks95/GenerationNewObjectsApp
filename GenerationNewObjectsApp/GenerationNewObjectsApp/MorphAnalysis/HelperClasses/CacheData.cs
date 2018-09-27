@@ -29,6 +29,10 @@ namespace MorphAnalysis.HelperClasses
         //Кеш для зберігання параметрів цілей
         private List<ParametersGoal> parametersGoals;
 
+        //Кеш для зберігання параметрів цілей та їх функцій для таблиці 
+        //оцінювання модифікацій і тех. рішень для параметрів цілей
+        private List<ParametersGoal> parametersGoalsForTables;
+
         private static CacheData instance;
 
         #endregion
@@ -44,6 +48,8 @@ namespace MorphAnalysis.HelperClasses
 
             goals = new List<Goal>();
             parametersGoals = new List<ParametersGoal>();
+
+            parametersGoalsForTables = new List<ParametersGoal>();
         }
 
         public static CacheData GetInstance()
@@ -125,11 +131,19 @@ namespace MorphAnalysis.HelperClasses
         }
 
         //Додавання параметру цілі до списку
-        public bool AddParameterGoalToList(ParametersGoal paramGoal)
+        public bool AddParameterGoalToList(ParametersGoal paramGoal, bool forTables = false)
         {
             if (paramGoal == null) return false;
-            if (FindSimiliarParameterOfGoal(parametersGoals, paramGoal)) return false;
-            return CanAdd<ParametersGoal>(parametersGoals, paramGoal);
+            if (forTables)
+            {
+                if (FindSimiliarParameterOfGoal(parametersGoalsForTables, paramGoal)) return false;
+                return CanAdd<ParametersGoal>(parametersGoalsForTables, paramGoal);
+            }
+            else
+            {
+                if (FindSimiliarParameterOfGoal(parametersGoals, paramGoal)) return false;
+                return CanAdd<ParametersGoal>(parametersGoals, paramGoal);
+            }
         }
 
         //Знаходження ідентичних функції та її рішення в списку
@@ -213,6 +227,17 @@ namespace MorphAnalysis.HelperClasses
             {
                 if (parametersGoals.Count > 0)
                     return parametersGoals;
+                else
+                    throw new Exception("Помилка! Пустий список параметрів цілей");
+            }
+        }
+
+        public List<ParametersGoal> getListParameterGoalForTables
+        {
+            get
+            {
+                if (parametersGoalsForTables.Count > 0)
+                    return parametersGoalsForTables;
                 else
                     throw new Exception("Помилка! Пустий список параметрів цілей");
             }
