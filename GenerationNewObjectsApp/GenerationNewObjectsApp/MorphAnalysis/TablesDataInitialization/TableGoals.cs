@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using MorphAnalysis.HelperClasses;
 
 namespace MorphAnalysis.TablesDataInitialization
 {
@@ -18,6 +19,9 @@ namespace MorphAnalysis.TablesDataInitialization
         private string id;
 
         private MorphModel db;
+
+        //кешування
+        private CacheData cacheData = CacheData.GetInstance();
 
         public TableGoals()
         {
@@ -108,6 +112,23 @@ namespace MorphAnalysis.TablesDataInitialization
             db.SaveChanges();
 
             dataGridView1.Refresh();
+        }
+
+        private void buttonAddGoalToList_Click(object sender, EventArgs e)
+        {
+            var goal = dataGridView1.CurrentRow.DataBoundItem as Goal;
+            if (goal == null)
+            {
+                MessageBox.Show("Ціль не обрана!", "Помилка");
+                return;
+            }
+            else
+            {
+                if (cacheData.AddGoalToList(goal))
+                    MessageBox.Show("Ціль " + goal.name + " додано для оцінювання!", "Підтверджено");
+                else
+                    MessageBox.Show("Ціль " + goal.name + " вже занесено для оцінювання!", "Відхилено");
+            }
         }
     }
 }
