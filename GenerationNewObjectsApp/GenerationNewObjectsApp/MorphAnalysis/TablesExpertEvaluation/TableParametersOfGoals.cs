@@ -36,6 +36,10 @@ namespace MorphAnalysis.TablesExpertEvaluation
         private int countOfExpert = 1;
 
 
+        //Число (вага) для фільтрації
+        private decimal valueFilter = 0;
+
+
         public TableParametersOfGoals()
         {
             InitializeComponent();
@@ -81,7 +85,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 string firstCellValue = e.Row.Cells[0].Value?.ToString(); ;
                 if (firstCellValue is null) return;
 
-                label1.Text = "Розрахувати ср. значення параметрів в межах обраної цілі:" + "\n" + firstCellValue;
+                label1.Text = "Розрахувати ср. значення параметрів \n в межах обраної цілі:" + "\n" + firstCellValue;
 
                 //отримаємо функцію для запиту
                 selectedGoal = goalList.FirstOrDefault(g => g.name == firstCellValue);
@@ -128,8 +132,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
             private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) =>
             configDGV.CellValidating(dataGridView2, sender, e);
-
-        /*
+        
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             decimal value;
@@ -151,10 +154,50 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     }
                 }
             }
-        }*/
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            decimal value;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (textBox2.Text is null || textBox2.Text == "")
+                    MessageBox.Show("Введене значення повинне бути числом!", "Помилка введення");
+                else
+                {
+                    if (!decimal.TryParse(textBox2.Text, out value))
+                        MessageBox.Show("Введене значення повинне бути числом!", "Помилка введення");
+                    else
+                    {
+                        if (value >= 0 && value <= 1)
+                            valueFilter = value;
+                        else
+                            MessageBox.Show("Вага повинна бути >=0 && <=1", "Помилка введення");
+                    }
+                }
+            }
+        }
 
         #endregion
 
+        #region Розрахунок ваги елементів відносно один одного та середніх значень параметрів рішень
+
+        //Розрахунок середнього значення параметру цілей
+        private void buttonCalcParams_Click(object sender, EventArgs e)
+        {
+            configDGV.RebuildTableDGV(dataGridView2, false);
+            buttonSaveResultParamsOfGoal.Enabled = true;
+        }
+
+        //Розрахунок ваги цілей
+        private void buttonCalcGoals_Click(object sender, EventArgs e)
+        {
+            configDGV.RebuildTableDGV(dataGridView1);
+            buttonSaveResultGoals.Enabled = true;
+        }
+
+        #endregion
 
     }
 }

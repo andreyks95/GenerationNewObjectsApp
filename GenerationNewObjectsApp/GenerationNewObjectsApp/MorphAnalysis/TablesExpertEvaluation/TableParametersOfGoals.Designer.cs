@@ -30,17 +30,17 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.buttonSaveResultFuncs = new System.Windows.Forms.Button();
+            this.buttonSaveResultGoals = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.buttonCalcFuncs = new System.Windows.Forms.Button();
+            this.buttonCalcGoals = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonCalcParams = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttonSaveResultSolutionsOfFunc = new System.Windows.Forms.Button();
+            this.buttonSaveResultParamsOfGoal = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonCalcSols = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -51,9 +51,9 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.buttonSaveResultFuncs);
+            this.panel1.Controls.Add(this.buttonSaveResultGoals);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.buttonCalcFuncs);
+            this.panel1.Controls.Add(this.buttonCalcGoals);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -68,17 +68,18 @@
             this.textBox2.Size = new System.Drawing.Size(85, 20);
             this.textBox2.TabIndex = 5;
             this.textBox2.Text = "0";
+            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             // 
-            // buttonSaveResultFuncs
+            // buttonSaveResultGoals
             // 
-            this.buttonSaveResultFuncs.Enabled = false;
-            this.buttonSaveResultFuncs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSaveResultFuncs.Location = new System.Drawing.Point(728, 9);
-            this.buttonSaveResultFuncs.Name = "buttonSaveResultFuncs";
-            this.buttonSaveResultFuncs.Size = new System.Drawing.Size(75, 23);
-            this.buttonSaveResultFuncs.TabIndex = 3;
-            this.buttonSaveResultFuncs.Text = "Занести";
-            this.buttonSaveResultFuncs.UseVisualStyleBackColor = true;
+            this.buttonSaveResultGoals.Enabled = false;
+            this.buttonSaveResultGoals.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSaveResultGoals.Location = new System.Drawing.Point(728, 9);
+            this.buttonSaveResultGoals.Name = "buttonSaveResultGoals";
+            this.buttonSaveResultGoals.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveResultGoals.TabIndex = 3;
+            this.buttonSaveResultGoals.Text = "Занести";
+            this.buttonSaveResultGoals.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -90,15 +91,16 @@
             this.label4.TabIndex = 2;
             this.label4.Text = "Занести цілі в таблицю,\r\nвага яких >=";
             // 
-            // buttonCalcFuncs
+            // buttonCalcGoals
             // 
-            this.buttonCalcFuncs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonCalcFuncs.Location = new System.Drawing.Point(199, 12);
-            this.buttonCalcFuncs.Name = "buttonCalcFuncs";
-            this.buttonCalcFuncs.Size = new System.Drawing.Size(152, 30);
-            this.buttonCalcFuncs.TabIndex = 1;
-            this.buttonCalcFuncs.Text = "Розрахунок цілей";
-            this.buttonCalcFuncs.UseVisualStyleBackColor = true;
+            this.buttonCalcGoals.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.buttonCalcGoals.Location = new System.Drawing.Point(199, 12);
+            this.buttonCalcGoals.Name = "buttonCalcGoals";
+            this.buttonCalcGoals.Size = new System.Drawing.Size(152, 30);
+            this.buttonCalcGoals.TabIndex = 1;
+            this.buttonCalcGoals.Text = "Розрахунок цілей";
+            this.buttonCalcGoals.UseVisualStyleBackColor = true;
+            this.buttonCalcGoals.Click += new System.EventHandler(this.buttonCalcGoals_Click);
             // 
             // label2
             // 
@@ -132,34 +134,48 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.buttonCalcParams);
             this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.buttonSaveResultSolutionsOfFunc);
+            this.panel2.Controls.Add(this.buttonSaveResultParamsOfGoal);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.buttonCalcSols);
             this.panel2.Location = new System.Drawing.Point(0, 295);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(984, 50);
             this.panel2.TabIndex = 7;
             // 
+            // buttonCalcParams
+            // 
+            this.buttonCalcParams.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.buttonCalcParams.Location = new System.Drawing.Point(283, 7);
+            this.buttonCalcParams.Name = "buttonCalcParams";
+            this.buttonCalcParams.Size = new System.Drawing.Size(205, 30);
+            this.buttonCalcParams.TabIndex = 0;
+            this.buttonCalcParams.Text = "Розрахунок параметрів";
+            this.buttonCalcParams.UseVisualStyleBackColor = true;
+            this.buttonCalcParams.Click += new System.EventHandler(this.buttonCalcParams_Click);
+            // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(620, 21);
+            this.textBox1.Location = new System.Drawing.Point(678, 20);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(85, 20);
             this.textBox1.TabIndex = 4;
             this.textBox1.Text = "0";
+            this.textBox1.Visible = false;
+            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
-            // buttonSaveResultSolutionsOfFunc
+            // buttonSaveResultParamsOfGoal
             // 
-            this.buttonSaveResultSolutionsOfFunc.Enabled = false;
-            this.buttonSaveResultSolutionsOfFunc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSaveResultSolutionsOfFunc.Location = new System.Drawing.Point(874, 11);
-            this.buttonSaveResultSolutionsOfFunc.Name = "buttonSaveResultSolutionsOfFunc";
-            this.buttonSaveResultSolutionsOfFunc.Size = new System.Drawing.Size(98, 23);
-            this.buttonSaveResultSolutionsOfFunc.TabIndex = 3;
-            this.buttonSaveResultSolutionsOfFunc.Text = "Занести";
-            this.buttonSaveResultSolutionsOfFunc.UseVisualStyleBackColor = true;
+            this.buttonSaveResultParamsOfGoal.Enabled = false;
+            this.buttonSaveResultParamsOfGoal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSaveResultParamsOfGoal.Location = new System.Drawing.Point(874, 11);
+            this.buttonSaveResultParamsOfGoal.Name = "buttonSaveResultParamsOfGoal";
+            this.buttonSaveResultParamsOfGoal.Size = new System.Drawing.Size(98, 23);
+            this.buttonSaveResultParamsOfGoal.TabIndex = 3;
+            this.buttonSaveResultParamsOfGoal.Text = "Занести";
+            this.buttonSaveResultParamsOfGoal.UseVisualStyleBackColor = true;
+            this.buttonSaveResultParamsOfGoal.Visible = false;
             // 
             // label3
             // 
@@ -167,9 +183,10 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(528, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(343, 34);
+            this.label3.Size = new System.Drawing.Size(254, 34);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Занести рішення функції в морфологічну таблицю,\r\nвага яких >=";
+            this.label3.Text = "Занести параметри цілей в таблицю,\r\nср. значення яких >=";
+            this.label3.Visible = false;
             // 
             // label1
             // 
@@ -180,16 +197,6 @@
             this.label1.Size = new System.Drawing.Size(263, 34);
             this.label1.TabIndex = 1;
             this.label1.Text = "Розрахувати ср. значення параметрів \r\nв межах обраної цілі:";
-            // 
-            // buttonCalcSols
-            // 
-            this.buttonCalcSols.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.buttonCalcSols.Location = new System.Drawing.Point(272, 6);
-            this.buttonCalcSols.Name = "buttonCalcSols";
-            this.buttonCalcSols.Size = new System.Drawing.Size(205, 30);
-            this.buttonCalcSols.TabIndex = 0;
-            this.buttonCalcSols.Text = "Розрахунок параметрів";
-            this.buttonCalcSols.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
@@ -236,16 +243,16 @@
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button buttonSaveResultFuncs;
+        private System.Windows.Forms.Button buttonSaveResultGoals;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button buttonCalcFuncs;
+        private System.Windows.Forms.Button buttonCalcGoals;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button buttonSaveResultSolutionsOfFunc;
+        private System.Windows.Forms.Button buttonSaveResultParamsOfGoal;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonCalcSols;
+        private System.Windows.Forms.Button buttonCalcParams;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label3;
     }
