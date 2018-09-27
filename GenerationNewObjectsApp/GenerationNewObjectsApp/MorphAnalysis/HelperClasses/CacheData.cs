@@ -23,6 +23,12 @@ namespace MorphAnalysis.HelperClasses
         //Кеш для зберігання рішень функцій в морфологічну таблицю
         private List<SolutionsOfFunction> solOfFuncListMorphTable;
 
+        //Кеш для зберігання цілей
+        private List<Goal> goals;
+
+        //Кеш для зберігання параметрів цілей
+        private List<ParametersGoal> parametersGoals;
+
         private static CacheData instance;
 
         #endregion
@@ -35,6 +41,9 @@ namespace MorphAnalysis.HelperClasses
 
             funcListMorphTable = new List<Function>();
             solOfFuncListMorphTable = new List<SolutionsOfFunction>();
+
+            goals = new List<Goal>();
+            parametersGoals = new List<ParametersGoal>();
         }
 
         public static CacheData GetInstance()
@@ -47,6 +56,7 @@ namespace MorphAnalysis.HelperClasses
 
         #region функції додавання елементів в список
 
+
         //Узагальнений метод
         public bool CanAdd<T>(List<T> list, T element)
         {
@@ -58,6 +68,7 @@ namespace MorphAnalysis.HelperClasses
             return false;
         }
 
+        #region Додавання рішень та функцій
 
         //Додавання функцій в список
         public bool AddFunctionToList(Function func, bool ToMorphTable = false)
@@ -86,6 +97,7 @@ namespace MorphAnalysis.HelperClasses
             }
         }
 
+        //Знаходження ідентичних функції та її рішення в списку
         private bool FindSimiliarSolutionOfFunction(List<SolutionsOfFunction> list, SolutionsOfFunction solOfFunc)
         {
             foreach (SolutionsOfFunction item in list)
@@ -95,6 +107,44 @@ namespace MorphAnalysis.HelperClasses
             }
             return false;
         }
+
+        #endregion
+
+        #region Додавання параметрів та цілей
+
+        //Додавання цілей до списку  
+        public bool AddGoalToList(Goal goal)
+        {
+            if (goal == null) return false;
+            foreach (Goal g in goals)
+            {
+                if (g.id_goal == goal.id_goal)
+                    return false;
+            }
+            return CanAdd<Goal>(goals, goal);
+        }
+
+        //Додавання параметру цілі до списку
+        public bool AddParameterGoalToList(ParametersGoal paramGoal)
+        {
+            if (paramGoal == null) return false;
+            if (FindSimiliarParameterOfGoal(parametersGoals, paramGoal)) return false;
+            return CanAdd<ParametersGoal>(parametersGoals, paramGoal);
+        }
+
+        //Знаходження ідентичних функції та її рішення в списку
+        private bool FindSimiliarParameterOfGoal(List<ParametersGoal> list, ParametersGoal param)
+        {
+            foreach (ParametersGoal item in list)
+            {
+                if (item.id_parameter == param.id_parameter && item.Goal.id_goal == param.Goal.id_goal )
+                   // && item.name == param.name && item.Goal.name == param.Goal.name)
+                    return true;
+            }
+            return false;
+        }
+
+        #endregion
 
         #endregion
 
@@ -142,6 +192,29 @@ namespace MorphAnalysis.HelperClasses
                     return solOfFuncListMorphTable;
                 else
                     throw new Exception("Помилка! Пустий список функцій та їх рішень для передачі в морфологічну таблицю!");
+            }
+        }
+
+
+        public List<Goal> getListGoal
+        {
+            get
+            {
+                if (goals.Count > 0)
+                    return goals;
+                else
+                    throw new Exception("Помилка! Пустий список цілей!");
+            }
+        }
+
+        public List<ParametersGoal> getListParameterGoal
+        {
+            get
+            {
+                if (parametersGoals.Count > 0)
+                    return parametersGoals;
+                else
+                    throw new Exception("Помилка! Пустий список параметрів цілей");
             }
         }
 
