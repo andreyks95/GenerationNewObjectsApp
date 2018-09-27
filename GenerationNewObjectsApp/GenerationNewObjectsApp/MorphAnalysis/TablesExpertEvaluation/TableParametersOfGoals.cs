@@ -30,7 +30,10 @@ namespace MorphAnalysis.TablesExpertEvaluation
         private Goal selectedGoal;
 
         //Для отримання результатів LINQ параметрів цілі обраної користувачем цілі
-        IEnumerable<ParametersGoal> getResultQueryParamGoal;
+        private IEnumerable<ParametersGoal> getResultQueryParamGoal;
+
+        //Локальне сховище параметрів цілей для передачі в таблиці оцінювання рішень по цілям та модифікацій по цілям
+        private List<ParametersGoal> paramGoalLocalList;
 
         //Отримаємо кількість експертів
         private int countOfExpert = 1;
@@ -57,6 +60,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
             this.countOfExpert = countOfExpert;
 
             configDGV = new ConfigDGV(countOfExpert);
+
+            paramGoalLocalList = new List<ParametersGoal>();
         }
 
         private void TableParametersOfGoals_Load(object sender, EventArgs e)
@@ -95,7 +100,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 // з параматреми цілей в ОЗУ. Дістаємо параметри цілі
                 IEnumerable<ParametersGoal> getPartQueryParametersWithGoal = from paramDB in db.ParametersGoals.ToList()
                                                                              join paramLocal in paramGoalList on paramDB.id_parameter equals paramLocal.id_parameter
-                                                                                     select paramLocal;
+                                                                             select paramLocal;
 
                 getResultQueryParamGoal = from paramLocal in getPartQueryParametersWithGoal
                                           where paramLocal.Goal.id_goal == selectedGoal.id_goal
@@ -112,28 +117,28 @@ namespace MorphAnalysis.TablesExpertEvaluation
         }
 
 
-            #region Додаткове налаштування dgv's
+        #region Додаткове налаштування dgv's
 
-            //Вимикаємо фокус на dgv1 коли редагуємо dgv2
-            private void dataGridView2_Enter(object sender, EventArgs e) =>
-            dataGridView1.Enabled = false;
+        //Вимикаємо фокус на dgv1 коли редагуємо dgv2
+        private void dataGridView2_Enter(object sender, EventArgs e) =>
+        dataGridView1.Enabled = false;
 
-            //Вмикаємо фокус на dgv1 коли покидаємо dgv2
-            private void dataGridView2_MouseLeave(object sender, EventArgs e) =>
-            dataGridView1.Enabled = true;
+        //Вмикаємо фокус на dgv1 коли покидаємо dgv2
+        private void dataGridView2_MouseLeave(object sender, EventArgs e) =>
+        dataGridView1.Enabled = true;
 
-            //Відкючаємо стовбець ср. значень dgv2 коли знаходимося в dgv1
-            private void dataGridView1_Enter(object sender, EventArgs e) =>
-            dataGridView2.Columns[countOfExpert + 1].Visible = false;
+        //Відкючаємо стовбець ср. значень dgv2 коли знаходимося в dgv1
+        private void dataGridView1_Enter(object sender, EventArgs e) =>
+        dataGridView2.Columns[countOfExpert + 1].Visible = false;
 
-            //Перевірка комірок тільки на ввведення числових даних
-            private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) =>
-            configDGV.CellValidating(dataGridView1, sender, e);
+        //Перевірка комірок тільки на ввведення числових даних
+        private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) =>
+        configDGV.CellValidating(dataGridView1, sender, e);
 
-            private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) =>
-            configDGV.CellValidating(dataGridView2, sender, e);
-        
-        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        private void dataGridView2_CellValidating(object sender, DataGridViewCellValidatingEventArgs e) =>
+        configDGV.CellValidating(dataGridView2, sender, e);
+
+        /*private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             decimal value;
 
@@ -154,7 +159,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     }
                 }
             }
-        }
+        }*/
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
@@ -199,5 +204,98 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
         #endregion
 
+        private void buttonSaveResultGoals_Click(object sender, EventArgs e)
+        {
+            int firstIndex = dataGridView1.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
+            int lastIndex = dataGridView1.Columns.GetLastColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
+
+
+            //Присвоюємо для кожної цілі її вагу, якщо вона пройшла фільтрацію
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                string nameGoal = Convert.ToString(dataGridView1[firstIndex, i].Value);
+                decimal weightGoal = Convert.ToDecimal(dataGridView1[lastIndex, i].Value);
+
+                if (nameGoal != null && weightGoal >= 0 && weightGoal <= 1 && weightGoal >= valueFilter)
+                {
+                    ParametersGoal paramGoal = paramGoalLocalList.FirstOrDefault(p => p.Goal.name == nameGoal);
+                    if (paramGoal is null) return;
+                    paramGoal.Goal.weight = weightGoal;
+                }
+            }
+            //Перебираємо локальний список параметрів цілі та відхиляємо ті цілі в яких нема ваги
+            //або якщо вона менша заданному фільтру (при загрузці з БД. Можливий пропуск з більшим значенням!)
+            foreach (ParametersGoal item in paramGoalLocalList)
+            {
+               if (item.Goal is null) 
+                    continue;
+                if (item.Goal.weight is null)
+                    continue;
+                if (item.Goal.weight <= valueFilter)
+                    continue;
+
+                Goal goal = new Goal()
+                {
+                    id_goal = item.Goal.id_goal,
+                    name = item.Goal.name,
+                    characteristic = item.Goal.characteristic,
+                    weight = item.Goal.weight
+                };
+
+                ParametersGoal newParam = new ParametersGoal()
+                {
+                    id_parameter = item.id_parameter,
+                    unit = item.unit,
+                    name = item.name,
+                    avg = item.avg,
+                    Goal = goal
+                };
+
+                cacheData.AddParameterGoalToList(newParam, true);
+            }
+            MessageBox.Show("Дані успішно додані", "Підтверджено");
+            /*foreach (var item in cacheData.getListParameterGoalForTables)
+            {
+                Console.Write("ID param =" + item.id_parameter + " " + item.name + " avg = " + item.avg
+                    + " \n ID goal" + item.Goal.id_goal + " " + item.Goal.name + " weight = " + item.Goal.weight + "\n");
+            }*/
+
+        }
+
+        private void buttonSaveResultParamsOfGoal_Click(object sender, EventArgs e)
+        {
+
+            //обрана користувачем ціль
+            string nameSelectedGoalDGV1 = dataGridView1.CurrentRow.Cells[0].Value?.ToString();
+
+            if (nameSelectedGoalDGV1 == null) return;
+
+            //Знаходимо індекси в dgv2 для назв параметру цілі і її середньої оцінки
+            int firstIndexDGV2 = dataGridView2.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
+            int lastIndexDGV2 = dataGridView2.Columns.GetLastColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
+
+            for (int rowIndex = 0; rowIndex < dataGridView2.Rows.Count; rowIndex++)
+            {
+                //Назва параметру
+                string nameParameterGoal = Convert.ToString(dataGridView2[firstIndexDGV2, rowIndex].Value);
+                //Середнє значення параметру цілі. Можливе зі знаком "-"
+                decimal avgParameterGoal = Convert.ToDecimal(dataGridView2[lastIndexDGV2, rowIndex].Value);
+
+                if (nameParameterGoal != null)
+                {
+                    ParametersGoal selectedParamOfGoal = getResultQueryParamGoal.FirstOrDefault(p => p.name == nameParameterGoal
+                                                                                 && p.Goal.name == nameSelectedGoalDGV1);
+                    if (selectedParamOfGoal is null) return;
+                    selectedParamOfGoal.avg = avgParameterGoal;
+                    //selectedParamOfGoal.Goal.
+
+                    paramGoalLocalList.Add(selectedParamOfGoal);
+
+                    //cacheData.AddSolutionOfFunctionToList(selectedSolOfFunc, true);
+                }
+
+            }
+            MessageBox.Show("Дані успішно додані", "Підтверджено");
+        }
     }
 }

@@ -37,7 +37,6 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonCalcParams = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSaveResultParamsOfGoal = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -80,6 +79,7 @@
             this.buttonSaveResultGoals.TabIndex = 3;
             this.buttonSaveResultGoals.Text = "Занести";
             this.buttonSaveResultGoals.UseVisualStyleBackColor = true;
+            this.buttonSaveResultGoals.Click += new System.EventHandler(this.buttonSaveResultGoals_Click);
             // 
             // label4
             // 
@@ -135,7 +135,6 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.buttonCalcParams);
-            this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.buttonSaveResultParamsOfGoal);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label1);
@@ -155,27 +154,17 @@
             this.buttonCalcParams.UseVisualStyleBackColor = true;
             this.buttonCalcParams.Click += new System.EventHandler(this.buttonCalcParams_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(678, 20);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(85, 20);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "0";
-            this.textBox1.Visible = false;
-            this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            // 
             // buttonSaveResultParamsOfGoal
             // 
             this.buttonSaveResultParamsOfGoal.Enabled = false;
             this.buttonSaveResultParamsOfGoal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSaveResultParamsOfGoal.Location = new System.Drawing.Point(874, 11);
+            this.buttonSaveResultParamsOfGoal.Location = new System.Drawing.Point(784, 3);
             this.buttonSaveResultParamsOfGoal.Name = "buttonSaveResultParamsOfGoal";
             this.buttonSaveResultParamsOfGoal.Size = new System.Drawing.Size(98, 23);
             this.buttonSaveResultParamsOfGoal.TabIndex = 3;
             this.buttonSaveResultParamsOfGoal.Text = "Занести";
             this.buttonSaveResultParamsOfGoal.UseVisualStyleBackColor = true;
-            this.buttonSaveResultParamsOfGoal.Visible = false;
+            this.buttonSaveResultParamsOfGoal.Click += new System.EventHandler(this.buttonSaveResultParamsOfGoal_Click);
             // 
             // label3
             // 
@@ -183,9 +172,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(528, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(254, 34);
+            this.label3.Size = new System.Drawing.Size(250, 17);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Занести параметри цілей в таблицю,\r\nср. значення яких >=";
+            this.label3.Text = "Занести параметри цілей в таблицю";
             this.label3.Visible = false;
             // 
             // label1
@@ -249,7 +238,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonSaveResultParamsOfGoal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonCalcParams;
