@@ -166,7 +166,7 @@ namespace MorphAnalysis.TablesDataInitialization
 
 
             //Зберегти в локальне сховище
-            if (solOfFuncCacheData.AddSolutionOfFunctionToList(solOfFunc))
+            if (solOfFuncCacheData.AddElementToList<SolutionsOfFunction>(solOfFunc))
                 MessageBox.Show("Рішення: " + solOfFunc.Solution.name + " для функції: " + solOfFunc.Function.name + " додано для оцінювання!", "Підтверджено");
             else
                 MessageBox.Show("Рішення: " + solOfFunc.Solution.name + " для функції: " + solOfFunc.Function.name + " вже занесено для оцінювання!", "Відхилено");

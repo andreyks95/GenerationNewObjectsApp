@@ -159,7 +159,7 @@ namespace MorphAnalysis.TablesDataInitialization
             };
 
             //Зберегти в локальне сховище
-            if (cacheData.AddParameterGoalToList(newParamGoal))
+            if (cacheData.AddElementToList<ParametersGoal>(newParamGoal))
                 MessageBox.Show("Параметр: " + newParamGoal.name + " для цілі: " + newParamGoal.Goal.name + " додано для оцінювання!", "Підтверджено");
             else
                 MessageBox.Show("Параметр: " + newParamGoal.name + " для цілі: " + newParamGoal.Goal.name + " вже занесено для оцінювання!", "Відхилено");
