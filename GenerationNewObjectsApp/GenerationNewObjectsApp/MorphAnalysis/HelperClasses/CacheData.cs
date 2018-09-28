@@ -33,6 +33,9 @@ namespace MorphAnalysis.HelperClasses
         //оцінювання модифікацій і тех. рішень для параметрів цілей
         private List<ParametersGoal> parametersGoalsForTables;
 
+        //Кеш для зберігання параметрів цілей щодо тех. рішень
+        private List<ParametersGoalsForSolution> parametersGoalsForSolutionsList;
+
         private static CacheData instance;
 
         #endregion
@@ -50,6 +53,8 @@ namespace MorphAnalysis.HelperClasses
             parametersGoals = new List<ParametersGoal>();
 
             parametersGoalsForTables = new List<ParametersGoal>();
+
+            parametersGoalsForSolutionsList = new List<ParametersGoalsForSolution>();
         }
 
         public static CacheData GetInstance()
@@ -151,8 +156,8 @@ namespace MorphAnalysis.HelperClasses
         {
             foreach (ParametersGoal item in list)
             {
-                if (item.id_parameter == param.id_parameter && item.Goal.id_goal == param.Goal.id_goal )
-                   // && item.name == param.name && item.Goal.name == param.Goal.name)
+                if (item.id_parameter == param.id_parameter && item.Goal.id_goal == param.Goal.id_goal)
+                    // && item.name == param.name && item.Goal.name == param.Goal.name)
                     return true;
             }
             return false;
@@ -160,89 +165,88 @@ namespace MorphAnalysis.HelperClasses
 
         #endregion
 
-        #endregion
+        #region Додавання тех. рішень та модифікацій щодо параметрів цілей
 
-        #region отримання списків
-
-        public List<Function> getListFunction
+        public bool AddParamGoalForSolToList(ParametersGoalsForSolution paramGoalForSol)
         {
-            get
+            if (paramGoalForSol == null) return false;
+            /*foreach(ParametersGoalsForSolution item in parametersGoalsForSolutionsList)
             {
-                if (funcList.Count > 0)
-                    return funcList;
-                else
-                    throw new Exception("Помилка! Пустий список функцій!");
-            }
-        }
-
-
-        public List<SolutionsOfFunction> getListSolutionOfFunction
-        {
-            get
-            {
-                if (solOfFuncList.Count > 0)
-                    return solOfFuncList;
-                else
-                    throw new Exception("Помилка! Пустий список функцій та їх рішень!");
-            }
-        }
-
-        public List<Function> getListFunctionMorphTable
-        {
-            get
-            {
-                if (funcListMorphTable.Count > 0)
-                    return funcListMorphTable;
-                else
-                    throw new Exception("Помилка! Пустий список функцій для передачі в морфологічну таблицю!");
-            }
-        }
-
-        public List<SolutionsOfFunction> getListSolutionOfFunctionMorphTable
-        {
-            get
-            {
-                if (solOfFuncListMorphTable.Count > 0)
-                    return solOfFuncListMorphTable;
-                else
-                    throw new Exception("Помилка! Пустий список функцій та їх рішень для передачі в морфологічну таблицю!");
-            }
-        }
-
-
-        public List<Goal> getListGoal
-        {
-            get
-            {
-                if (goals.Count > 0)
-                    return goals;
-                else
-                    throw new Exception("Помилка! Пустий список цілей!");
-            }
-        }
-
-        public List<ParametersGoal> getListParameterGoal
-        {
-            get
-            {
-                if (parametersGoals.Count > 0)
-                    return parametersGoals;
-                else
-                    throw new Exception("Помилка! Пустий список параметрів цілей");
-            }
-        }
-
-        public List<ParametersGoal> getListParameterGoalForTables
-        {
-            get
-            {
-                if (parametersGoalsForTables.Count > 0)
-                    return parametersGoalsForTables;
-                else
-                    throw new Exception("Помилка! Пустий список параметрів цілей");
-            }
+                if (paramGoalForSol.)
+                    return false;
+            }*/
+            return CanAdd<ParametersGoalsForSolution>(parametersGoalsForSolutionsList, paramGoalForSol);
         }
 
         #endregion
+
+        #endregion
+
+        #region Отримання списків
+        //Отримання списків в залежності від класу 
+        //а також в залежності для яких таблиць: морфологічних / оціночних / кросс таблиць
+        //чи звичайних для експертів 
+
+        private bool HasListElements<T>(List<T> list)
+        {
+            if (list == null) return false;
+            else if (list.Count > 0) return true;
+            else return false;
+        }
+
+        public List<T> GetList<T>(bool forEvaluationTable = false)
+        {
+            List<T> returnList = null;
+            string n = typeof(T).Name;
+            switch (n)
+            {
+                case nameof(Function):
+                    if (forEvaluationTable)
+                        returnList = funcListMorphTable.Cast<T>().ToList();
+                    else
+                        returnList = funcList.Cast<T>().ToList();
+                    break;
+
+                case nameof(SolutionsOfFunction):
+                    if (forEvaluationTable)
+                        returnList = solOfFuncListMorphTable.Cast<T>().ToList();
+                    else
+                        returnList = solOfFuncList.Cast<T>().ToList();
+                    break;
+
+                case nameof(Goal):
+                    returnList = goals.Cast<T>().ToList();
+                    break;
+
+                case nameof(ParametersGoal):
+                    if (forEvaluationTable)
+                        returnList = parametersGoalsForTables.Cast<T>().ToList();
+                    else
+                        returnList = parametersGoals.Cast<T>().ToList();
+                    break;
+
+                case nameof(ParametersGoalsForSolution):
+                    returnList = parametersGoalsForSolutionsList.Cast<T>().ToList();
+                    break;
+
+                default:
+                    returnList = null;
+                    break;
+            }
+            if (HasListElements(returnList))
+                return returnList;
+            else
+                throw new Exception("Помилка! Пустий список елементів " + n);
+        }
+
+        #endregion
+
+        public bool AddElementToList<T>(T element, bool forEvaluationTable = false)
+        {
+            //Реализовать метод
+            return true;
+        }
+
+
     }
 }
