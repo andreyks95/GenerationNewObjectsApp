@@ -71,6 +71,7 @@ namespace MorphAnalysis.HelperClasses
         //Узагальнений метод
         public bool CanAdd<T>(List<T> list, T element)
         {
+            if (element == null) return false;
             if (!list.Contains(element))
             {
                 list.Add(element);
@@ -182,12 +183,79 @@ namespace MorphAnalysis.HelperClasses
 
         #endregion
 
+        public bool AddElementToList<T>(T element, bool forEvaluationTable = false)
+        {
+            //Реализовать метод
+            if (element == null) return false;
+
+            bool returnResult;
+            string nameClass = typeof(T).Name;
+            //Type typeElement = element.GetType();
+            //nameClass = typeElement.Name;
+            switch (nameClass)
+            {
+                case nameof(Function):
+                    if (forEvaluationTable)
+                        returnResult = CanAdd<Function>(funcListMorphTable, element as Function);
+                    else
+                        returnResult = CanAdd<Function>(funcList, element as Function);
+                    break;
+
+                case nameof(SolutionsOfFunction):
+                    {
+                        List<SolutionsOfFunction> list = null;
+
+                        if (forEvaluationTable)
+                            list = solOfFuncListMorphTable;
+                        else
+                            list = solOfFuncList;
+
+                        if (FindSimiliarSolutionOfFunction(list, element as SolutionsOfFunction))
+                            returnResult = false;
+                        else
+                            returnResult = CanAdd<SolutionsOfFunction>(list, element as SolutionsOfFunction);
+
+                        break;
+                    }
+
+                case nameof(Goal):
+                    returnResult = CanAdd<Goal>(goals, element as Goal);
+                    break;
+
+                case nameof(ParametersGoal):
+                    {
+                        List<ParametersGoal> list = null;
+
+                        if (forEvaluationTable)
+                            list = parametersGoalsForTables;
+                        else
+                            list = parametersGoals;
+
+                        if (FindSimiliarParameterOfGoal(list, element as ParametersGoal))
+                            returnResult = false;
+                        else
+                            returnResult = CanAdd<ParametersGoal>(list, element as ParametersGoal);
+
+                        break;
+                    }
+
+                case nameof(ParametersGoalsForSolution):
+                    returnResult = CanAdd<ParametersGoalsForSolution>(parametersGoalsForSolutionsList, element as ParametersGoalsForSolution);
+                    break;
+
+                default:
+                    returnResult = false;
+                    break;
+            }
+            return returnResult;
+        }
+
         #region Отримання списків
         //Отримання списків в залежності від класу 
         //а також в залежності для яких таблиць: морфологічних / оціночних / кросс таблиць
         //чи звичайних для експертів 
 
-        private bool HasListElements<T>(List<T> list)
+        private bool HasListAnyElements<T>(List<T> list)
         {
             if (list == null) return false;
             else if (list.Count > 0) return true;
@@ -233,20 +301,13 @@ namespace MorphAnalysis.HelperClasses
                     returnList = null;
                     break;
             }
-            if (HasListElements(returnList))
+            if (HasListAnyElements(returnList))
                 return returnList;
             else
                 throw new Exception("Помилка! Пустий список елементів " + n);
         }
 
         #endregion
-
-        public bool AddElementToList<T>(T element, bool forEvaluationTable = false)
-        {
-            //Реализовать метод
-            return true;
-        }
-
 
     }
 }
