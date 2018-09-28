@@ -46,6 +46,7 @@
             this.buttonMorphTable = new System.Windows.Forms.Button();
             this.textBoxCountExpert = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonSolParamTable = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -159,6 +160,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonSolParamTable);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.buttonMorphTable);
             this.tabPage1.Controls.Add(this.textBoxCountExpert);
@@ -195,9 +197,9 @@
             // buttonMorphTable
             // 
             this.buttonMorphTable.Enabled = false;
-            this.buttonMorphTable.Location = new System.Drawing.Point(11, 181);
+            this.buttonMorphTable.Location = new System.Drawing.Point(11, 175);
             this.buttonMorphTable.Name = "buttonMorphTable";
-            this.buttonMorphTable.Size = new System.Drawing.Size(102, 38);
+            this.buttonMorphTable.Size = new System.Drawing.Size(102, 51);
             this.buttonMorphTable.TabIndex = 7;
             this.buttonMorphTable.Text = "Морфологічна таблиця";
             this.buttonMorphTable.UseVisualStyleBackColor = true;
@@ -220,6 +222,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonSolParamTable
+            // 
+            this.buttonSolParamTable.Enabled = false;
+            this.buttonSolParamTable.Location = new System.Drawing.Point(144, 175);
+            this.buttonSolParamTable.Name = "buttonSolParamTable";
+            this.buttonSolParamTable.Size = new System.Drawing.Size(147, 51);
+            this.buttonSolParamTable.TabIndex = 10;
+            this.buttonSolParamTable.Text = "Оцінювання тех. рішень відповідно до параметрів цілей";
+            this.buttonSolParamTable.UseVisualStyleBackColor = true;
+            this.buttonSolParamTable.Click += new System.EventHandler(this.buttonSolParamTable_Click);
             // 
             // Form1
             // 
@@ -262,6 +275,7 @@
         private System.Windows.Forms.Button buttonMorphTable;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonParamsGoals;
+        private System.Windows.Forms.Button buttonSolParamTable;
     }
 }
 
