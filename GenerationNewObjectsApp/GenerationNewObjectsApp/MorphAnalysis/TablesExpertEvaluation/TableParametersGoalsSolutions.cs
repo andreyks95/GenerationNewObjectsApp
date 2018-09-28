@@ -29,8 +29,6 @@ namespace MorphAnalysis.TablesExpertEvaluation
         //Для тимчасового зберігання назв функції
         private string functionNameInTable;
 
-        List<decimal> ratings = new List<decimal>();
-
 
         public TableParametersGoalsSolutions()
         {
@@ -54,7 +52,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
             int i = 0;
             foreach (ParametersGoal param in parametersGoalsList)
             {
-                dataGridView1.Columns.Add("P" + ++i, "Параметр: " + param.name + " : " + " Ціль: "+ param.Goal.name + " " 
+                dataGridView1.Columns.Add("P" + ++i, "Параметр: " + param.name + " : " + " Ціль: " + param.Goal.name + " "
                     + "ср. знач. " + param.avg + " " + param.unit);
             }
             dataGridView1.Columns.Add("Sum", "Оцінка");
@@ -62,8 +60,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
             //Стовбці тільки для читання
             configDGV.SetColumnsDgvOnlyRead(dataGridView1, new[] { 0, dataGridView1.Columns.Count - 1 });
-            
-            
+
+
             //Наповнюємо рядками таблицю
             foreach (SolutionsOfFunction solOfFunc in solOfFuncList)
             {
@@ -90,42 +88,60 @@ namespace MorphAnalysis.TablesExpertEvaluation
         //технічними рішеннями згідно параметрам цілей
         private void buttonSaveRating_Click(object sender, EventArgs e)
         {
-            //Переделать ЗДЕСЬ!!!
 
             //int firstIndex = dataGridView1.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 GetFirstColumnNameSolutionFunction(i, ref solutionNameInTable, ref functionNameInTable);
 
-                //Знайдемо рішення і функцію, яке зараз оцінюється відносно функцій
+                //Знайдемо рішення і функцію, яке зараз оцінюється відносно параметру цілей
                 SolutionsOfFunction selectedSolOfFunc = solOfFuncList.FirstOrDefault(s => (s.Solution.name == solutionNameInTable) && (s.Function.name == functionNameInTable));
                 if (selectedSolOfFunc is null) return;
 
-                decimal estimateSol = selectedSolOfFunc.Solution.weight ?? 0;
+
+                //decimal estimateSol = selectedSolOfFunc.Solution.weight ?? 0;
 
                 int index = 0;
                 decimal sum = 0;
 
+
+
                 //Отримаємо оцінки по стовбцям 
-                foreach (Function func in funcList)
+                foreach (ParametersGoal paramGoal in parametersGoalsList)
                 {
-                    decimal estimateFunc = func.weight ?? 0;
-                    decimal estimateSolOnFunc = 0;
-                    if (!(decimal.TryParse(dataGridView1[++index, i].Value.ToString(), out estimateSolOnFunc)))
+
+                    decimal estimateParamGoal = paramGoal.Goal.weight ?? 0;
+                    decimal estimateSolOnParam = 0;
+                    if (!(decimal.TryParse(dataGridView1[++index, i].Value.ToString(), out estimateSolOnParam)))
                     {
                         MessageBox.Show("Неможливо конвертувати значення комірки в тип decimal", "Помилка");
                         return;
                     }
-                    sum += (estimateFunc * (estimateSolOnFunc / 100.0m));
+
+                    //Питання відкрите щодо використання середнього значення в формулі
+                    sum += (estimateParamGoal * (estimateSolOnParam / 100.0m));
+
                 }
 
-                decimal finalEstimate = estimateSol * sum;
+                //Створюємо новий об'єкт, який закріплює за кожною цілью рішення і кінцеву оцінку рішення
+                foreach (ParametersGoal paramGoal in parametersGoalsList)
+                {
+                    ParametersGoalsForSolution parameterGoalForSolution = new ParametersGoalsForSolution();
+                    //Присваюємо рішення об'єкту
+                    parameterGoalForSolution.Solution = selectedSolOfFunc.Solution;
+                    //Присвоємо параметричну ціль об'єкту
+                    parameterGoalForSolution.ParametersGoal = paramGoal;
+                    //Присваюємо загальну оцінку щодо 
+                    parameterGoalForSolution.rating = sum;
+                    //Додамо до списку
+                    cacheData.AddParamGoalForSolToList(parameterGoalForSolution);
+                }
 
-                selectedSolOfFunc.rating = finalEstimate;
-                dataGridView1[dataGridView1.Columns.Count - 1, i].Value = finalEstimate;
-                //ratings.Add(finalEstimate);
+                dataGridView1[dataGridView1.Columns.Count - 1, i].Value = sum;
             }
+
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;
+            var list = cacheData.getListParametersGoalsForSolution;
 
         }
 
