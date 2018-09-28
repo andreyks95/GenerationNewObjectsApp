@@ -44,9 +44,10 @@ namespace MorphAnalysis.TablesExpertEvaluation
             
             db = new MorphModel();
 
-            solOfFuncList = cacheData.getListSolutionOfFunction;
+           
+            solOfFuncList = cacheData.GetList<SolutionsOfFunction>();
 
-            funcList = cacheData.getListFunction;
+            funcList = cacheData.GetList<Function>(); ;
 
         }
 

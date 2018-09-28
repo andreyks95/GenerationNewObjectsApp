@@ -35,9 +35,9 @@ namespace MorphAnalysis.TablesExpertEvaluation
         {
             InitializeComponent();
 
-            solOfFuncList = cacheData.getListSolutionOfFunctionMorphTable;
+            solOfFuncList = cacheData.GetList<SolutionsOfFunction>(true);
 
-            funcList = cacheData.getListFunctionMorphTable;
+            funcList = cacheData.GetList<Function>(true);
 
             configDGV = new ConfigDGV();
         }

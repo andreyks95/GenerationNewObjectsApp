@@ -49,9 +49,9 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
             db = new MorphModel();
 
-            goalList = cacheData.getListGoal;
+            goalList = cacheData.GetList<Goal>();
 
-            paramGoalList = cacheData.getListParameterGoal;
+            paramGoalList = cacheData.GetList<ParametersGoal>();
 
         }
 
@@ -227,7 +227,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
             //або якщо вона менша заданному фільтру (при загрузці з БД. Можливий пропуск з більшим значенням!)
             foreach (ParametersGoal item in paramGoalLocalList)
             {
-               if (item.Goal is null) 
+                if (item.Goal is null)
                     continue;
                 if (item.Goal.weight is null)
                     continue;
