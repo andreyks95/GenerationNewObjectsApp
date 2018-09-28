@@ -34,9 +34,9 @@ namespace MorphAnalysis.TablesExpertEvaluation
         {
             InitializeComponent();
 
-            solOfFuncList = cacheData.getListSolutionOfFunctionMorphTable;
+            solOfFuncList = cacheData.GetList<SolutionsOfFunction>(true);
 
-            parametersGoalsList = cacheData.getListParameterGoalForTables;
+            parametersGoalsList = cacheData.GetList<ParametersGoal>(true);
 
             configDGV = new ConfigDGV();
 
@@ -141,7 +141,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
             }
 
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;
-            var list = cacheData.getListParametersGoalsForSolution;
+            
 
         }
 

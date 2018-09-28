@@ -33,7 +33,7 @@ namespace MorphAnalysis.TablesDataInitialization
 
             db = new MorphModel();
 
-            funcList = solOfFuncCacheData.getListFunction;
+            funcList = solOfFuncCacheData.GetList<Function>();
         }
 
         private void TableSolutions_Load(object sender, EventArgs e)

@@ -32,7 +32,7 @@ namespace MorphAnalysis.TablesDataInitialization
 
             db = new MorphModel();
 
-            goals = cacheData.getListGoal;
+            goals = cacheData.GetList<Goal>();
         }
 
         private void ParametersGoals_Load(object sender, EventArgs e)
