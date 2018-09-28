@@ -134,7 +134,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     //Присваюємо загальну оцінку щодо 
                     parameterGoalForSolution.rating = sum;
                     //Додамо до списку
-                    cacheData.AddParamGoalForSolToList(parameterGoalForSolution);
+                    //cacheData.AddParamGoalForSolToList(parameterGoalForSolution);
+                    cacheData.AddElementToList<ParametersGoalsForSolution>(parameterGoalForSolution);
                 }
 
                 dataGridView1[dataGridView1.Columns.Count - 1, i].Value = sum;

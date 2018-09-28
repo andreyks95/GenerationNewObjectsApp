@@ -254,7 +254,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     selectedSolOfFunc.Solution.weight = weightSolution;
                     //selectedSolOfFunc.rating = weightSolution;
 
-                    cacheData.AddSolutionOfFunctionToList(selectedSolOfFunc, true);
+                    //cacheData.AddSolutionOfFunctionToList(selectedSolOfFunc, true);
+                    cacheData.AddElementToList<SolutionsOfFunction>(selectedSolOfFunc, true);
                     /*Console.WriteLine("selectedSolOfFunc" + selectedSolOfFunc.Function.id_function + ": " + selectedSolOfFunc.Function.name +
                             " sol = " + selectedSolOfFunc.Solution.id_solution + ": " + selectedSolOfFunc.Solution.name +
                             " " + selectedSolOfFunc.Solution.weight + " " + selectedSolOfFunc.rating);*/
@@ -296,7 +297,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     Function func = funcList.FirstOrDefault(f => f.name == nameFunc);
                     if (func is null) return;
                     func.weight = weightFunc;
-                    cacheData.AddFunctionToList(func, true);
+                    //cacheData.AddFunctionToList(func, true);
+                    cacheData.AddElementToList<Function>(func, true);
                     //Console.WriteLine("Func " + func.id_function + ": " + func.name + " " + func.weight);
                 }
             }

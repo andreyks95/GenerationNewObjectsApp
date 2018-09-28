@@ -251,7 +251,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     Goal = goal
                 };
 
-                cacheData.AddParameterGoalToList(newParam, true);
+                //cacheData.AddParameterGoalToList(newParam, true);
+                cacheData.AddElementToList<ParametersGoal>(newParam, true);
             }
             MessageBox.Show("Дані успішно додані", "Підтверджено");
             /*foreach (var item in cacheData.getListParameterGoalForTables)
