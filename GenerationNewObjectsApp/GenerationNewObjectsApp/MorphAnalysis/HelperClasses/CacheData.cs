@@ -69,7 +69,7 @@ namespace MorphAnalysis.HelperClasses
 
 
         //Узагальнений метод
-        public bool CanAdd<T>(List<T> list, T element)
+        private bool CanAdd<T>(List<T> list, T element)
         {
             if (element == null) return false;
             if (!list.Contains(element))
@@ -80,40 +80,7 @@ namespace MorphAnalysis.HelperClasses
             return false;
         }
 
-        #region Додавання рішень та функцій
-
-        //Знаходження ідентичних функції та її рішення в списку
-        private bool FindSimiliarSolutionOfFunction(List<SolutionsOfFunction> list, SolutionsOfFunction solOfFunc)
-        {
-            foreach (SolutionsOfFunction item in list)
-            {
-                if (item.Solution.name == solOfFunc.Solution.name && item.Function.name == solOfFunc.Function.name)
-                    return true;
-            }
-            return false;
-        }
-
-        #endregion
-
-        #region Додавання параметрів та цілей
-
-        //Знаходження ідентичних функції та її рішення в списку
-        private bool FindSimiliarParameterOfGoal(List<ParametersGoal> list, ParametersGoal param)
-        {
-            foreach (ParametersGoal item in list)
-            {
-                if (item.id_parameter == param.id_parameter && item.Goal.id_goal == param.Goal.id_goal)
-                    // && item.name == param.name && item.Goal.name == param.Goal.name)
-                    return true;
-            }
-            return false;
-        }
-
-        #endregion
-
-
-        #endregion
-
+        //Додавання елементу в список
         public bool AddElementToList<T>(T element, bool forEvaluationTable = false)
         {
             //Реализовать метод
@@ -178,6 +145,32 @@ namespace MorphAnalysis.HelperClasses
             }
             return returnResult;
         }
+
+        //Знаходження ідентичних функції та її рішення в списку
+        private bool FindSimiliarSolutionOfFunction(List<SolutionsOfFunction> list, SolutionsOfFunction solOfFunc)
+        {
+            foreach (SolutionsOfFunction item in list)
+            {
+                if (item.Solution.name == solOfFunc.Solution.name && item.Function.name == solOfFunc.Function.name)
+                    return true;
+            }
+            return false;
+        }
+
+        //Знаходження ідентичних функції та її рішення в списку
+        private bool FindSimiliarParameterOfGoal(List<ParametersGoal> list, ParametersGoal param)
+        {
+            foreach (ParametersGoal item in list)
+            {
+                if (item.id_parameter == param.id_parameter && item.Goal.id_goal == param.Goal.id_goal)
+                    // && item.name == param.name && item.Goal.name == param.Goal.name)
+                    return true;
+            }
+            return false;
+        }
+
+
+        #endregion
 
         #region Отримання списків
         //Отримання списків в залежності від класу 
