@@ -82,33 +82,6 @@ namespace MorphAnalysis.HelperClasses
 
         #region Додавання рішень та функцій
 
-        //Додавання функцій в список
-        public bool AddFunctionToList(Function func, bool ToMorphTable = false)
-        {
-            if (func == null) return false;
-            if (ToMorphTable)
-                return CanAdd<Function>(funcListMorphTable, func);
-            else
-                return CanAdd<Function>(funcList, func);
-        }
-
-        //Додавання функції та її рішення в список
-        public bool AddSolutionOfFunctionToList(SolutionsOfFunction solOfFunc, bool ToMorphTable = false)
-        {
-            if (solOfFunc == null) return false;
-
-            if (ToMorphTable)
-            {
-                if (FindSimiliarSolutionOfFunction(solOfFuncListMorphTable, solOfFunc)) return false;
-                return CanAdd<SolutionsOfFunction>(solOfFuncListMorphTable, solOfFunc);
-            }
-            else
-            {
-                if (FindSimiliarSolutionOfFunction(solOfFuncList, solOfFunc)) return false;
-                return CanAdd<SolutionsOfFunction>(solOfFuncList, solOfFunc);
-            }
-        }
-
         //Знаходження ідентичних функції та її рішення в списку
         private bool FindSimiliarSolutionOfFunction(List<SolutionsOfFunction> list, SolutionsOfFunction solOfFunc)
         {
@@ -124,34 +97,6 @@ namespace MorphAnalysis.HelperClasses
 
         #region Додавання параметрів та цілей
 
-        //Додавання цілей до списку  
-        public bool AddGoalToList(Goal goal)
-        {
-            if (goal == null) return false;
-            foreach (Goal g in goals)
-            {
-                if (g.id_goal == goal.id_goal)
-                    return false;
-            }
-            return CanAdd<Goal>(goals, goal);
-        }
-
-        //Додавання параметру цілі до списку
-        public bool AddParameterGoalToList(ParametersGoal paramGoal, bool forTables = false)
-        {
-            if (paramGoal == null) return false;
-            if (forTables)
-            {
-                if (FindSimiliarParameterOfGoal(parametersGoalsForTables, paramGoal)) return false;
-                return CanAdd<ParametersGoal>(parametersGoalsForTables, paramGoal);
-            }
-            else
-            {
-                if (FindSimiliarParameterOfGoal(parametersGoals, paramGoal)) return false;
-                return CanAdd<ParametersGoal>(parametersGoals, paramGoal);
-            }
-        }
-
         //Знаходження ідентичних функції та її рішення в списку
         private bool FindSimiliarParameterOfGoal(List<ParametersGoal> list, ParametersGoal param)
         {
@@ -166,20 +111,6 @@ namespace MorphAnalysis.HelperClasses
 
         #endregion
 
-        #region Додавання тех. рішень та модифікацій щодо параметрів цілей
-
-        public bool AddParamGoalForSolToList(ParametersGoalsForSolution paramGoalForSol)
-        {
-            if (paramGoalForSol == null) return false;
-            /*foreach(ParametersGoalsForSolution item in parametersGoalsForSolutionsList)
-            {
-                if (paramGoalForSol.)
-                    return false;
-            }*/
-            return CanAdd<ParametersGoalsForSolution>(parametersGoalsForSolutionsList, paramGoalForSol);
-        }
-
-        #endregion
 
         #endregion
 
@@ -190,8 +121,6 @@ namespace MorphAnalysis.HelperClasses
 
             bool returnResult;
             string nameClass = typeof(T).Name;
-            //Type typeElement = element.GetType();
-            //nameClass = typeElement.Name;
             switch (nameClass)
             {
                 case nameof(Function):
