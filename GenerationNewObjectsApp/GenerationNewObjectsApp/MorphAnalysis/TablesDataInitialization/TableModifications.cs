@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using MorphAnalysis.HelperClasses;
 
 namespace MorphAnalysis.TablesDataInitialization
 {
@@ -17,6 +18,8 @@ namespace MorphAnalysis.TablesDataInitialization
         private string id;
 
         private MorphModel db;
+
+        private CacheData cahceData = CacheData.GetInstance();
 
         public TableModifications()
         {
@@ -111,6 +114,23 @@ namespace MorphAnalysis.TablesDataInitialization
             db.SaveChanges();
 
             dataGridView1.Refresh();
+        }
+
+        private void buttonAddModToList_Click(object sender, EventArgs e)
+        {
+            var mod = dataGridView1.CurrentRow.DataBoundItem as Modification;
+            if (mod == null)
+            {
+                MessageBox.Show("Модифікація не обрана!", "Помилка");
+                return;
+            }
+            else
+            {
+                if (cahceData.AddElementToList<Modification>(mod))
+                    MessageBox.Show("Функцію " + mod.name + " додано для оцінювання!", "Підтверджено");
+                else
+                    MessageBox.Show("Функцію " + mod.name + " вже занесено для оцінювання!", "Відхилено");
+            }
         }
     }
 }
