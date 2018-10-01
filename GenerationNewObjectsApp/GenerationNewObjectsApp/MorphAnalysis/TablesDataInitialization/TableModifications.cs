@@ -126,7 +126,7 @@ namespace MorphAnalysis.TablesDataInitialization
             }
             else
             {
-                if (cahceData.AddElementToList<Modification>(mod))
+                if (cahceData.AddElement<Modification>(mod))
                     MessageBox.Show("Функцію " + mod.name + " додано для оцінювання!", "Підтверджено");
                 else
                     MessageBox.Show("Функцію " + mod.name + " вже занесено для оцінювання!", "Відхилено");

@@ -33,7 +33,7 @@ namespace MorphAnalysis.TablesDataInitialization
 
             db = new MorphModel();
 
-            funcList = solOfFuncCacheData.GetList<Function>();
+            funcList = solOfFuncCacheData.GetListElements<Function>();
         }
 
         private void TableSolutions_Load(object sender, EventArgs e)
@@ -166,7 +166,7 @@ namespace MorphAnalysis.TablesDataInitialization
 
 
             //Зберегти в локальне сховище
-            if (solOfFuncCacheData.AddElementToList<SolutionsOfFunction>(solOfFunc))
+            if (solOfFuncCacheData.AddElement<SolutionsOfFunction>(solOfFunc))
                 MessageBox.Show("Рішення: " + solOfFunc.Solution.name + " для функції: " + solOfFunc.Function.name + " додано для оцінювання!", "Підтверджено");
             else
                 MessageBox.Show("Рішення: " + solOfFunc.Solution.name + " для функції: " + solOfFunc.Function.name + " вже занесено для оцінювання!", "Відхилено");

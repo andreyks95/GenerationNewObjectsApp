@@ -49,9 +49,9 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
             db = new MorphModel();
 
-            goalList = cacheData.GetList<Goal>();
+            goalList = cacheData.GetListElements<Goal>();
 
-            paramGoalList = cacheData.GetList<ParametersGoal>();
+            paramGoalList = cacheData.GetListElements<ParametersGoal>();
 
         }
 
@@ -204,6 +204,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
         #endregion
 
+        //Збереження цілей
         private void buttonSaveResultGoals_Click(object sender, EventArgs e)
         {
             int firstIndex = dataGridView1.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
@@ -225,6 +226,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
             }
             //Перебираємо локальний список параметрів цілі та відхиляємо ті цілі в яких нема ваги
             //або якщо вона менша заданному фільтру (при загрузці з БД. Можливий пропуск з більшим значенням!)
+            //Зберігаємо відфільтровані дані
             foreach (ParametersGoal item in paramGoalLocalList)
             {
                 if (item.Goal is null)
@@ -252,7 +254,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 };
 
                 //cacheData.AddParameterGoalToList(newParam, true);
-                cacheData.AddElementToList<ParametersGoal>(newParam, true);
+                cacheData.AddElement<ParametersGoal>(newParam, true);
             }
             MessageBox.Show("Дані успішно додані", "Підтверджено");
             /*foreach (var item in cacheData.getListParameterGoalForTables)
@@ -263,6 +265,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
         }
 
+        //Збереження параметрів цілей в локальну таблицю
         private void buttonSaveResultParamsOfGoal_Click(object sender, EventArgs e)
         {
 

@@ -34,9 +34,9 @@ namespace MorphAnalysis.TablesExpertEvaluation
         {
             InitializeComponent();
 
-            solOfFuncList = cacheData.GetList<SolutionsOfFunction>(true);
+            solOfFuncList = cacheData.GetListElements<SolutionsOfFunction>(true);
 
-            parametersGoalsList = cacheData.GetList<ParametersGoal>(true);
+            parametersGoalsList = cacheData.GetListElements<ParametersGoal>(true);
 
             configDGV = new ConfigDGV();
 
@@ -135,7 +135,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     parameterGoalForSolution.rating = sum;
                     //Додамо до списку
                     //cacheData.AddParamGoalForSolToList(parameterGoalForSolution);
-                    cacheData.AddElementToList<ParametersGoalsForSolution>(parameterGoalForSolution);
+                    cacheData.AddElement<ParametersGoalsForSolution>(parameterGoalForSolution);
                 }
 
                 dataGridView1[dataGridView1.Columns.Count - 1, i].Value = sum;

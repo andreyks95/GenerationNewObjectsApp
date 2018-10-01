@@ -124,7 +124,7 @@ namespace MorphAnalysis.TablesDataInitialization
             }
             else
             {
-                if (cacheData.AddElementToList<Goal>(goal))
+                if (cacheData.AddElement<Goal>(goal))
                     MessageBox.Show("Ціль " + goal.name + " додано для оцінювання!", "Підтверджено");
                 else
                     MessageBox.Show("Ціль " + goal.name + " вже занесено для оцінювання!", "Відхилено");

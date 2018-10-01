@@ -32,7 +32,7 @@ namespace MorphAnalysis.TablesDataInitialization
 
             db = new MorphModel();
 
-            goals = cacheData.GetList<Goal>();
+            goals = cacheData.GetListElements<Goal>();
         }
 
         private void ParametersGoals_Load(object sender, EventArgs e)
@@ -159,7 +159,7 @@ namespace MorphAnalysis.TablesDataInitialization
             };
 
             //Зберегти в локальне сховище
-            if (cacheData.AddElementToList<ParametersGoal>(newParamGoal))
+            if (cacheData.AddElement<ParametersGoal>(newParamGoal))
                 MessageBox.Show("Параметр: " + newParamGoal.name + " для цілі: " + newParamGoal.Goal.name + " додано для оцінювання!", "Підтверджено");
             else
                 MessageBox.Show("Параметр: " + newParamGoal.name + " для цілі: " + newParamGoal.Goal.name + " вже занесено для оцінювання!", "Відхилено");

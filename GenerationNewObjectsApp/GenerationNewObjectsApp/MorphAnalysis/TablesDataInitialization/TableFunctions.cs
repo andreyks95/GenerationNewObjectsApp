@@ -131,7 +131,7 @@ namespace MorphAnalysis.TablesDataInitialization
             }
             else
             {  
-                if(funcCacheData.AddElementToList<Function>(func))
+                if(funcCacheData.AddElement<Function>(func))
                     MessageBox.Show("Функцію " + func.name + " додано для оцінювання!", "Підтверджено");
                 else
                     MessageBox.Show("Функцію " + func.name + " вже занесено для оцінювання!", "Відхилено");
