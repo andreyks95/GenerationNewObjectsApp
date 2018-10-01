@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,51 +11,14 @@ namespace MorphAnalysis.HelperClasses
     public class CacheData
     {
 
-        #region поля класу 
-        //Кеш для зберігання функцій об'єкту
-        private List<Function> funcList;
-
-        //Кеш для зберігання функцій та їх рішень 
-        private List<SolutionsOfFunction> solOfFuncList;
-
-        //Кеш для зберігання функцій в морфологічну таблицю
-        private List<Function> funcListMorphTable;
-
-        //Кеш для зберігання рішень функцій в морфологічну таблицю
-        private List<SolutionsOfFunction> solOfFuncListMorphTable;
-
-        //Кеш для зберігання цілей
-        private List<Goal> goals;
-
-        //Кеш для зберігання параметрів цілей
-        private List<ParametersGoal> parametersGoals;
-
-        //Кеш для зберігання параметрів цілей та їх функцій для таблиці 
-        //оцінювання модифікацій і тех. рішень для параметрів цілей
-        private List<ParametersGoal> parametersGoalsForTables;
-
-        //Кеш для зберігання параметрів цілей щодо тех. рішень
-        private List<ParametersGoalsForSolution> parametersGoalsForSolutionsList;
-
         private static CacheData instance;
 
-        #endregion
-
+        //Кеш словник для зберігання динамічних списків 
+        private Dictionary<string, dynamic> _dictionary;
 
         private CacheData()
         {
-            funcList = new List<Function>();
-            solOfFuncList = new List<SolutionsOfFunction>();
-
-            funcListMorphTable = new List<Function>();
-            solOfFuncListMorphTable = new List<SolutionsOfFunction>();
-
-            goals = new List<Goal>();
-            parametersGoals = new List<ParametersGoal>();
-
-            parametersGoalsForTables = new List<ParametersGoal>();
-
-            parametersGoalsForSolutionsList = new List<ParametersGoalsForSolution>();
+            _dictionary = new Dictionary<string, dynamic>();
         }
 
         public static CacheData GetInstance()
@@ -64,118 +28,157 @@ namespace MorphAnalysis.HelperClasses
             return instance;
         }
 
-
-        #region функції додавання елементів в список
-
-
-        //Узагальнений метод
-        private bool CanAdd<T>(List<T> list, T element)
-        {
-            if (element == null) return false;
-            if (!list.Contains(element))
-            {
-                list.Add(element);
-                return true;
-            }
-            return false;
-        }
-
-        //Додавання елементу в список
-        public bool AddElementToList<T>(T element, bool forEvaluationTable = false)
-        {
-            //Реализовать метод
-            if (element == null) return false;
-
-            bool returnResult;
-            string nameClass = typeof(T).Name;
-            switch (nameClass)
-            {
-                case nameof(Function):
-                    if (forEvaluationTable)
-                        returnResult = CanAdd<Function>(funcListMorphTable, element as Function);
-                    else
-                        returnResult = CanAdd<Function>(funcList, element as Function);
-                    break;
-
-                case nameof(SolutionsOfFunction):
-                    {
-                        List<SolutionsOfFunction> list = null;
-
-                        if (forEvaluationTable)
-                            list = solOfFuncListMorphTable;
-                        else
-                            list = solOfFuncList;
-
-                        if (FindSimiliarSolutionOfFunction(list, element as SolutionsOfFunction))
-                            returnResult = false;
-                        else
-                            returnResult = CanAdd<SolutionsOfFunction>(list, element as SolutionsOfFunction);
-
-                        break;
-                    }
-
-                case nameof(Goal):
-                    returnResult = CanAdd<Goal>(goals, element as Goal);
-                    break;
-
-                case nameof(ParametersGoal):
-                    {
-                        List<ParametersGoal> list = null;
-
-                        if (forEvaluationTable)
-                            list = parametersGoalsForTables;
-                        else
-                            list = parametersGoals;
-
-                        if (FindSimiliarParameterOfGoal(list, element as ParametersGoal))
-                            returnResult = false;
-                        else
-                            returnResult = CanAdd<ParametersGoal>(list, element as ParametersGoal);
-
-                        break;
-                    }
-
-                case nameof(ParametersGoalsForSolution):
-                    returnResult = CanAdd<ParametersGoalsForSolution>(parametersGoalsForSolutionsList, element as ParametersGoalsForSolution);
-                    break;
-
-                default:
-                    returnResult = false;
-                    break;
-            }
-            return returnResult;
-        }
+        #region Методи для знаходження ідентичних: елементів, функцій і їх рішень, параметрів цілей
 
         //Знаходження ідентичних функції та її рішення в списку
         private bool FindSimiliarSolutionOfFunction(List<SolutionsOfFunction> list, SolutionsOfFunction solOfFunc)
         {
             foreach (SolutionsOfFunction item in list)
             {
-                if (item.Solution.name == solOfFunc.Solution.name && item.Function.name == solOfFunc.Function.name)
+                if ((item.Solution.name == solOfFunc.Solution.name && item.Function.name == solOfFunc.Function.name)
+                     || (item.Solution.id_solution == solOfFunc.Solution.id_solution && item.Function.id_function == solOfFunc.Function.id_function)
+                    )
                     return true;
             }
             return false;
         }
 
-        //Знаходження ідентичних функції та її рішення в списку
+        //Знаходження ідентичних параметрів цілей
         private bool FindSimiliarParameterOfGoal(List<ParametersGoal> list, ParametersGoal param)
         {
             foreach (ParametersGoal item in list)
             {
-                if (item.id_parameter == param.id_parameter && item.Goal.id_goal == param.Goal.id_goal)
+                if ((item.id_parameter == param.id_parameter && item.Goal.id_goal == param.Goal.id_goal))
                     // && item.name == param.name && item.Goal.name == param.Goal.name)
                     return true;
             }
             return false;
         }
 
+        //Знаходження ідентичних функцій та їх рішень
+        private bool FindSimiliarParamOrSolOfFunc<T>(List<T> list, T element)
+        {
+            if (element is SolutionsOfFunction)
+            {
+                if (FindSimiliarSolutionOfFunction(list.Cast<SolutionsOfFunction>().ToList(), element as SolutionsOfFunction))
+                    return true;
+            }
+            else if (element is ParametersGoal)
+            {
+                if (FindSimiliarParameterOfGoal(list.Cast<ParametersGoal>().ToList(), element as ParametersGoal))
+                    return true;
+            }
+            return false;
+        }
+
+        //Знаходження ідентичних елементів
+        private bool FindSimiliarElement<T>(T element, string nameKeyDictionary)
+        {
+            string nameKey = nameKeyDictionary;
+            List<T> list = _dictionary[nameKey];
+            if (list == null) return false;
+
+            Type typeAddElement = element.GetType();
+            PropertyInfo[] elementProps = typeAddElement.GetProperties(); //BindingFlags.Public); // | BindingFlags.Instance);
+
+            foreach (T item in list)
+            {
+                Type typeItem = item.GetType();
+                PropertyInfo[] itemProps = typeItem.GetProperties();//BindingFlags.Public); // | BindingFlags.Instance);
+
+                if (elementProps.Length != itemProps.Length)
+                    return false;
+
+                for (int i = 0; i < itemProps.Length; i++)
+                {
+                    string propName = itemProps[i].Name.ToLower();
+                    if (propName == "weight" || propName == "avg" || propName == "rating") continue;
+                    if (itemProps[i].PropertyType.IsInterface || itemProps[i].PropertyType.IsGenericType) continue;
+
+                    string valueElement = elementProps[i].GetValue(element)?.ToString(); //?? null;
+                    string valueItem = itemProps[i].GetValue(item)?.ToString();// ?? null;
+
+                    if (valueElement is null || valueItem is null)
+                        continue;
+                    //якщо значення властивостей співпадають, отже елемент дублюється
+                    if (valueElement == valueItem)
+                        return true;
+                }
+            }
+            return false;
+        }
 
         #endregion
 
-        #region Отримання списків
+        public bool AddElement<T>(T element, bool forEvaluationTable = false)
+        {
+            if (element == null) return false;
+
+            string nameKey = GetKeyDictionary(GetType<T>(), forEvaluationTable);
+
+            bool success = false;
+
+            if (_dictionary.ContainsKey(nameKey))
+            {
+                if (element is SolutionsOfFunction || element is ParametersGoal)
+                {
+                    if (FindSimiliarParamOrSolOfFunc<T>(_dictionary[nameKey], element))
+                        return false;
+                }
+                else
+                {
+                    if (FindSimiliarElement<T>(element, nameKey))
+                        return false;
+                }
+                _dictionary[nameKey].Add(element);
+                success = true;
+            }
+            else
+            {
+                _dictionary.Add(nameKey, new List<T>());
+                _dictionary[nameKey].Add(element);
+                success = true;
+            }
+            return success;
+        }
+       
         //Отримання списків в залежності від класу 
-        //а також в залежності для яких таблиць: морфологічних / оціночних / кросс таблиць
+        //а також в залежності для яких таблиць: морфологічних ( оціночних | крос таблиць)
         //чи звичайних для експертів 
+        public List<T> GetListElements<T>(bool forEvaluationTable = false)
+        {
+            string nameKey = GetKeyDictionary(GetType<T>(), forEvaluationTable);
+
+            if (HasListAnyElements(_dictionary[nameKey]))
+                return _dictionary[nameKey];
+            else
+                throw new Exception("Помилка! Пустий список елементів " + nameKey);
+        }
+
+        //Дозволяє отримати тип елементу що додається
+        private Type GetType<T>()
+        {
+            var typesQuery = from type in Assembly.GetExecutingAssembly().GetTypes()
+                             where type.IsClass// && type.Name == typeof(T).Name
+                             select type;
+
+            List<Type> typeList = typesQuery.ToList();
+
+            Type findType = typeList.FirstOrDefault(t => t.Name == typeof(T).Name);
+
+            return findType;
+        }
+
+        //Метод для отримання ключа для словника
+        private string GetKeyDictionary(Type type, bool forEvaluationTable = false)
+        {
+            string nameKey = type.Name;
+            if (forEvaluationTable)
+            {
+                nameKey += "_v"; //class name + value (for EvaluationTable) // клас для оціночних таблиць
+            }
+            return nameKey;
+        }
 
         private bool HasListAnyElements<T>(List<T> list)
         {
@@ -184,52 +187,6 @@ namespace MorphAnalysis.HelperClasses
             else return false;
         }
 
-        public List<T> GetList<T>(bool forEvaluationTable = false)
-        {
-            List<T> returnList = null;
-            string n = typeof(T).Name;
-            switch (n)
-            {
-                case nameof(Function):
-                    if (forEvaluationTable)
-                        returnList = funcListMorphTable.Cast<T>().ToList();
-                    else
-                        returnList = funcList.Cast<T>().ToList();
-                    break;
-
-                case nameof(SolutionsOfFunction):
-                    if (forEvaluationTable)
-                        returnList = solOfFuncListMorphTable.Cast<T>().ToList();
-                    else
-                        returnList = solOfFuncList.Cast<T>().ToList();
-                    break;
-
-                case nameof(Goal):
-                    returnList = goals.Cast<T>().ToList();
-                    break;
-
-                case nameof(ParametersGoal):
-                    if (forEvaluationTable)
-                        returnList = parametersGoalsForTables.Cast<T>().ToList();
-                    else
-                        returnList = parametersGoals.Cast<T>().ToList();
-                    break;
-
-                case nameof(ParametersGoalsForSolution):
-                    returnList = parametersGoalsForSolutionsList.Cast<T>().ToList();
-                    break;
-
-                default:
-                    returnList = null;
-                    break;
-            }
-            if (HasListAnyElements(returnList))
-                return returnList;
-            else
-                throw new Exception("Помилка! Пустий список елементів " + n);
-        }
-
-        #endregion
 
     }
 }
