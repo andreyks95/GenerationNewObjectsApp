@@ -161,7 +161,16 @@ namespace MorphAnalysis
                 new TableParametersGoalsSolutions().Show();
         }
 
+        //Відображення таблиці оцінювання модифікацій відповідно до параметрів цілей
+        private void buttonModParamTable_Click(object sender, EventArgs e)
+        {
+            if (cacheData.GetListElements<ParametersGoal>(true).Count > 0
+                || cacheData.GetListElements<Modification>().Count > 0)
+                new TableParametersGoalsModifications().Show();
+        }
+
         #endregion
+
 
     }
 }
