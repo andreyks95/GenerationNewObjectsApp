@@ -34,6 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSaveRating = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +72,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.buttonSaveRating);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -101,6 +103,17 @@
             this.buttonSaveRating.UseVisualStyleBackColor = true;
             this.buttonSaveRating.Click += new System.EventHandler(this.buttonSaveRating_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label5.Location = new System.Drawing.Point(444, 2);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(328, 45);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Оцінки слід виставляти в відсотковому співвідношенні \r\nв залежності наскільки тех" +
+    ". рішення задовільняє \r\nпараметру цілі (середньому значенню параметру)";
+            // 
             // TableParametersGoalsSolutions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -125,5 +138,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonSaveRating;
+        private System.Windows.Forms.Label label5;
     }
 }

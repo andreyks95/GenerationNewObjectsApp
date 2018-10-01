@@ -41,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -134,13 +135,14 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.buttonCalcParams);
             this.panel2.Controls.Add(this.buttonSaveResultParamsOfGoal);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(0, 295);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(984, 50);
+            this.panel2.Size = new System.Drawing.Size(984, 58);
             this.panel2.TabIndex = 7;
             // 
             // buttonCalcParams
@@ -196,14 +198,24 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 345);
-            this.dataGridView2.MinimumSize = new System.Drawing.Size(0, 210);
+            this.dataGridView2.Location = new System.Drawing.Point(0, 354);
+            this.dataGridView2.MinimumSize = new System.Drawing.Size(0, 205);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(984, 214);
+            this.dataGridView2.Size = new System.Drawing.Size(984, 205);
             this.dataGridView2.TabIndex = 8;
             this.dataGridView2.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView2_CellValidating);
             this.dataGridView2.Enter += new System.EventHandler(this.dataGridView2_Enter);
             this.dataGridView2.MouseLeave += new System.EventHandler(this.dataGridView2_MouseLeave);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(4, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(473, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Оцінка параметру цілі повинна містити бажане значення параметру в межах одиниці в" +
+    "иміру";
             // 
             // TableParametersOfGoals
             // 
@@ -243,5 +255,6 @@
         private System.Windows.Forms.Button buttonCalcParams;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
     }
 }

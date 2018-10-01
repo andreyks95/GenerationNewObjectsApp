@@ -76,7 +76,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
             if (int.TryParse(Convert.ToString(e.FormattedValue), out value))
                 if (!(value >= 0 && value <= 300))
                 {
-                    MessageBox.Show("Значення комірки повинно бути: [0;100]!", "Помилка вводу");
+                    MessageBox.Show("Значення комірки повинно бути: [0;300]!", "Помилка вводу");
                     dataGridView1.CurrentCell.Value = 0;
                 }
 
