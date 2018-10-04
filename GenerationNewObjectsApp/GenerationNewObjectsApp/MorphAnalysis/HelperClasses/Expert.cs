@@ -11,11 +11,6 @@ namespace MorphAnalysis.HelperClasses
 
         private double[] values = new double[0];
 
-        /*private void setEstimates()
-        {
-
-        }*/
-
          //Додаємо значення оцінки, яку виставив експерт елементу по стовбцю
         public void AddValue(double value)
         {

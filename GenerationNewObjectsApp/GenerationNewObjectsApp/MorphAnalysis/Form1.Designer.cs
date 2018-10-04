@@ -30,28 +30,34 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.таблиціІніціалізаціїДанихToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.таблицяОбєктівToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяФункційToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяТехРішеньToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяМодифікаційToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяЦілейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяПараметриЦілейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.таблицяОбєктівToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяКласифікаційToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSolsFuncs = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonModParamTable = new System.Windows.Forms.Button();
             this.buttonSolParamTable = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonParamsGoals = new System.Windows.Forms.Button();
             this.buttonMorphTable = new System.Windows.Forms.Button();
             this.textBoxCountExpert = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.buttonModParamTable = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonSols = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -60,30 +66,23 @@
             this.таблиціІніціалізаціїДанихToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(469, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(474, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // таблиціІніціалізаціїДанихToolStripMenuItem
             // 
             this.таблиціІніціалізаціїДанихToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.таблицяОбєктівToolStripMenuItem,
             this.таблицяФункційToolStripMenuItem,
             this.таблицяТехРішеньToolStripMenuItem,
             this.таблицяМодифікаційToolStripMenuItem,
             this.таблицяЦілейToolStripMenuItem,
             this.таблицяПараметриЦілейToolStripMenuItem,
+            this.таблицяОбєктівToolStripMenuItem,
             this.таблицяКласифікаційToolStripMenuItem});
             this.таблиціІніціалізаціїДанихToolStripMenuItem.Name = "таблиціІніціалізаціїДанихToolStripMenuItem";
             this.таблиціІніціалізаціїДанихToolStripMenuItem.Size = new System.Drawing.Size(163, 20);
             this.таблиціІніціалізаціїДанихToolStripMenuItem.Text = "Таблиці ініціалізації даних";
-            // 
-            // таблицяОбєктівToolStripMenuItem
-            // 
-            this.таблицяОбєктівToolStripMenuItem.Name = "таблицяОбєктівToolStripMenuItem";
-            this.таблицяОбєктівToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.таблицяОбєктівToolStripMenuItem.Text = "Таблиця об\'єктів";
-            this.таблицяОбєктівToolStripMenuItem.Click += new System.EventHandler(this.таблицяОбєктівToolStripMenuItem_Click);
             // 
             // таблицяФункційToolStripMenuItem
             // 
@@ -119,6 +118,13 @@
             this.таблицяПараметриЦілейToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.таблицяПараметриЦілейToolStripMenuItem.Text = "Таблиця параметри цілей";
             this.таблицяПараметриЦілейToolStripMenuItem.Click += new System.EventHandler(this.таблицяПараметриЦілейToolStripMenuItem_Click);
+            // 
+            // таблицяОбєктівToolStripMenuItem
+            // 
+            this.таблицяОбєктівToolStripMenuItem.Name = "таблицяОбєктівToolStripMenuItem";
+            this.таблицяОбєктівToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.таблицяОбєктівToolStripMenuItem.Text = "Таблиця об\'єктів";
+            this.таблицяОбєктівToolStripMenuItem.Click += new System.EventHandler(this.таблицяОбєктівToolStripMenuItem_Click);
             // 
             // таблицяКласифікаційToolStripMenuItem
             // 
@@ -156,7 +162,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(469, 288);
+            this.tabControl1.Size = new System.Drawing.Size(474, 290);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -170,10 +176,20 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(461, 262);
+            this.tabPage1.Size = new System.Drawing.Size(466, 264);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Експертна оцінка";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonModParamTable
+            // 
+            this.buttonModParamTable.Location = new System.Drawing.Point(308, 175);
+            this.buttonModParamTable.Name = "buttonModParamTable";
+            this.buttonModParamTable.Size = new System.Drawing.Size(145, 51);
+            this.buttonModParamTable.TabIndex = 11;
+            this.buttonModParamTable.Text = "Оцінювання модифікацій\r\nвідповідно до параметрів\r\nцілей";
+            this.buttonModParamTable.UseVisualStyleBackColor = true;
+            this.buttonModParamTable.Click += new System.EventHandler(this.buttonModParamTable_Click);
             // 
             // buttonSolParamTable
             // 
@@ -228,32 +244,56 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(461, 262);
+            this.tabPage2.Size = new System.Drawing.Size(476, 264);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Оцінки рішень";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // buttonModParamTable
+            // dataGridView1
             // 
-            this.buttonModParamTable.Location = new System.Drawing.Point(308, 175);
-            this.buttonModParamTable.Name = "buttonModParamTable";
-            this.buttonModParamTable.Size = new System.Drawing.Size(145, 51);
-            this.buttonModParamTable.TabIndex = 11;
-            this.buttonModParamTable.Text = "Оцінювання модифікацій\r\nвідповідно до параметрів\r\nцілей";
-            this.buttonModParamTable.UseVisualStyleBackColor = true;
-            this.buttonModParamTable.Click += new System.EventHandler(this.buttonModParamTable_Click);
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 37);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(470, 222);
+            this.dataGridView1.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonSols);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(470, 34);
+            this.panel1.TabIndex = 1;
+            // 
+            // buttonSols
+            // 
+            this.buttonSols.Location = new System.Drawing.Point(6, 5);
+            this.buttonSols.Name = "buttonSols";
+            this.buttonSols.Size = new System.Drawing.Size(141, 23);
+            this.buttonSols.TabIndex = 0;
+            this.buttonSols.Text = "Зведена таблиця рішень";
+            this.buttonSols.UseVisualStyleBackColor = true;
+            this.buttonSols.Click += new System.EventHandler(this.buttonSols_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 314);
+            this.ClientSize = new System.Drawing.Size(474, 316);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(490, 355);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -263,6 +303,9 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,6 +332,9 @@
         private System.Windows.Forms.Button buttonParamsGoals;
         private System.Windows.Forms.Button buttonSolParamTable;
         private System.Windows.Forms.Button buttonModParamTable;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button buttonSols;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
