@@ -23,7 +23,14 @@ namespace MorphAnalysis
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Помилка");
+                Application.Restart();
+
             }
+            //finally
+            //{
+            //    Application.Restart();
+            //}
+           
         }
     }
 }
