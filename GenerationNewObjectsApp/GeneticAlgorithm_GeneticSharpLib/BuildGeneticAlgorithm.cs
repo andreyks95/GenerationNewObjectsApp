@@ -187,7 +187,7 @@ namespace GeneticAlgorithm_GeneticSharpLib
                     latestFitness = bestFitness;
                     var phenotype = bestChromosome.GetGenes();
 
-                    Console.WriteLine("Покоління №{0,2}. Кращий результат = {1}", ga.GenerationsNumber, bestFitness);
+                    Console.WriteLine("Поколiння №{0,2}. Кращий результат = {1}", ga.GenerationsNumber, bestFitness);
                     Console.Write("Вид хромосоми: ");
 
                     foreach (GeneticSharp.Domain.Chromosomes.Gene g in phenotype)
