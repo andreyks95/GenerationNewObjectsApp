@@ -85,11 +85,12 @@ namespace MorphAnalysis.TablesExpertEvaluation
         {
 
             //int firstIndex = dataGridView1.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
+            //Передвигаємося по строкам таблиці
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 GetFirstColumnNameSolutionFunction(i, ref solutionNameInTable, ref functionNameInTable);
                
-                //Знайдемо рішення і функцію, яке зараз оцінюється відносно функцій
+                //Знайдемо рішення функції, яка зараз оцінюється відносно функцій
                 SolutionsOfFunction selectedSolOfFunc = solOfFuncList.FirstOrDefault(s => (s.Solution.name == solutionNameInTable) && (s.Function.name == functionNameInTable));
                 if (selectedSolOfFunc is null) return;
 
@@ -119,6 +120,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
             }
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;
 
+            MessageBox.Show("Оцінки збережено","Пітверджено");
         }
 
         private void GetFirstColumnNameSolutionFunction(int indexRow, ref string sol, ref string func)
