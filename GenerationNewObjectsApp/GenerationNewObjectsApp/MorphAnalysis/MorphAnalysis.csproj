@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeneticAlgorithm\ConverterToFromChromosome.cs" />
     <Compile Include="HelperClasses\CacheData.cs" />
     <Compile Include="HelperClasses\ConfigDGV.cs" />
     <Compile Include="HelperClasses\Expert.cs" />
