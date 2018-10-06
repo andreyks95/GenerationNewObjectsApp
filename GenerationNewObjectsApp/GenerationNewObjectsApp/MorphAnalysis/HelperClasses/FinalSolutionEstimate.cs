@@ -11,16 +11,20 @@ namespace MorphAnalysis.HelperClasses
     class FinalSolutionEstimate : IDisposable
     {
 
-        //Создать словарь для хранения id решения и его итоговой оценки
-
+        
+        //Словник для збереження id рішень і їх оцінок за параметрами цілей
         private Dictionary<int, decimal> _solByParamEstimateDict;
 
+        //Словник для збереження id модифікацій і їх оцінок за параметрами цілей
         private Dictionary<int, decimal> _modByParamEstimateDict;
 
+        //Словник для збереження id рішень і їх оцінок відносно функцій
         private Dictionary<int, decimal> _solByFuncEstimateDict;
 
+        //Словник для збереження id рішень і їх кінцевих оцінок
         private Dictionary<int, decimal> _solFinalEstimateDict;
 
+        //Словник для збереження id рішень і їх оцінок враховуючи модифікації рішень
         private Dictionary<int, decimal> _solWithModByParamEsitmateDict;
 
         private static int counterForGetSolutionByParam = 0;
@@ -234,8 +238,9 @@ namespace MorphAnalysis.HelperClasses
             }
             else if (counterForGetSolutionByParam > 0 && typeof(T).Name == nameof(ParametersGoalsForSolution))
             {
-                //return GetDictByType<ParametersGoalsForSolution>();
+                counterForGetSolutionByParam -= 1;
                 return _solWithModByParamEsitmateDict;
+                
             }
 
             return GetDictByType<T>();
