@@ -55,9 +55,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GenerationNewObjectsApp\MorphAnalysis\MorphAnalysis.csproj">
-      <Project>{c4b33929-d048-4e25-9402-67c4f3b864b2}</Project>
-      <Name>MorphAnalysis</Name>
+    <ProjectReference Include="..\GeneticAlgorithm_GeneticSharpLib\GeneticAlgorithm_GeneticSharpLib.csproj">
+      <Project>{30bc1619-8371-423c-b3a2-67a5c51ef447}</Project>
+      <Name>GeneticAlgorithm_GeneticSharpLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
