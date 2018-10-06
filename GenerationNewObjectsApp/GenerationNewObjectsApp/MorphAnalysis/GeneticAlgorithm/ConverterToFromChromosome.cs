@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MorphAnalysis.GeneticAlgorithm
 {
-    class ConverterToFromChromosome
+    public class ConverterToFromChromosome
     {
         //Под вопросом!!!
         //Словник функцій, який зберігає в собі словник рішень та їх оцінок з морфологічної таблиці
@@ -48,7 +48,7 @@ namespace MorphAnalysis.GeneticAlgorithm
 
             //Кількість елементів між _solutionWithFunction == _solutionWithParameters
 
-            _solutionWithFunction = finalEstimates.GetEstimatesBy<SolutionsOfFunction>();
+            _solutionWithFunction   = finalEstimates.GetEstimatesBy<SolutionsOfFunction>();
 
             _solutionWithParameters = finalEstimates.GetEstimatesBy<ParametersGoalsForSolution>();
 
@@ -57,40 +57,127 @@ namespace MorphAnalysis.GeneticAlgorithm
             _funcList = cacheData.GetListElements<Function>(true);
         }
 
+        #region Отримати довжину хромосоми
 
-        public void CreatePseudoCromosomeString()
+        //Отримати довжину хромосоми
+        public int GetChromosomeLength
         {
-            //где: f - функция, s - решение функции, m - модификация
-            string[] chainString = new[] { "f1", "s1", "m1", "m2", "m3", "s2", "m1", "m2", "m3", "f2", "s1", "m1", "m2", "m3", "s2", "m1", "m2", "m3" };
+            
+            //Довжина хромосоми повинна вміщувати загальну кількість модифікацій в ній 
+            //+ загальну кількість рішень 
+            //тому, що деякі рішення можуть реалізуватися = 1, а деякі - ні = 0 
+            //приклад: 2 функції, 2 рішення, 2 модифікації => 2*2*2 = 8 мод. + 2*2 = 4 ріш. => 8 + 4 = 12 - довжина хромосоми
+            get
+            {
+                int allModCount = (_funcList.Count * _solutionWithFunction.Count * _modification.Count);
+                int allSolCount = (_funcList.Count * _solutionWithFunction.Count);
+                int length = allModCount + allSolCount;
+                return length;
+            }
+        }
 
-            //представление хромосомы без учёта функции, необходимо при оценивании восстановить их порядок
-            //BitArray bitArr = new BitArray(new bool[] { true, false, false, false, true, false, false, true, false, false, true, true, false, true, true, false });
+        #endregion
 
+        #region Методи для побудови псевдо хромосоми 
+
+        public string GetPseudoChromosomeString 
+        {
             //или будет возвращаться как строка, но также без учёта функции
-            string str = "0101101101110011"; //"0:101 1:011|0:111 0:011" // | - разделитель между функциями : - разделитель между решениями
+            //string str = "0101101101110011"; //"0:101 1:011|0:111 0:011" // | - разделитель между функциями : - разделитель между решениями
 
             //Если длина подцепочки в функции фиксированая, то строку пожно разбить ровно на некоторые промежутки
             //В данном примере 0101
             // при этом 1 символ будет соответсвовать решению, остальные модификации
-
-            string[] fName = BuildFunctionString();
+            get
+            {
+                //f1; f2; ...
+                string[] funcsId = BuildPartChromosomeFunctionString();
+                //s1; s1; ...
+                string[] solsId = BuildPartChromosomeSolutionString();
+                //m1; m2; ...
+                string[] modsId = BuildPartChromosomeModificationString();
+                //f1s1m1m2m3s2m1m2m3f2s1m1m2m3s2m1m2m3 ... block
+                string result = BuildChromosomeString(funcsId, solsId, modsId);
+                return result;
+            }
 
         }
 
-        private string[] BuildFunctionString()
+        
+        //Побудувати псевдо хромосому
+        private string BuildChromosomeString(string[] funcsId, string[] solsId, string[] modsId)
+        {
+
+            //example: m1m2m3 block
+            string mod = string.Join("", modsId);
+
+            //example: s1m1m2m3; s2m1m2m3
+            for (int i=0; i < solsId.Length; i++)
+            {
+                solsId[i] = solsId[i] + mod;
+            }
+
+            //example: s1m1m2m3s2m1m2m3 block
+            string solsMods = string.Join("", solsId);
+
+            //example f1s1m1m2m3s2m1m2m3; f2s1m1m2m3s2m1m2m3; f3s1m1m2m3s2m1m2m3
+            for (int i=0; i < funcsId.Length; i++)
+            {
+                funcsId[i] = funcsId[i] + solsMods;
+            }
+
+            //example f1s1m1m2m3s2m1m2m3f2s1m1m2m3s2m1m2m3f3s1m1m2m3s2m1m2m3 block
+            string funcsSolsMods = string.Join("", funcsId);
+
+            return funcsSolsMods;
+        }
+
+        #region Створити частини для представлення псевдо хромосоми у вигляді рядку
+
+        //example: f1; f2; f2
+        private string[] BuildPartChromosomeFunctionString()
         {
             string[] functionsId = new string[_funcList.Count];
 
-            //foreach (Function func in _funcList)
-            //{
-            //    func.id_function.ToString();
-            //}
-
+            //example: f1; f2; f2
             for(int i=0; i < _funcList.Count; i++)
             {
                 functionsId[i] = "f" + _funcList[i].id_function.ToString();
             }
             return functionsId;
         }
+
+        private string[] BuildPartChromosomeSolutionString()
+        {
+            string[] solutionsId = new string[_solutionWithFunction.Count]; //_solutionWithParameters.Count           
+
+            int i = 0;
+            //example: s1; s2; s3
+            //key it's id
+            foreach (KeyValuePair<int, decimal> solution in _solutionWithFunction)
+            {
+                solutionsId[i++] = "s" + solution.Key.ToString();
+            }
+            return solutionsId;
+        }
+
+        private string[] BuildPartChromosomeModificationString()
+        {
+            string[] modificationsId = new string[_modification.Count];
+
+            int i = 0;
+            //example: m1, m2, m2
+            //key it's id 
+            foreach (KeyValuePair<int, decimal> modification in _modification)
+            {
+                modificationsId[i++] = "m" + modification.Key.ToString();
+            }
+
+            return modificationsId;
+        }
+
+        #endregion
+
+        #endregion
     }
 }
