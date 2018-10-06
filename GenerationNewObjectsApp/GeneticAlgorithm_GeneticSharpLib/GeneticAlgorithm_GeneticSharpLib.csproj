@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BinaryChromosome.cs" />
     <Compile Include="BuildGeneticAlgorithm.cs" />
+    <Compile Include="ConvertToFromChromosome.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
