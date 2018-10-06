@@ -199,6 +199,8 @@ namespace GeneticAlgorithm_GeneticSharpLib
             };
 
             ga.Start();
+
+
         }
     }
 }
