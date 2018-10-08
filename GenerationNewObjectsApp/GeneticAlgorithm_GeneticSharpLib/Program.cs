@@ -18,45 +18,45 @@ namespace GeneticAlgorithm_GeneticSharpLib
         static void Main(string[] args)
         {
 
-            //BitArray bitArr = new BitArray(10);
-
             //Program.BuildTestGA();
+           // Program.BuildMyGA();
 
-            //Проецирование морф таблицы на хромосому:
+            //ConverterToFromChromosome converter = new ConverterToFromChromosome();
+            //string str = converter.BuildChromosomeString(
+            //    new string[] { "f1", "f2" },
+            //    new string[] { "s1", "s169", "s4" },
+            //    new string[] { "m1", "m3", "m16" });
+            //string str = "-f1-|s1|.m1.m3.m16.|s169|.m1.m3.m16.|s4|.m1.m3.m16.-f2-|s1|.m1.m3.m16.|s169|.m1.m3.m16.|s4|.m1.m3.m16.";
+            //char[] separator = new char[] { '-', '|', '.' };
+            //string[] s = str.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
-            //где: f - функция, s - решение функции, m - модификация
-            string[] chainString = new[] { "f1", "s1", "m1", "m2", "m3", "s2", "m1", "m2", "m3", "f2", "s1", "m1", "m2", "m3", "s2", "m1", "m2", "m3" };
+            //converter.ParseChromosome(s);
 
-            //представление хромосомы без учёта функции, необходимо при оценивании восстановить их порядок
-            //BitArray bitArr = new BitArray(new bool[] { true, false, false, false, true, false, false, true, false, false, true, true, false, true, true, false });
 
-            //или будет возвращаться как строка, но также без учёта функции
-            string str = "0101101101110011"; //"0:101 1:011|0:111 0:011" // | - разделитель между функциями : - разделитель между решениями
 
-            //Если длина подцепочки в функции фиксированая, то строку пожно разбить ровно на некоторые промежутки
-            //В данном примере 0101
-            // при этом 1 символ будет соответсвовать решению, остальные модификации
+            Console.ReadKey();
+        }
+
+        public static void BuildMyGA()
+        {
 
             var ga = new BuildGeneticAlgorithm(20, 50, 150);
-            ga.Fitness = new FuncFitness(c => 
+            ga.Fitness = new FuncFitness(c =>
             {
-                 var fc = c as BinaryChromosome;
-                 double result = 0.0;
-                 foreach (GeneticSharp.Domain.Chromosomes.Gene gene in fc.GetGenes())
-                 {
-                     result += Convert.ToDouble(gene.Value.ToString());
-                 }
-                 return result;
+                var fc = c as BinaryChromosome;
+                double result = 0.0;
+                foreach (GeneticSharp.Domain.Chromosomes.Gene gene in fc.GetGenes())
+                {
+                    result += Convert.ToDouble(gene.Value.ToString());
+                }
+                return result;
             });
             ga.SetSelection(Selection.TournamentSelection);
             ga.SetCrossover(Crossover.UniformCrossover);
             ga.SetMutation(Mutation.FlipBitMutation);
             ga.SetTermination(Termination.GenerationNumberTermination, 100);
             ga.Start();
-
-            Console.ReadKey();
         }
-
 
         public static void BuildTestGA()
         {
