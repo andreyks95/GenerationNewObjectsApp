@@ -122,7 +122,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     solOfFuncEstimateDict.Add(func.id_function, estimateSolOnFunc / 100.0m);
                 }
 
-                //Зберігаємо оцінки рішення по кожній функції
+                //Зберігаємо оцінки рішення по кожній функції (для генетичного алгоритму)
                 SaveValueSolByFuncForDictionaryGA(dictForGA, solOfFuncEstimateDict, selectedSolOfFunc);
 
 
@@ -137,7 +137,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
             MessageBox.Show("Оцінки збережено","Пітверджено");
 
             //Передача даних для генетичного алгоритму
-            AddDataToGA(dataGridView1.Rows.Count, solOfFuncList, funcList, dictForGA);
+            AddDataToGA(//dataGridView1.Rows.Count, 
+                solOfFuncList, funcList, dictForGA);
         }
 
         //Метод для зберігання у словник оцінок рішень по кожній функції 
@@ -191,11 +192,13 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
 
         //Передача даних для генетичного алгоритму
-        private void AddDataToGA(int countRows, List<SolutionsOfFunction> solOfFuncList, List<Function> funcList, Dictionary<int, Dictionary<int, decimal>> estimates)
+        private void AddDataToGA(//int countRows, 
+            List<SolutionsOfFunction> solOfFuncList, List<Function> funcList, Dictionary<int, Dictionary<int, decimal>> estimates)
         {
             GeneticAlgorithm.ManagerGA manager = GeneticAlgorithm.ManagerGA.GetInstance();
 
-            manager.SetDataForMorphTable(countRows, solOfFuncList, funcList, estimates);
+            manager.SetDataForMorphTable(//countRows, 
+                solOfFuncList, funcList, estimates);
         }
     }
 }
