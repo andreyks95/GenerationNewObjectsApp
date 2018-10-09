@@ -89,6 +89,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
         private void buttonSaveRating_Click(object sender, EventArgs e)
         {
 
+            Dictionary<int, decimal> solEstimateByParametersDict = new Dictionary<int, decimal>();
+
             //int firstIndex = dataGridView1.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
@@ -139,11 +141,39 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 }
 
                 dataGridView1[dataGridView1.Columns.Count - 1, i].Value = sum;
+
+                //Зберігаємо оцінку рішення по параметрам в словник
+                AddSolToDict(solEstimateByParametersDict, selectedSolOfFunc.Solution.id_solution, sum);
             }
 
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;
-            
 
+            //Передеча даних для генетичного алгоритму
+            //List<ParametersGoalsForSolution> list = cacheData.GetListElements<ParametersGoalsForSolution>();
+            GeneticAlgorithm.ManagerGA manager = GeneticAlgorithm.ManagerGA.GetInstance();
+            manager.SetDataForTableParametersGoalsSolutions(solEstimateByParametersDict);//list);
+
+        }
+
+        //Додаємо рішення до словника
+        private void AddSolToDict(Dictionary<int, decimal> dict, int key, decimal value)
+        {
+            if (!dict.ContainsKey(key))
+            {
+                dict.Add(key, value);
+            }
+            //якщо вже є таке рішення в таблиці (дублюється), то розраховуємо середнє значення
+            else
+            {
+                decimal oldEstimate = 0.0m,
+                        newEstimate = 0.0m,
+                        avgEstimate = 0.0m;
+
+                oldEstimate = dict[key];
+                newEstimate = value;
+                avgEstimate = (oldEstimate + newEstimate) / 2.0m;
+                dict[key] = avgEstimate;
+            }
         }
 
         private void GetFirstColumnNameSolutionFunction(int indexRow, ref string sol, ref string func)
