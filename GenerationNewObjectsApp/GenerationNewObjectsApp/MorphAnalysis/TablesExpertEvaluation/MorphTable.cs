@@ -83,6 +83,11 @@ namespace MorphAnalysis.TablesExpertEvaluation
         //функцій технічним рішенням
         private void buttonSaveRating_Click(object sender, EventArgs e)
         {
+            //Зберігаємо дані для генетичного алгоритму
+            //Словник містить в собі id рішення по ключу та по значенню вкладений словник з id функцією та оцінкою рішення за цією функцією
+            //якщо id рішення по ключу збігаються то розраховується середнє значення рішення
+            Dictionary<int, Dictionary<int, decimal>> dictForGA = new Dictionary<int, Dictionary<int, decimal>>();
+
 
             //int firstIndex = dataGridView1.Columns.GetFirstColumn(DataGridViewElementStates.Visible, DataGridViewElementStates.None).Index;
             //Передвигаємося по строкам таблиці
@@ -99,6 +104,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 int index = 0;
                 decimal sum = 0;
 
+                Dictionary<int, decimal> solOfFuncEstimateDict = new Dictionary<int, decimal>();
+
                 //Отримаємо оцінки по стовбцям 
                 foreach (Function func in funcList)
                 {
@@ -110,7 +117,14 @@ namespace MorphAnalysis.TablesExpertEvaluation
                         return;
                     }
                     sum += (estimateFunc * (estimateSolOnFunc / 100.0m));
+                    
+                    //Накопичуємо для даного рядку ітерації (рішення) його оцінки по функціям 
+                    solOfFuncEstimateDict.Add(func.id_function, estimateSolOnFunc / 100.0m);
                 }
+
+                //Зберігаємо оцінки рішення по кожній функції
+                SaveValueSolByFuncForDictionaryGA(dictForGA, solOfFuncEstimateDict, selectedSolOfFunc);
+
 
                 decimal finalEstimate = estimateSol * sum;
 
@@ -121,6 +135,40 @@ namespace MorphAnalysis.TablesExpertEvaluation
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;
 
             MessageBox.Show("Оцінки збережено","Пітверджено");
+
+            //Передача даних для генетичного алгоритму
+            AddDataToGA(dataGridView1.Rows.Count, solOfFuncList, funcList, dictForGA);
+        }
+
+        //Метод для зберігання у словник оцінок рішень по кожній функції 
+        private void SaveValueSolByFuncForDictionaryGA(Dictionary<int, Dictionary<int, decimal>> dict, Dictionary<int, decimal> funcDict, SolutionsOfFunction solOfFunc)
+        {
+            int idSol = solOfFunc.Solution.id_solution;
+
+            decimal newAvgEstimate = 0.0m;
+
+            //якщо немає такого рішення то додаємо його до словника
+            if (!dict.ContainsKey(idSol))
+            {
+                dict.Add(idSol, funcDict);
+            }
+            //якщо таке рішення вже є в словнику розраховуємо йому середню оцінку по функції в стовбцю
+            else
+            {
+                decimal oldEstimate = 0.0m,
+                        newEstimate = 0.0m;
+
+                foreach (var col in funcDict)
+                {
+                    oldEstimate = dict[idSol][col.Key];
+                    newEstimate = col.Value;
+
+                    newAvgEstimate = (oldEstimate + newEstimate) / 2.0m;
+
+                    dict[idSol][col.Key] = newAvgEstimate;
+                }            
+            }
+
         }
 
         private void GetFirstColumnNameSolutionFunction(int indexRow, ref string sol, ref string func)
@@ -139,6 +187,15 @@ namespace MorphAnalysis.TablesExpertEvaluation
             sol = solFuncFirstColumn[0];
             func = solFuncFirstColumn[1];
 
+        }
+
+
+        //Передача даних для генетичного алгоритму
+        private void AddDataToGA(int countRows, List<SolutionsOfFunction> solOfFuncList, List<Function> funcList, Dictionary<int, Dictionary<int, decimal>> estimates)
+        {
+            GeneticAlgorithm.ManagerGA manager = GeneticAlgorithm.ManagerGA.GetInstance();
+
+            manager.SetDataForMorphTable(countRows, solOfFuncList, funcList, estimates);
         }
     }
 }
