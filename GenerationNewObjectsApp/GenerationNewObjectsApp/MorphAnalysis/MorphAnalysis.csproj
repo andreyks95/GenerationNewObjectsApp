@@ -63,6 +63,7 @@
     <Compile Include="GeneticAlgorithm\BinaryChromosome.cs" />
     <Compile Include="GeneticAlgorithm\BuildGeneticAlgorithm.cs" />
     <Compile Include="GeneticAlgorithm\ConverterToFromChromosome.cs" />
+    <Compile Include="GeneticAlgorithm\ManagerGA.cs" />
     <Compile Include="HelperClasses\CacheData.cs" />
     <Compile Include="HelperClasses\ConfigDGV.cs" />
     <Compile Include="HelperClasses\Expert.cs" />
