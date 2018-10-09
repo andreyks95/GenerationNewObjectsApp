@@ -86,6 +86,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
         //згідно з парметрам цілей.
         private void buttonSaveRating_Click(object sender, EventArgs e)
         {
+            decimal sumAllMods = 0.0m;
+
             for (int i = 0; i < dataGridView1.Rows.Count; i++)
             {
                 //GetFirstColumnNameSolutionFunction(i, ref solutionNameInTable, ref functionNameInTable);
@@ -135,9 +137,17 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 }
 
                 dataGridView1[dataGridView1.Columns.Count - 1, i].Value = sum;
+                
+                //накопичуємо оцінку всіх модифікацій
+                sumAllMods += sum;
             }
 
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;
+
+            //Збереження даних для генетичного алгоритму
+            //А саме: збереження сукупної оцінки модифікацій для рішень (буде задієно у фітнес функції)
+            GeneticAlgorithm.ManagerGA manager = GeneticAlgorithm.ManagerGA.GetInstance();
+            manager.SetDataForTableParametersGoalsModifications(sumAllMods);
 
         }
 
