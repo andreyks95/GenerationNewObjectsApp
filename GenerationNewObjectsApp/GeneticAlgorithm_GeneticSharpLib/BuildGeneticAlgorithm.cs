@@ -163,6 +163,9 @@ namespace GeneticAlgorithm_GeneticSharpLib
             }
         }
 
+
+        //Одне скомбіноване рішення
+        //Недоречний варіант!!!
         public void Start()
         {
             //Сам генетический алгоритм
@@ -202,5 +205,48 @@ namespace GeneticAlgorithm_GeneticSharpLib
 
 
         }
+
+        public GeneticSharp.Domain.GeneticAlgorithm GetGA()
+        {
+            //Сам генетический алгоритм
+            var ga = new GeneticSharp.Domain.GeneticAlgorithm(
+                _population,
+                 _fitness,
+                _selection,
+                _crossover,
+                _mutation);
+            ga.Termination = _termination;
+            return ga;
+        }
+
+        //Оптимальний варіант 
+        //Подумати як передати туди контрол з форми і який!!!
+        public void GenerationRan(GeneticSharp.Domain.GeneticAlgorithm ga)
+        {
+            var latestFitness = 0.0;
+
+            ga.GenerationRan += (sender, e) =>
+            {
+                var bestChromosome = ga.BestChromosome as BinaryChromosome;
+                var bestFitness = bestChromosome.Fitness.Value;
+
+                if (bestFitness != latestFitness)
+                {
+                    latestFitness = bestFitness;
+                    var phenotype = bestChromosome.GetGenes();
+
+                    Console.WriteLine("Поколiння №{0,2}. Кращий результат = {1}", ga.GenerationsNumber, bestFitness);
+                    Console.Write("Вид хромосоми: ");
+
+                    foreach (GeneticSharp.Domain.Chromosomes.Gene g in phenotype)
+                    {
+                        Console.Write(g.Value.ToString() + "");
+                    }
+                    Console.WriteLine();
+                }
+            };
+        }
+
+        public void Start(GeneticSharp.Domain.GeneticAlgorithm ga) => ga.Start();
     }
 }
