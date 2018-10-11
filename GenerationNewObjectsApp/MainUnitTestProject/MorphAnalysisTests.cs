@@ -1,13 +1,82 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GeneticAlgorithm_GeneticSharpLib;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MainUnitTestProject
 {
     [TestClass]
     public class MorphAnalysisTests
     {
-        
+        ConverterToFromChromosome converter = new ConverterToFromChromosome();
+
+        [TestMethod]
+        public void GetSizeBlock_Test()
+        {
+            //arrange
+            int countSol = 8;
+
+            int expected = 4;
+
+            //act
+           
+            int result = converter.GetSizeBlock(countSol);
+
+
+            //assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void GetSizeChromosome_Test()
+        {
+            //arrange
+            int countSol = 8;
+            int countFunc = 4;
+
+            int expected = 4 * countFunc;
+
+            //act
+            int result = converter.GetSizeChromosome(countSol, countFunc);
+
+
+            //assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void ConvertFromChromosome_Test()
+        {
+            //arrange
+            string str = "110010101";
+            int countFunc = 3;
+            int expected = 13;
+
+            //act
+            int result = converter.ConvertFromChromosome(str, countFunc).Sum();
+
+            //assert
+            Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void GetIdSolutions_Test()
+        {
+            //arrange
+            Dictionary<int, decimal> dict = new Dictionary<int, decimal>();
+            dict.Add(5, 0.1m);
+            dict.Add(14, 2.3m);
+            dict.Add(3, 7.1m);
+
+            int expected = 5 + 14 + 3;
+
+            //act
+
+            int result = converter.GetIdSolutions(new[] { 2, 0, 1 }, dict).Sum();
+
+            //assert
+            Assert.AreEqual(expected, result);
+        }
 
 
         #region Стара версія хромосоми "-f1-|s1|.m1.m3.m16.|s169|.m1.m3.m16.|s4|.m1.m3.m16.-f2-|s1|.m1.m3.m16.|s169|.m1.m3.m16.|s4|.m1.m3.m16."
@@ -75,7 +144,7 @@ namespace MainUnitTestProject
             Assert.AreEqual(expected, result);
         }
         */
-#endregion
-   
+        #endregion
+
     }
 }
