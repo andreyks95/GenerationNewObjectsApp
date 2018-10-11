@@ -9,54 +9,90 @@ namespace MorphAnalysis.GeneticAlgorithm
 {
     public class ConverterToFromChromosome
     {
-        //Под вопросом!!!
+        //Під питанням!!
         //Словник функцій, який зберігає в собі словник рішень та їх оцінок з морфологічної таблиці
         //private Dictionary<int, Dictionary<int, decimal>> _dictFuncSolValue;
 
         //Нужно сохранить оценки модификаций, оценки решений без модификаций
 
          //Отримаємо оцінки
-        private FinalSolutionEstimate finalEstimates = FinalSolutionEstimate.GetInstance();
-
-        //Отримаємо перелік функцій з морф таблиці
-        private CacheData cacheData = CacheData.GetInstance();
-
-        //Рішення відносно функцій 
-        private Dictionary<int, decimal> _solutionWithFunction;
-
-        //Рішення відносно параметрів
-        private Dictionary<int, decimal> _solutionWithParameters;
-
-        //модифікації
-        private Dictionary<int, decimal> _modification;
-
-        //список функцій 
-        private List<Function> _funcList;
+        //private FinalSolutionEstimate finalEstimates = FinalSolutionEstimate.GetInstance();
+        //
+        ////Отримаємо перелік функцій з морф таблиці
+        //private CacheData cacheData = CacheData.GetInstance();
+        //
+        ////Рішення відносно функцій 
+        //private Dictionary<int, decimal> _solutionWithFunction;
+        //
+        ////Рішення відносно параметрів
+        //private Dictionary<int, decimal> _solutionWithParameters;
+        //
+        ////модифікації
+        //private Dictionary<int, decimal> _modification;
+        //
+        ////список функцій 
+        //private List<Function> _funcList;
    
 
 
         public ConverterToFromChromosome()
         {
-            //_dictFuncSolValue = new Dictionary<int, Dictionary<int, decimal>>();
-            //
-            ////Приклад роботи
-            //var _dict = new Dictionary<int, decimal>();
-            //_dict.Add(4, 5);
-            //
-            //_dictFuncSolValue.Add(4, _dict);
-            //
-
             //Кількість елементів між _solutionWithFunction == _solutionWithParameters
 
-            _solutionWithFunction   = finalEstimates.GetEstimatesBy<SolutionsOfFunction>();
-
-            _solutionWithParameters = finalEstimates.GetEstimatesBy<ParametersGoalsForSolution>();
-
-            _modification = finalEstimates.GetEstimatesBy<Modification>();
-
-            _funcList = cacheData.GetListElements<Function>(true);
+            //_solutionWithFunction   = finalEstimates.GetEstimatesBy<SolutionsOfFunction>();
+            //
+            //_solutionWithParameters = finalEstimates.GetEstimatesBy<ParametersGoalsForSolution>();
+            //
+            //_modification = finalEstimates.GetEstimatesBy<Modification>();
+            //
+            //_funcList = cacheData.GetListElements<Function>(true);
         }
 
+        //Бінарний максимальний розмір блоку для розміщення рішень
+        private int GetSizeBlock(int countOfSolution)
+        {
+            string str = Convert.ToString(countOfSolution, 2);
+            return str.Length;
+        }
+
+        //Бінарний розмір хромосоми (блок * кількість функцій)
+        public int GetSizeChromosome(int countOfSolution, int countOfFunction)
+        {
+            int sizeBlock = GetSizeBlock(countOfSolution);
+            return sizeBlock * countOfFunction;
+        }
+
+        //Повертає масив НОМЕРІВ рішень (а не ID рішень) для словника, з розміру хромосоми 
+        public int[] ConvertFromChromosome(string chromosomeAsString, int countOfFunction)
+        {
+            int sizeChromosome = chromosomeAsString.Length; //Convert.ToInt32(chromosomeAsString, 2);
+
+            //int blockLength = sizeChromosome / countOfFunction;
+
+            //кількість функцій = кількості рішень
+            int[] solutionsNumber = new int[countOfFunction];
+
+            var arr = Split(chromosomeAsString, countOfFunction);
+
+            int i = 0;
+            foreach (var item in arr)
+            {
+                solutionsNumber[i++] = Convert.ToInt32(item, 2);
+            }
+
+            return solutionsNumber;
+        }
+
+        //Для потрібненння хромосоми на рівні шматки
+        private IEnumerable<string> Split(string str, int chunkSize)
+        {
+            return Enumerable.Range(0, str.Length / chunkSize)
+                .Select(i => str.Substring(i * chunkSize, chunkSize));
+        }
+
+        //old methods
+        #region Старі методи
+        /*
         #region Отримати довжину хромосоми
 
         //Отримати довжину хромосоми
@@ -178,6 +214,8 @@ namespace MorphAnalysis.GeneticAlgorithm
 
         #endregion
 
+        #endregion
+    */
         #endregion
     }
 }
