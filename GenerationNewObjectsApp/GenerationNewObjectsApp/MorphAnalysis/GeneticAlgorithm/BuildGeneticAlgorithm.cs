@@ -165,7 +165,7 @@ namespace MorphAnalysis.GeneticAlgorithm
 
         public void Start()
         {
-            //Сам генетический алгоритм
+            //генетичний алгоритм
             var ga = new GeneticSharp.Domain.GeneticAlgorithm(
                 _population,
                  _fitness,

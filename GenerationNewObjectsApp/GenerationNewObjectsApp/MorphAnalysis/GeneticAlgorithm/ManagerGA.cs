@@ -112,7 +112,9 @@ namespace MorphAnalysis.GeneticAlgorithm
             modsSum = finalEstimateMods;
         }
 
-        #endregion 
+        #endregion
+
+        # region Методи для фітнес функції
 
         //Методи для фітнес функції
         //Функція 1 | Ф2    | Ф3
@@ -217,7 +219,16 @@ namespace MorphAnalysis.GeneticAlgorithm
             return ids;
         }
 
+        #endregion
 
+
+        #region Властивості для отримання розміру хромосоми
+
+        public int GetCountSolutions => countSolutions;
+
+        public int GetCountFunctions => countFunctions;
+
+        #endregion
 
     }
 }
