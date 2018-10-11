@@ -8,6 +8,8 @@ namespace MorphAnalysis.GeneticAlgorithm
 {
     class ManagerGA
     {
+        #region Поля класу
+
         private static ManagerGA instance;
 
         //для фітнес функції (функція приспособленності)
@@ -23,6 +25,9 @@ namespace MorphAnalysis.GeneticAlgorithm
         //для розміру бінарного блоку генів в функції
         int                                         countSolutions;
 
+        //для розміру хромосоми. Кількість функцій
+        private int countFunctions;
+
         //для фітнес функції (функція приспособленності)
         //Оцінка кожного рішення згідно функції 
         Dictionary<int, Dictionary<int, decimal>>   solByFuncValuesFromMorphTableDict;
@@ -36,8 +41,9 @@ namespace MorphAnalysis.GeneticAlgorithm
         //сума всії модифікацій
         decimal modsSum;
 
+        #endregion
 
-        private  ManagerGA()
+        private ManagerGA()
         {
 
         }
@@ -49,6 +55,8 @@ namespace MorphAnalysis.GeneticAlgorithm
             return instance;
         }
 
+        #region Методи для зберігання даних з таблиць
+
         //Для збереження оцінки кожного рішення по функції, а також список функцій, список рішень - цікавить їх вага
         public void SetDataForMorphTable(/*int countRows,*/ List<SolutionsOfFunction> solOfFuncList, List<Function> funcList, Dictionary<int, Dictionary<int, decimal>> estimates)
         {
@@ -57,6 +65,8 @@ namespace MorphAnalysis.GeneticAlgorithm
             this.solOfFuncList = solOfFuncList;
 
             countSolutions = estimates.Keys.Count;//countRows;
+
+            countFunctions = funcList.Count;
 
             solByFuncValuesFromMorphTableDict = estimates;
 
@@ -89,16 +99,125 @@ namespace MorphAnalysis.GeneticAlgorithm
             }
         }
 
-
+        //Збереження рішень оцінених по параметрам цілей
         public void SetDataForTableParametersGoalsSolutions(Dictionary<int, decimal> dict)//List<ParametersGoalsForSolution> list)
         {
             //parametersGoalsForSolutionsList = list;
             solByParametersDict = dict;
         }
-
+         
+        //Збереження сумарної оцінки модифікацій
         public void SetDataForTableParametersGoalsModifications(decimal finalEstimateMods)
         {
             modsSum = finalEstimateMods;
         }
+
+        #endregion 
+
+        //Методи для фітнес функції
+        //Функція 1 | Ф2    | Ф3
+        //1010      | 0101  | 0110
+        //Р№10      | 5     | 6     -> Номер рішення в словнику
+
+        //Фітнес функція
+        public decimal FitnessFunction(int[] numbersSolutions)
+        {
+            int[] idSolutions = GetIdSolutions(numbersSolutions);
+
+            return CalcChromosome(idSolutions);
+
+        }
+
+        //знаходимо оцінку рішення по 
+        //кількість рішень === кількість функцій
+        private decimal CalcChromosome(int[] idSols)
+        {
+            int idFunc = 0;
+
+            int idSol = 0;
+
+            decimal estimateSolution = 0;
+
+            decimal resultFitness = 0;
+
+
+            for(int i=0; i < idSols.Length; i++)
+            {
+                //знаходимо іd функції 
+                idFunc = funcList[i].id_function;
+
+                //id рішення
+                idSol = idSols[i];
+
+                //Розрахуємо рішення
+                estimateSolution = CalcSolution(i, idSol, idFunc);
+
+                resultFitness += estimateSolution;
+
+            }
+            return resultFitness;
+
+            //funcList[i].weight; //знаходимо вагу функції
+            //
+            //solWeightDict[idSols[i]]; //знаходимо вагу рішення
+            //
+            ////Порібно знайти оцінку рішення по конкретній функції
+            //solByFuncValuesFromMorphTableDict[idSols[i]][funcList[i].id_function];
+            //
+            ////Знаходимо оцінку рішення відповідно параметрам по id
+            //solByParametersDict[idSols[i]];
+            //
+            ////Сумарна оцінка модифікацій
+            //modsSum;
+
+        }
+
+        //Розрахувати оцінку рішення
+        private decimal CalcSolution(int i, int idSol, int idFunc)
+        {
+            //оцінка рішення = вага рішення * (вага функції * оцінку рішення по конкретній функції) +
+            //+ (оцінка рішення по параматерам цілей) + (сукупна оцінка модифікацій);
+
+            //[idSol][idFunc] - отримаємо оцінку рішення за функцією, де: 
+            //[idSol] - пошук по id рішення, [idFunc] - пошук по id функції в вкладеному словнику,
+
+            decimal estimateSolution = solWeightDict[idSol] *
+                                       (funcList[i].weight ?? 0 * solByFuncValuesFromMorphTableDict[idSol][idFunc]) +
+                                        (solByParametersDict[idSol]) + modsSum;
+
+
+            //funcList[i].weight; //знаходимо вагу функції
+
+            //solWeightDict[idSols[i]]; //знаходимо вагу рішення
+
+            //Порібно знайти оцінку рішення по конкретній функції
+            // solByFuncValuesFromMorphTableDict[idSols[i]][funcList[i].id_function];
+
+            //Знаходимо оцінку рішення відповідно параметрам по id
+            //solByParametersDict[idSols[i]];
+
+            //Сумарна оцінка модифікацій
+            //modsSum;
+
+            return estimateSolution;
+
+        }
+
+        //Знайти id рішень в словнику solByFuncValuesFromMorphTableDict
+        private int[] GetIdSolutions(int[] numbersSolutions)
+        {
+            int[] ids = new int[numbersSolutions.Length];
+
+            //Так як, прийшли номера рішень (їх індекси в словнику)
+            //то потрібно знайти ці рішення (їх id) в словнику по індексу
+            for (int i = 0; i < numbersSolutions.Length; i++)
+            {
+                ids[i] = solByFuncValuesFromMorphTableDict.ElementAt(numbersSolutions[i]).Key;
+            }
+            return ids;
+        }
+
+
+
     }
 }
