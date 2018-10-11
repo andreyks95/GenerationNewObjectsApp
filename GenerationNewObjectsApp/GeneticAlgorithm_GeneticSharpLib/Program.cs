@@ -19,7 +19,8 @@ namespace GeneticAlgorithm_GeneticSharpLib
         {
 
             //Program.BuildTestGA();
-           // Program.BuildMyGA();
+            // Program.BuildMyGAFirstVariant();
+            Program.BuildMyGASecondVariant();
 
             //ConverterToFromChromosome converter = new ConverterToFromChromosome();
             //string str = converter.BuildChromosomeString(
@@ -37,7 +38,32 @@ namespace GeneticAlgorithm_GeneticSharpLib
             Console.ReadKey();
         }
 
-        public static void BuildMyGA()
+        public static void BuildMyGASecondVariant()
+        {
+            var bga = new BuildGeneticAlgorithm(20, 50, 150);
+            bga.Fitness = new FuncFitness(c =>
+            {
+                var fc = c as BinaryChromosome;
+                double result = 0.0;
+                foreach (GeneticSharp.Domain.Chromosomes.Gene gene in fc.GetGenes())
+                {
+                    result += Convert.ToDouble(gene.Value.ToString());
+                }
+                return result;
+            });
+            bga.SetSelection(Selection.TournamentSelection);
+            bga.SetCrossover(Crossover.UniformCrossover);
+            bga.SetMutation(Mutation.FlipBitMutation);
+            bga.SetTermination(Termination.GenerationNumberTermination, 100);
+            var geneticAlgorithm = bga.GetGA();
+            //var latestFitness = 0.0;
+            //geneticAlgorithm.GenerationRan += 
+            //або
+            bga.GenerationRan(geneticAlgorithm);
+            bga.Start(geneticAlgorithm);
+        }
+
+        public static void BuildMyGAFirstVariant()
         {
 
             var ga = new BuildGeneticAlgorithm(20, 50, 150);
