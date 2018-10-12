@@ -12,7 +12,7 @@ namespace MorphAnalysis.GeneticAlgorithm
     //best: UniformCrossover з значенням 0.5f
     //bad CutAndSpliceCrossover(); //только с EliteSelection()
     //bad ThreeParentCrossover(); //ОДНУ Итерацию выполняет
-    public enum Crossover : byte { UniformCrossover, OnePointCrossover, TwoPointCrossover, ThreeParentCrossover, CutAndSpliceCrossover }
+    public enum Crossover : byte { UniformCrossover, OnePointCrossover, TwoPointCrossover, ThreeParentCrossover } //, CutAndSpliceCrossover }
 
     //best: FlipBitMutation
     //var mutation = new UniformMutation(); //1 перегрузка принимает индексы генов для мутации, 2-я все гены мутируют
@@ -103,9 +103,9 @@ namespace MorphAnalysis.GeneticAlgorithm
                 case Crossover.ThreeParentCrossover:
                     _crossover = new GeneticSharp.Domain.Crossovers.ThreeParentCrossover();
                     break;
-                case Crossover.CutAndSpliceCrossover:
-                    _crossover = new GeneticSharp.Domain.Crossovers.CutAndSpliceCrossover();
-                    break;
+                //case Crossover.CutAndSpliceCrossover:
+                //    _crossover = new GeneticSharp.Domain.Crossovers.CutAndSpliceCrossover();
+                //    break;
                 default:
                     throw new Exception("Не існує такого виду кроссовера!");
                     break;
@@ -163,9 +163,12 @@ namespace MorphAnalysis.GeneticAlgorithm
             }
         }
 
+
+        //Одне скомбіноване рішення
+        //Недоречний варіант!!!
         public void Start()
         {
-            //генетичний алгоритм
+            //Сам генетический алгоритм
             var ga = new GeneticSharp.Domain.GeneticAlgorithm(
                 _population,
                  _fitness,
@@ -202,5 +205,52 @@ namespace MorphAnalysis.GeneticAlgorithm
 
 
         }
+
+        //Отримати побудований генетичний алгоритм
+        public GeneticSharp.Domain.GeneticAlgorithm GetGA()
+        {
+            //Сам генетический алгоритм
+            var ga = new GeneticSharp.Domain.GeneticAlgorithm(
+                _population,
+                 _fitness,
+                _selection,
+                _crossover,
+                _mutation);
+            ga.Termination = _termination;
+            return ga;
+        }
+
+        //Оптимальний варіант 
+        //Подумати як передати туди контрол з форми і який!!!
+        //Можливо навіть таблицю, щоби можно було виводити по шапці стовбцям назви функцій
+        //а по строкам ії рішення і суммарну оцінку фітнесс функції
+        public void GenerationRan(GeneticSharp.Domain.GeneticAlgorithm ga)
+        {
+            var latestFitness = 0.0;
+
+            ga.GenerationRan += (sender, e) =>
+            {
+                var bestChromosome = ga.BestChromosome as BinaryChromosome;
+                var bestFitness = bestChromosome.Fitness.Value;
+
+                if (bestFitness != latestFitness)
+                {
+                    latestFitness = bestFitness;
+                    var phenotype = bestChromosome.GetGenes();
+
+                    Console.WriteLine("Поколiння №{0,2}. Кращий результат = {1}", ga.GenerationsNumber, bestFitness);
+                    Console.Write("Вид хромосоми: ");
+
+                    foreach (GeneticSharp.Domain.Chromosomes.Gene g in phenotype)
+                    {
+                        Console.Write(g.Value.ToString() + "");
+                    }
+                    Console.WriteLine();
+                }
+            };
+        }
+
+        //Запустити генетичний алгоритм
+        public void Start(GeneticSharp.Domain.GeneticAlgorithm ga) => ga.Start();
     }
 }
