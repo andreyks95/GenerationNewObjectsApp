@@ -221,6 +221,8 @@ namespace GeneticAlgorithm_GeneticSharpLib
 
         //Оптимальний варіант 
         //Подумати як передати туди контрол з форми і який!!!
+        //Можливо навіть таблицю, щоби можно було виводити по шапці стовбцям назви функцій
+        //а по строкам ії рішення і суммарну оцінку фітнесс функції
         public void GenerationRan(GeneticSharp.Domain.GeneticAlgorithm ga)
         {
             var latestFitness = 0.0;
