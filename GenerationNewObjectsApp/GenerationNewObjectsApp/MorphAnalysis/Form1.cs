@@ -280,5 +280,13 @@ namespace MorphAnalysis
 
         #endregion
 
+        #region 3-я вкладка (Генетичний алгоритм)
+
+        private void StartGAButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }
