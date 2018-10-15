@@ -274,7 +274,8 @@ namespace MorphAnalysis.GeneticAlgorithm
         //Подумати як передати туди контрол з форми і який!!!
         //Можливо навіть таблицю, щоби можно було виводити по шапці стовбцям назви функцій
         //а по строкам ії рішення і суммарну оцінку фітнесс функції
-        public void GenerationRan()//GeneticSharp.Domain.GeneticAlgorithm ga)
+        public void GenerationRan(Dictionary<int, double> generationBestValueDict, Dictionary<int, string> generationBestChromosomeDict)
+            //ConverterToFromChromosome converter)//GeneticSharp.Domain.GeneticAlgorithm ga)
         {
             var latestFitness = 0.0;
 
@@ -288,14 +289,31 @@ namespace MorphAnalysis.GeneticAlgorithm
                     latestFitness = bestFitness;
                     var phenotype = bestChromosome.GetGenes();
 
-                    Console.WriteLine("Поколiння №{0,2}. Кращий результат = {1}", _ga.GenerationsNumber, bestFitness);
-                    Console.Write("Вид хромосоми: ");
-
+                    //Console.WriteLine("Поколiння №{0,2}. Кращий результат = {1}", _ga.GenerationsNumber, bestFitness);
+                    //Console.Write("Вид хромосоми: ");
+                    
+                    string viewChromosome = "";
                     foreach (GeneticSharp.Domain.Chromosomes.Gene g in phenotype)
                     {
-                        Console.Write(g.Value.ToString() + "");
+                        viewChromosome += g.Value.ToString();
+                        
                     }
-                    Console.WriteLine();
+                   // Console.Write(viewChromosome);
+                   // Console.WriteLine();
+
+                    generationBestValueDict.Add(_ga.GenerationsNumber, bestFitness);
+                    generationBestChromosomeDict.Add(_ga.GenerationsNumber, viewChromosome);
+
+                    ////Пытаемся отобразить данные в таблице
+                    //
+                    //string viewChromosome = "";
+                    //foreach (GeneticSharp.Domain.Chromosomes.Gene g in phenotype)
+                    //{
+                    //    viewChromosome += g.Value.ToString();
+                    //}
+                    //int[] solutionsNumber = converter.ConvertFromChromosome(viewChromosome, managerGA.GetCountFunctions);
+                    //Console.WriteLine();
+                    
                 }
             };
         }
@@ -303,5 +321,9 @@ namespace MorphAnalysis.GeneticAlgorithm
         //Запустити генетичний алгоритм
         public void Start()//GeneticSharp.Domain.GeneticAlgorithm ga) 
             => _ga.Start();
+
+
+        //Показати стан роботи алгоритму
+        public bool IsRunning => _ga.IsRunning;
     }
 }
