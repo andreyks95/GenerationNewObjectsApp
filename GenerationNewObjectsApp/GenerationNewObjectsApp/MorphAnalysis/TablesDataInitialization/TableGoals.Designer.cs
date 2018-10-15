@@ -30,6 +30,8 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonAddGoalToList = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
@@ -40,8 +42,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.buttonAddGoalToList = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,6 +62,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(290, 291);
             this.panel1.TabIndex = 0;
+            // 
+            // buttonAddGoalToList
+            // 
+            this.buttonAddGoalToList.Location = new System.Drawing.Point(15, 248);
+            this.buttonAddGoalToList.Name = "buttonAddGoalToList";
+            this.buttonAddGoalToList.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddGoalToList.TabIndex = 12;
+            this.buttonAddGoalToList.Text = "Занести";
+            this.buttonAddGoalToList.UseVisualStyleBackColor = true;
+            this.buttonAddGoalToList.Click += new System.EventHandler(this.buttonAddGoalToList_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(15, 195);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(195, 39);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Занести обрану ціль для оцінювання \r\nекспертами щодо її важливості \r\nпри побудові" +
+    " об\'єкту";
             // 
             // groupBox1
             // 
@@ -124,9 +144,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 76);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 13);
+            this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Характеристика";
+            this.label3.Text = "Текстовий опис";
             // 
             // label2
             // 
@@ -170,26 +190,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(513, 291);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 195);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(195, 39);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Занести обрану ціль для оцінювання \r\nекспертами щодо її важливості \r\nпри побудові" +
-    " об\'єкту";
-            // 
-            // buttonAddGoalToList
-            // 
-            this.buttonAddGoalToList.Location = new System.Drawing.Point(15, 248);
-            this.buttonAddGoalToList.Name = "buttonAddGoalToList";
-            this.buttonAddGoalToList.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddGoalToList.TabIndex = 12;
-            this.buttonAddGoalToList.Text = "Занести";
-            this.buttonAddGoalToList.UseVisualStyleBackColor = true;
-            this.buttonAddGoalToList.Click += new System.EventHandler(this.buttonAddGoalToList_Click);
             // 
             // TableGoals
             // 

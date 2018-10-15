@@ -144,6 +144,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;
 
+            MessageBox.Show("Оцінки збережено", "Пітверджено");
+
             //Збереження даних для генетичного алгоритму
             //А саме: збереження сукупної оцінки модифікацій для рішень (буде задієно у фітнес функції)
             GeneticAlgorithm.ManagerGA manager = GeneticAlgorithm.ManagerGA.GetInstance();

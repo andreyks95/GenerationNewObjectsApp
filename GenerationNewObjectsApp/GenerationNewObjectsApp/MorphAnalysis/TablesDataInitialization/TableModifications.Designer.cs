@@ -30,6 +30,8 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonAddModToList = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
@@ -40,8 +42,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.buttonAddModToList = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,6 +62,26 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(276, 321);
             this.panel1.TabIndex = 0;
+            // 
+            // buttonAddModToList
+            // 
+            this.buttonAddModToList.Location = new System.Drawing.Point(6, 280);
+            this.buttonAddModToList.Name = "buttonAddModToList";
+            this.buttonAddModToList.Size = new System.Drawing.Size(106, 23);
+            this.buttonAddModToList.TabIndex = 11;
+            this.buttonAddModToList.Text = "Занести";
+            this.buttonAddModToList.UseVisualStyleBackColor = true;
+            this.buttonAddModToList.Click += new System.EventHandler(this.buttonAddModToList_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 228);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(239, 39);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Занести обрану модифікацію для оцінювання \r\nекспертами щодо її важливості \r\nпри п" +
+    "обудові об\'єкту";
             // 
             // groupBox1
             // 
@@ -143,9 +163,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(5, 99);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 13);
+            this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Характеристика";
+            this.label3.Text = "Текстовий опис";
             // 
             // dataGridView1
             // 
@@ -170,26 +190,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(525, 321);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 228);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(239, 39);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Занести обрану модифікацію для оцінювання \r\nекспертами щодо її важливості \r\nпри п" +
-    "обудові об\'єкту";
-            // 
-            // buttonAddModToList
-            // 
-            this.buttonAddModToList.Location = new System.Drawing.Point(6, 280);
-            this.buttonAddModToList.Name = "buttonAddModToList";
-            this.buttonAddModToList.Size = new System.Drawing.Size(106, 23);
-            this.buttonAddModToList.TabIndex = 11;
-            this.buttonAddModToList.Text = "Занести";
-            this.buttonAddModToList.UseVisualStyleBackColor = true;
-            this.buttonAddModToList.Click += new System.EventHandler(this.buttonAddModToList_Click);
             // 
             // TableModifications
             // 

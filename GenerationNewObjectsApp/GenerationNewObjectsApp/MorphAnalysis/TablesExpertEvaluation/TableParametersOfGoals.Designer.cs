@@ -36,12 +36,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.buttonCalcParams = new System.Windows.Forms.Button();
             this.buttonSaveResultParamsOfGoal = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -145,6 +145,16 @@
             this.panel2.Size = new System.Drawing.Size(984, 58);
             this.panel2.TabIndex = 7;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(508, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(473, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Оцінка параметру цілі повинна містити бажане значення параметру в межах одиниці в" +
+    "иміру";
+            // 
             // buttonCalcParams
             // 
             this.buttonCalcParams.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
@@ -206,16 +216,6 @@
             this.dataGridView2.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView2_CellValidating);
             this.dataGridView2.Enter += new System.EventHandler(this.dataGridView2_Enter);
             this.dataGridView2.MouseLeave += new System.EventHandler(this.dataGridView2_MouseLeave);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 40);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(473, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Оцінка параметру цілі повинна містити бажане значення параметру в межах одиниці в" +
-    "иміру";
             // 
             // TableParametersOfGoals
             // 

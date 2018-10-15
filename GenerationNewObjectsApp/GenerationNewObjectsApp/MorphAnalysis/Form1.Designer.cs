@@ -162,6 +162,7 @@
             this.таблицяОбєктівToolStripMenuItem.Name = "таблицяОбєктівToolStripMenuItem";
             this.таблицяОбєктівToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.таблицяОбєктівToolStripMenuItem.Text = "Таблиця об\'єктів";
+            this.таблицяОбєктівToolStripMenuItem.Visible = false;
             this.таблицяОбєктівToolStripMenuItem.Click += new System.EventHandler(this.таблицяОбєктівToolStripMenuItem_Click);
             // 
             // таблицяКласифікаційToolStripMenuItem
@@ -169,6 +170,7 @@
             this.таблицяКласифікаційToolStripMenuItem.Name = "таблицяКласифікаційToolStripMenuItem";
             this.таблицяКласифікаційToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.таблицяКласифікаційToolStripMenuItem.Text = "Таблиця класифікацій";
+            this.таблицяКласифікаційToolStripMenuItem.Visible = false;
             this.таблицяКласифікаційToolStripMenuItem.Click += new System.EventHandler(this.таблицяКласифікаційToolStripMenuItem_Click);
             // 
             // buttonSolsFuncs

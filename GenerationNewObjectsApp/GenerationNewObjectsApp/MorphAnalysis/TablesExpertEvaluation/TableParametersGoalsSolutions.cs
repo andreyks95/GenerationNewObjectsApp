@@ -148,6 +148,8 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;
 
+            MessageBox.Show("Оцінки збережено", "Пітверджено");
+
             //Передеча даних для генетичного алгоритму
             //List<ParametersGoalsForSolution> list = cacheData.GetListElements<ParametersGoalsForSolution>();
             GeneticAlgorithm.ManagerGA manager = GeneticAlgorithm.ManagerGA.GetInstance();

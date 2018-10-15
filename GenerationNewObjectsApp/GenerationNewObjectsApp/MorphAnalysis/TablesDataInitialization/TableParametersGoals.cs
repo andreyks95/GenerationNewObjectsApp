@@ -51,6 +51,7 @@ namespace MorphAnalysis.TablesDataInitialization
             dataGridView1.Columns[3].HeaderText = "Середнє значення (еталон)";
 
             //Cховати стовбці
+            dataGridView1.Columns[3].Visible = false;
             dataGridView1.Columns[4].Visible = false;
             dataGridView1.Columns[5].Visible = false;
             dataGridView1.Columns[6].Visible = false;
