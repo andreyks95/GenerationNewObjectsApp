@@ -69,6 +69,12 @@
     <Compile Include="HelperClasses\Expert.cs" />
     <Compile Include="HelperClasses\FinalSolutionEstimate.cs" />
     <Compile Include="HelperClasses\Normalizer.cs" />
+    <Compile Include="HelperForms\ShowResultGA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperForms\ShowResultGA.Designer.cs">
+      <DependentUpon>ShowResultGA.cs</DependentUpon>
+    </Compile>
     <Compile Include="TablesDataInitialization\TableClassifications.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,10 +117,10 @@
     <Compile Include="TablesDataInitialization\TableSolutions.Designer.cs">
       <DependentUpon>TableSolutions.cs</DependentUpon>
     </Compile>
-    <Compile Include="TablesExpertEvaluation\HelperAskCountExpertForm.cs">
+    <Compile Include="HelperForms\HelperAskCountExpertForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TablesExpertEvaluation\HelperAskCountExpertForm.Designer.cs">
+    <Compile Include="HelperForms\HelperAskCountExpertForm.Designer.cs">
       <DependentUpon>HelperAskCountExpertForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TablesExpertEvaluation\MorphTable.cs">
@@ -169,6 +175,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="HelperForms\ShowResultGA.resx">
+      <DependentUpon>ShowResultGA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -199,7 +208,7 @@
     <EmbeddedResource Include="TablesDataInitialization\TableSolutions.resx">
       <DependentUpon>TableSolutions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TablesExpertEvaluation\HelperAskCountExpertForm.resx">
+    <EmbeddedResource Include="HelperForms\HelperAskCountExpertForm.resx">
       <DependentUpon>HelperAskCountExpertForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TablesExpertEvaluation\MorphTable.resx">
