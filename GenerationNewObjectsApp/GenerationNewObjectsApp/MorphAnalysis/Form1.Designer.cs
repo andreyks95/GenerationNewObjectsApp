@@ -52,10 +52,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonSols = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.StartGAButton = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.labelCount = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.TimeEvolvingTermination_RB = new System.Windows.Forms.RadioButton();
             this.FitnessThresholdTermination_RB = new System.Windows.Forms.RadioButton();
@@ -76,7 +76,12 @@
             this.TournamentSelection_RB = new System.Windows.Forms.RadioButton();
             this.RouletteWheelSelection_RB = new System.Windows.Forms.RadioButton();
             this.StochasticUniversalSamplingSelection_RB = new System.Windows.Forms.RadioButton();
-            this.labelCount = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.minSizePopulationTextBox = new System.Windows.Forms.TextBox();
+            this.maxSizePopulationTextBox = new System.Windows.Forms.TextBox();
+            this.minSisePopLabel = new System.Windows.Forms.Label();
+            this.maxSizePopLabel = new System.Windows.Forms.Label();
+            this.showResultGAButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -85,12 +90,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -99,7 +104,7 @@
             this.таблиціІніціалізаціїДанихToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(628, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(629, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -196,7 +201,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(628, 535);
+            this.tabControl1.Size = new System.Drawing.Size(629, 405);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -210,7 +215,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(620, 509);
+            this.tabPage1.Size = new System.Drawing.Size(621, 379);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Експертна оцінка";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -283,7 +288,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(620, 509);
+            this.tabPage2.Size = new System.Drawing.Size(621, 379);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Оцінки рішень";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -299,7 +304,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(3, 37);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(617, 472);
+            this.dataGridView1.Size = new System.Drawing.Size(618, 342);
             this.dataGridView1.TabIndex = 2;
             // 
             // panel1
@@ -308,7 +313,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(614, 34);
+            this.panel1.Size = new System.Drawing.Size(615, 34);
             this.panel1.TabIndex = 1;
             // 
             // buttonSols
@@ -323,32 +328,19 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.dataGridView2);
             this.tabPage3.Controls.Add(this.panel2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(620, 509);
+            this.tabPage3.Size = new System.Drawing.Size(621, 379);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Генетичний алгоритм";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 322);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(620, 191);
-            this.dataGridView2.TabIndex = 1;
-            // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.showResultGAButton);
+            this.panel2.Controls.Add(this.groupBox6);
             this.panel2.Controls.Add(this.StartGAButton);
             this.panel2.Controls.Add(this.groupBox5);
             this.panel2.Controls.Add(this.groupBox4);
@@ -357,12 +349,12 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(614, 313);
+            this.panel2.Size = new System.Drawing.Size(615, 373);
             this.panel2.TabIndex = 0;
             // 
             // StartGAButton
             // 
-            this.StartGAButton.Location = new System.Drawing.Point(5, 277);
+            this.StartGAButton.Location = new System.Drawing.Point(8, 335);
             this.StartGAButton.Name = "StartGAButton";
             this.StartGAButton.Size = new System.Drawing.Size(207, 23);
             this.StartGAButton.TabIndex = 4;
@@ -380,14 +372,24 @@
             this.groupBox5.Controls.Add(this.GenerationNumberTermination_RB);
             this.groupBox5.Location = new System.Drawing.Point(5, 182);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(602, 81);
+            this.groupBox5.Size = new System.Drawing.Size(602, 89);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Методи припинення алгоритму";
             // 
+            // labelCount
+            // 
+            this.labelCount.AutoSize = true;
+            this.labelCount.Location = new System.Drawing.Point(6, 68);
+            this.labelCount.Name = "labelCount";
+            this.labelCount.Size = new System.Drawing.Size(310, 13);
+            this.labelCount.TabIndex = 5;
+            this.labelCount.Text = "Кількість епох (0 - система обирає оптимальний параметр) ";
+            this.labelCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(495, 54);
+            this.textBox1.Location = new System.Drawing.Point(322, 64);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
             this.textBox1.TabIndex = 4;
@@ -626,25 +628,73 @@
             this.StochasticUniversalSamplingSelection_RB.Text = "Стохастична універсальна селекція\r\n(різновид колеса рулетки)";
             this.StochasticUniversalSamplingSelection_RB.UseVisualStyleBackColor = true;
             // 
-            // labelCount
+            // groupBox6
             // 
-            this.labelCount.AutoSize = true;
-            this.labelCount.Location = new System.Drawing.Point(179, 58);
-            this.labelCount.Name = "labelCount";
-            this.labelCount.Size = new System.Drawing.Size(310, 13);
-            this.labelCount.TabIndex = 5;
-            this.labelCount.Text = "Кількість епох (0 - система обирає оптимальний параметр) ";
-            this.labelCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.groupBox6.Controls.Add(this.maxSizePopLabel);
+            this.groupBox6.Controls.Add(this.minSisePopLabel);
+            this.groupBox6.Controls.Add(this.maxSizePopulationTextBox);
+            this.groupBox6.Controls.Add(this.minSizePopulationTextBox);
+            this.groupBox6.Location = new System.Drawing.Point(8, 277);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(599, 51);
+            this.groupBox6.TabIndex = 5;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Розмір популяції";
+            // 
+            // minSizePopulationTextBox
+            // 
+            this.minSizePopulationTextBox.Location = new System.Drawing.Point(82, 19);
+            this.minSizePopulationTextBox.Name = "minSizePopulationTextBox";
+            this.minSizePopulationTextBox.Size = new System.Drawing.Size(100, 20);
+            this.minSizePopulationTextBox.TabIndex = 0;
+            this.minSizePopulationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            // 
+            // maxSizePopulationTextBox
+            // 
+            this.maxSizePopulationTextBox.Location = new System.Drawing.Point(342, 19);
+            this.maxSizePopulationTextBox.Name = "maxSizePopulationTextBox";
+            this.maxSizePopulationTextBox.Size = new System.Drawing.Size(100, 20);
+            this.maxSizePopulationTextBox.TabIndex = 1;
+            this.maxSizePopulationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            // 
+            // minSisePopLabel
+            // 
+            this.minSisePopLabel.AutoSize = true;
+            this.minSisePopLabel.Location = new System.Drawing.Point(9, 23);
+            this.minSisePopLabel.Name = "minSisePopLabel";
+            this.minSisePopLabel.Size = new System.Drawing.Size(70, 13);
+            this.minSisePopLabel.TabIndex = 2;
+            this.minSisePopLabel.Text = "Мінімальний";
+            // 
+            // maxSizePopLabel
+            // 
+            this.maxSizePopLabel.AutoSize = true;
+            this.maxSizePopLabel.Location = new System.Drawing.Point(253, 23);
+            this.maxSizePopLabel.Name = "maxSizePopLabel";
+            this.maxSizePopLabel.Size = new System.Drawing.Size(84, 13);
+            this.maxSizePopLabel.TabIndex = 3;
+            this.maxSizePopLabel.Text = "Максимальний";
+            // 
+            // showResultGAButton
+            // 
+            this.showResultGAButton.Enabled = false;
+            this.showResultGAButton.Location = new System.Drawing.Point(242, 335);
+            this.showResultGAButton.Name = "showResultGAButton";
+            this.showResultGAButton.Size = new System.Drawing.Size(125, 23);
+            this.showResultGAButton.TabIndex = 6;
+            this.showResultGAButton.Text = "Показати результат";
+            this.showResultGAButton.UseVisualStyleBackColor = true;
+            this.showResultGAButton.Click += new System.EventHandler(this.showResultGAButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 561);
+            this.ClientSize = new System.Drawing.Size(629, 431);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(490, 600);
+            this.MinimumSize = new System.Drawing.Size(645, 470);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -658,7 +708,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -668,6 +717,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -720,9 +771,14 @@
         private System.Windows.Forms.RadioButton FitnessStagnationTermination_RB;
         private System.Windows.Forms.RadioButton GenerationNumberTermination_RB;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button StartGAButton;
         private System.Windows.Forms.Label labelCount;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label maxSizePopLabel;
+        private System.Windows.Forms.Label minSisePopLabel;
+        private System.Windows.Forms.TextBox maxSizePopulationTextBox;
+        private System.Windows.Forms.TextBox minSizePopulationTextBox;
+        private System.Windows.Forms.Button showResultGAButton;
     }
 }
 

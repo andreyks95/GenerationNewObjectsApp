@@ -19,6 +19,10 @@ namespace MorphAnalysis
     {
         private CacheData cacheData = CacheData.GetInstance();
 
+        //для зберігання номерів  поколінь, їх кращих хромосом та оцінок
+        private Dictionary<int, double> resultGAValueDict       = new Dictionary<int, double>();
+        private Dictionary<int, string> resultGAChromosomeDict  = new Dictionary<int, string>();
+
         public Form1()
         {
             InitializeComponent();
@@ -294,8 +298,18 @@ namespace MorphAnalysis
 
             int sizeChromosome = converter.GetSizeChromosome(managerGA.GetCountSolutions, managerGA.GetCountFunctions);
 
+            //отримаємо діапазон розміру популяції
+            int minSizePopulation = Convert.ToInt32(minSizePopulationTextBox.Text.ToString());
+            if(minSizePopulation < 2)
+            {
+                MessageBox.Show("Мінімальний розмір популяції повинен бути 2 та більше осіб","Помилка введення");
+                return;
+            }
+            int maxSizePopulation = Convert.ToInt32(maxSizePopulationTextBox.Text.ToString());
+
             //Будує генетичний алгоритм
-            BuildGeneticAlgorithm builderGA = new BuildGeneticAlgorithm(sizeChromosome, 50, 100);
+            BuildGeneticAlgorithm builderGA = new BuildGeneticAlgorithm(sizeChromosome, minSizePopulation, maxSizePopulation);
+
 
             //Знаходимо обрані користувачем RadioButtons
             List<RadioButton> checkedRadioButtons = GetCheckedRadioButtons();
@@ -331,11 +345,31 @@ namespace MorphAnalysis
 
             builderGA.BuildGA();
 
+            //для показу значень в таблиці
 
-            builderGA.GenerationRan();//ga);
+            //List<SolutionsOfFunction> solOfFuncList = cacheData.GetListElements<SolutionsOfFunction>(true);
+            //
+            //List<Function> funcList = cacheData.GetListElements<Function>(true);
 
+
+
+            builderGA.GenerationRan(resultGAValueDict, resultGAChromosomeDict); //ga);
+                                      
 
             builderGA.Start();//ga);
+
+            if (!builderGA.IsRunning)
+            {
+                MessageBox.Show("Робота генетичного алгоритму завершена!");
+                showResultGAButton.Enabled = true;
+            }
+        }
+
+        //Показати результати роботу алгоритму
+        private void showResultGAButton_Click(object sender, EventArgs e)
+        {
+            HelperForms.ShowResultGA showResultGA = new HelperForms.ShowResultGA(resultGAValueDict, resultGAChromosomeDict);
+            showResultGA.Show();
         }
 
         private List<RadioButton> GetCheckedRadioButtons()
@@ -542,6 +576,7 @@ namespace MorphAnalysis
                 }
             }
         }
+
 
         #endregion
 
