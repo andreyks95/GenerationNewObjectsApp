@@ -1,4 +1,6 @@
-﻿using MorphAnalysis.HelperClasses;
+﻿using GeneticSharp.Domain.Fitnesses;
+using MorphAnalysis.GeneticAlgorithm;
+using MorphAnalysis.HelperClasses;
 using MorphAnalysis.TablesDataInitialization;
 using MorphAnalysis.TablesExpertEvaluation;
 using System;
@@ -189,7 +191,7 @@ namespace MorphAnalysis
 
             if (listSolsOfFuncs.Count > 0 && listParamsGoalsForMod.Count > 0 && listParamsGoalsForSol.Count > 0)
             {
-                BuildDGV(listSolsOfFuncs, listParamsGoalsForMod, listParamsGoalsForSol);  
+                BuildDGV(listSolsOfFuncs, listParamsGoalsForMod, listParamsGoalsForSol);
             }
             else
             {
@@ -265,7 +267,7 @@ namespace MorphAnalysis
             }
 
             finalEstimates.Dispose();
-           
+
         }
 
         //Для пошуку усіх оцінених рішень експертами
@@ -284,9 +286,265 @@ namespace MorphAnalysis
 
         private void StartGAButton_Click(object sender, EventArgs e)
         {
+            //Керує отриманням даних для розрахунку фітнес функції 
+            ManagerGA managerGA = ManagerGA.GetInstance();
+
+            //Конвертує з / в хромосому
+            ConverterToFromChromosome converter = new ConverterToFromChromosome();
+
+            int sizeChromosome = converter.GetSizeChromosome(managerGA.GetCountSolutions, managerGA.GetCountFunctions);
+
+            //Будує генетичний алгоритм
+            BuildGeneticAlgorithm builderGA = new BuildGeneticAlgorithm(sizeChromosome, 50, 100);
+
+            //Знаходимо обрані користувачем RadioButtons
+            List<RadioButton> checkedRadioButtons = GetCheckedRadioButtons();
+            foreach (RadioButton rb in checkedRadioButtons)
+            {
+                //Задаємо операції для генетичного алгоритму
+                SetOperationGA(rb, builderGA);
+            }
+
+ 
+            /*builderGA.Fitness = new FuncFitness(c =>
+            {
+                var fc = c as BinaryChromosome;
+                double result = 0.0;
+                string viewChromosome = "";
+
+                foreach (GeneticSharp.Domain.Chromosomes.Gene gene in fc.GetGenes())
+                {
+                    viewChromosome += gene.Value.ToString();
+                }
+
+               int[] solutionsNumber = converter.ConvertFromChromosome(viewChromosome, managerGA.GetCountFunctions);
+
+               result = Convert.ToDouble(managerGA.FitnessFunction(solutionsNumber));
+
+
+                return result;
+            });*/
+
+            //GeneticSharp.Domain.GeneticAlgorithm ga = builderGA.GetGA;
+
+            builderGA.BuildFitnessFunction(managerGA, converter);
+
+            builderGA.BuildGA();
+
+
+            builderGA.GenerationRan();//ga);
+
+
+            builderGA.Start();//ga);
+        }
+
+        private List<RadioButton> GetCheckedRadioButtons()
+        {
+
+
+            TabPage selectedPage = tabControl1.SelectedTab;
+
+            Control.ControlCollection controls = selectedPage.Controls;
+
+            var panels = controls.OfType<Panel>();
+
+            List<GroupBox> groupBoxes = new List<GroupBox>();
+            foreach (Panel p in panels)
+            {
+                var groupBoxesInPanel = p.Controls.OfType<GroupBox>();
+
+                groupBoxes.AddRange(groupBoxesInPanel);
+            }
+
+            List<RadioButton> rbList = new List<RadioButton>();
+
+            foreach (GroupBox gp in groupBoxes)
+            {
+                var radioButtonsInGroupBox = gp.Controls.OfType<RadioButton>();
+                foreach (RadioButton rb in radioButtonsInGroupBox)
+                {
+                    if (rb.Checked)
+                    {
+                        rbList.Add(rb);
+                    }
+                }
+
+            }
+
+            return rbList;
+        }
+
+        private void SetOperationGA(RadioButton rb, BuildGeneticAlgorithm builderGA)
+        {
+            string tag = rb.Tag.ToString();
+            switch (tag)
+            {
+                //block selection
+                case "EliteSelection":
+                case "TournamentSelection":
+                case "RouletteWheelSelection":
+                case "StochasticUniversalSamplingSelection":
+                    SetSelection(tag, builderGA);
+                    break;
+
+                //block crossover
+                case "UniformCrossover":
+                case "OnePointCrossover":
+                case "TwoPointCrossover":
+                case "ThreeParentCrossover":
+                    SetCrossover(tag, builderGA);
+                    break;
+
+                //block mutation
+                case "FlipBitMutation":
+                case "UniformMutation":
+                case "TworsMutation":
+                case "ReverseSequenceMutation":
+                    SetMutation(tag, builderGA);
+                    break;
+
+                //block termination
+                case "GenerationNumberTermination":
+                case "FitnessStagnationTermination":
+                case "FitnessThresholdTermination":
+                case "TimeEvolvingTermination":
+                    SetTermination(tag, builderGA);
+                    break;
+
+                default: break;
+
+            }
 
         }
 
+
+        //block selection
+        private void SetSelection(string tag, BuildGeneticAlgorithm builderGA)
+        {
+            Selection selection = 0;
+
+            switch (tag)
+            {
+                case "EliteSelection":
+                    selection = Selection.EliteSelection;
+                    break;
+
+                case "TournamentSelection":
+                    selection = Selection.TournamentSelection;
+                    break;
+
+                case "RouletteWheelSelection":
+                    selection = Selection.RouletteWheelSelection;
+                    break;
+
+                case "StochasticUniversalSamplingSelection":
+                    selection = Selection.StochasticUniversalSamplingSelection;
+                    break;
+
+                default:
+                    throw new Exception("Не існує такого методу селекції");
+                    break;
+            }
+            builderGA.SetSelection(selection);
+        }
+
+        //block crossover
+        private void SetCrossover(string tag, BuildGeneticAlgorithm builderGA)
+        {
+            Crossover crossover = 0;
+            switch (tag)
+            {
+                case "UniformCrossover":
+                    crossover = Crossover.UniformCrossover;
+                    break;
+
+                case "OnePointCrossover":
+                    crossover = Crossover.OnePointCrossover;
+                    break;
+
+                case "TwoPointCrossover":
+                    crossover = Crossover.TwoPointCrossover;
+                    break;
+
+                case "ThreeParentCrossover":
+                    crossover = Crossover.ThreeParentCrossover;
+                    break;
+
+                default:
+                    throw new Exception("Не існує такого виду кросоверу");
+                    break;
+            }
+            builderGA.SetCrossover(crossover);
+        }
+
+        //block mutation
+        private void SetMutation(string tag, BuildGeneticAlgorithm builderGA)
+        {
+            Mutation mutation = 0;
+            switch (tag)
+            {
+
+                case "FlipBitMutation":
+                    mutation = Mutation.FlipBitMutation;
+                    break;
+                case "UniformMutation":
+                    mutation = Mutation.UniformMutation;
+                    break;
+                case "TworsMutation":
+                    mutation = Mutation.TworsMutation;
+                    break;
+                case "ReverseSequenceMutation":
+                    mutation = Mutation.ReverseSequenceMutation;
+                    break;
+
+                default:
+                    throw new Exception("Не існує такого виду мутації");
+                    break;
+            }
+            builderGA.SetMutation(mutation);
+        }
+
+        //block termination
+        private void SetTermination(string tag, BuildGeneticAlgorithm builderGA)
+        {
+            Termination termination = 0;
+            switch (tag)
+            {
+                case "GenerationNumberTermination":
+                    termination = Termination.GenerationNumberTermination;
+                    break;
+                case "FitnessStagnationTermination":
+                    termination = Termination.FitnessStagnationTermination;
+                    break;
+                case "FitnessThresholdTermination":
+                    termination = Termination.FitnessThresholdTermination;
+                    break;
+                case "TimeEvolvingTermination":
+                    termination = Termination.TimeEvolvingTermination;
+                    break;
+
+                default:
+                    throw new Exception("Не існує такого виду припинення алгоритму");
+                    break;
+            }
+            builderGA.SetTermination(termination, Convert.ToDouble(textBox1.Text));
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            double value;
+
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!double.TryParse(textBox1.Text, out value))
+                {
+                    MessageBox.Show("Кількість епох повинна бути числом", "Помилка введення");
+                }
+            }
+        }
+
         #endregion
+
+
     }
 }
