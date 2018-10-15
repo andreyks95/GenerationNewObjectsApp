@@ -36,6 +36,8 @@ namespace MorphAnalysis.GeneticAlgorithm
 
         private GeneticSharp.Domain.Fitnesses.IFitness _fitness;
 
+        private GeneticSharp.Domain.GeneticAlgorithm _ga;
+
 
         public BuildGeneticAlgorithm(int countGenes, int minSizePopulation = 2, int maxSizePopulation = 100)
         {
@@ -55,11 +57,6 @@ namespace MorphAnalysis.GeneticAlgorithm
         //    return result;
         //}
 
-        //Фітнес функція (функція пристосування)
-        public GeneticSharp.Domain.Fitnesses.IFitness Fitness
-        {
-            set { _fitness = value; }
-        }
 
         public void SetSelection(Selection selection)
         {
@@ -121,12 +118,12 @@ namespace MorphAnalysis.GeneticAlgorithm
                     break;
                 case Mutation.UniformMutation:
                     {
-                        if(!allGenesMutableUniformMutation && mutableGenesIndexesUniformMutation == null)
-                        _mutation = new GeneticSharp.Domain.Mutations.UniformMutation();
-                        else if(allGenesMutableUniformMutation && mutableGenesIndexesUniformMutation == null)
-                        _mutation = new GeneticSharp.Domain.Mutations.UniformMutation(allGenesMutableUniformMutation);
-                        else if(mutableGenesIndexesUniformMutation.Length > 0)
-                        _mutation = new GeneticSharp.Domain.Mutations.UniformMutation(mutableGenesIndexesUniformMutation);
+                        if (!allGenesMutableUniformMutation && mutableGenesIndexesUniformMutation == null)
+                            _mutation = new GeneticSharp.Domain.Mutations.UniformMutation();
+                        else if (allGenesMutableUniformMutation && mutableGenesIndexesUniformMutation == null)
+                            _mutation = new GeneticSharp.Domain.Mutations.UniformMutation(allGenesMutableUniformMutation);
+                        else if (mutableGenesIndexesUniformMutation.Length > 0)
+                            _mutation = new GeneticSharp.Domain.Mutations.UniformMutation(mutableGenesIndexesUniformMutation);
                         break;
                     }
                 case Mutation.TworsMutation:
@@ -141,22 +138,38 @@ namespace MorphAnalysis.GeneticAlgorithm
             }
         }
 
-        public void SetTermination(Termination termination, int countIteration)
+        public void SetTermination(Termination termination, double countIteration)
         {
             switch (termination)
             {
                 case Termination.GenerationNumberTermination:
-                    _termination = new GeneticSharp.Domain.Terminations.GenerationNumberTermination(countIteration);
+                    if (countIteration > 0)
+                        _termination = new GeneticSharp.Domain.Terminations.GenerationNumberTermination((int)Math.Round(countIteration));
+                    else
+                        _termination = new GeneticSharp.Domain.Terminations.GenerationNumberTermination();
                     break;
+
                 case Termination.FitnessStagnationTermination:
-                    _termination = new GeneticSharp.Domain.Terminations.FitnessStagnationTermination(countIteration);
+                    if (countIteration > 0)
+                        _termination = new GeneticSharp.Domain.Terminations.FitnessStagnationTermination((int)Math.Round(countIteration));
+                    else
+                        _termination = new GeneticSharp.Domain.Terminations.FitnessStagnationTermination();
                     break;
+
                 case Termination.FitnessThresholdTermination:
-                    _termination = new GeneticSharp.Domain.Terminations.FitnessThresholdTermination(countIteration);
+                    if (countIteration > 0)
+                        _termination = new GeneticSharp.Domain.Terminations.FitnessThresholdTermination(countIteration);
+                    else
+                        _termination = new GeneticSharp.Domain.Terminations.FitnessThresholdTermination();
                     break;
+
                 case Termination.TimeEvolvingTermination:
-                    _termination = new GeneticSharp.Domain.Terminations.TimeEvolvingTermination(new TimeSpan(0, 0, countIteration));
+                    if (countIteration > 0)
+                        _termination = new GeneticSharp.Domain.Terminations.TimeEvolvingTermination(new TimeSpan(0, 0, (int)Math.Round(countIteration)));
+                    else
+                        _termination = new GeneticSharp.Domain.Terminations.TimeEvolvingTermination();
                     break;
+
                 default:
                     throw new Exception("Не існує такого методу ітерації!");
                     break;
@@ -166,7 +179,7 @@ namespace MorphAnalysis.GeneticAlgorithm
 
         //Одне скомбіноване рішення
         //Недоречний варіант!!!
-        public void Start()
+        /*public void Start()
         {
             //Сам генетический алгоритм
             var ga = new GeneticSharp.Domain.GeneticAlgorithm(
@@ -204,33 +217,70 @@ namespace MorphAnalysis.GeneticAlgorithm
             ga.Start();
 
 
-        }
+        }*/
 
         //Отримати побудований генетичний алгоритм
-        public GeneticSharp.Domain.GeneticAlgorithm GetGA()
+        public GeneticSharp.Domain.GeneticAlgorithm GetGA
         {
             //Сам генетический алгоритм
-            var ga = new GeneticSharp.Domain.GeneticAlgorithm(
-                _population,
-                 _fitness,
-                _selection,
-                _crossover,
-                _mutation);
-            ga.Termination = _termination;
-            return ga;
+            get
+            {
+                return _ga;
+            }
+        }
+
+
+        //Фітнес функція (функція пристосування)
+        public GeneticSharp.Domain.Fitnesses.IFitness Fitness
+        {
+            set { _fitness = value; }
+        }
+
+        public void BuildFitnessFunction(ManagerGA managerGA, ConverterToFromChromosome converter)
+        {
+            _fitness =
+            new GeneticSharp.Domain.Fitnesses.FuncFitness(c =>
+            {
+                var fc = c as BinaryChromosome;
+                double result = 0.0;
+                string viewChromosome = "";
+
+                foreach (GeneticSharp.Domain.Chromosomes.Gene gene in fc.GetGenes())
+                {
+                    viewChromosome += gene.Value.ToString();
+                }
+
+                int[] solutionsNumber = converter.ConvertFromChromosome(viewChromosome, managerGA.GetCountFunctions);
+
+                result = Convert.ToDouble(managerGA.FitnessFunction(solutionsNumber));
+
+
+                return result;
+            });
+        }
+
+        public void BuildGA()
+        {
+            _ga = new GeneticSharp.Domain.GeneticAlgorithm(
+                        _population,
+                        _fitness,
+                        _selection,
+                         _crossover,
+                        _mutation);
+            _ga.Termination = _termination;
         }
 
         //Оптимальний варіант 
         //Подумати як передати туди контрол з форми і який!!!
         //Можливо навіть таблицю, щоби можно було виводити по шапці стовбцям назви функцій
         //а по строкам ії рішення і суммарну оцінку фітнесс функції
-        public void GenerationRan(GeneticSharp.Domain.GeneticAlgorithm ga)
+        public void GenerationRan()//GeneticSharp.Domain.GeneticAlgorithm ga)
         {
             var latestFitness = 0.0;
 
-            ga.GenerationRan += (sender, e) =>
+            _ga.GenerationRan += (sender, e) =>
             {
-                var bestChromosome = ga.BestChromosome as BinaryChromosome;
+                var bestChromosome = _ga.BestChromosome as BinaryChromosome;
                 var bestFitness = bestChromosome.Fitness.Value;
 
                 if (bestFitness != latestFitness)
@@ -238,7 +288,7 @@ namespace MorphAnalysis.GeneticAlgorithm
                     latestFitness = bestFitness;
                     var phenotype = bestChromosome.GetGenes();
 
-                    Console.WriteLine("Поколiння №{0,2}. Кращий результат = {1}", ga.GenerationsNumber, bestFitness);
+                    Console.WriteLine("Поколiння №{0,2}. Кращий результат = {1}", _ga.GenerationsNumber, bestFitness);
                     Console.Write("Вид хромосоми: ");
 
                     foreach (GeneticSharp.Domain.Chromosomes.Gene g in phenotype)
@@ -251,6 +301,7 @@ namespace MorphAnalysis.GeneticAlgorithm
         }
 
         //Запустити генетичний алгоритм
-        public void Start(GeneticSharp.Domain.GeneticAlgorithm ga) => ga.Start();
+        public void Start()//GeneticSharp.Domain.GeneticAlgorithm ga) 
+            => _ga.Start();
     }
 }
