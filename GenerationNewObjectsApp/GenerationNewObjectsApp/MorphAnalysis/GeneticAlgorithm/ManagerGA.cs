@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MorphAnalysis.GeneticAlgorithm
 {
-    class ManagerGA
+    public class ManagerGA
     {
         #region Поля класу
 
@@ -51,7 +51,7 @@ namespace MorphAnalysis.GeneticAlgorithm
         public static ManagerGA GetInstance()
         {
             if (instance == null)
-                return new ManagerGA();
+                instance = new ManagerGA();
             return instance;
         }
 
@@ -212,12 +212,28 @@ namespace MorphAnalysis.GeneticAlgorithm
 
             //Так як, прийшли номера рішень (їх індекси в словнику)
             //то потрібно знайти ці рішення (їх id) в словнику по індексу
+            //Притому врахувати, що в словнику індекси починаються с 0
+            //тому numbersSolutions[i]-1
+
+            int indexDict = 0;
+      
             for (int i = 0; i < numbersSolutions.Length; i++)
             {
-                ids[i] = solByFuncValuesFromMorphTableDict.ElementAt(numbersSolutions[i]).Key;
+                if (numbersSolutions[i] == 0 || numbersSolutions[i] < 0)
+                    indexDict = 0;
+                else
+                {
+                    indexDict = numbersSolutions[i]-1;
+                }
+                if (indexDict >= solByFuncValuesFromMorphTableDict.Keys.Count)
+                    indexDict = solByFuncValuesFromMorphTableDict.Keys.Count-1;
+
+                ids[i] = solByFuncValuesFromMorphTableDict.ElementAt(indexDict).Key;
             }
             return ids;
         }
+
+
 
         #endregion
 
