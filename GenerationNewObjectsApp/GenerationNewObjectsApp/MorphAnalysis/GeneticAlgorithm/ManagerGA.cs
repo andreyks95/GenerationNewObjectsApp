@@ -206,7 +206,7 @@ namespace MorphAnalysis.GeneticAlgorithm
         }
 
         //Знайти id рішень в словнику solByFuncValuesFromMorphTableDict
-        private int[] GetIdSolutions(int[] numbersSolutions)
+        public int[] GetIdSolutions(int[] numbersSolutions)
         {
             int[] ids = new int[numbersSolutions.Length];
 
