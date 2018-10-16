@@ -143,6 +143,7 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 dataGridView1[dataGridView1.Columns.Count - 1, i].Value = sum;
 
                 //Зберігаємо оцінку рішення по параметрам в словник
+                //Для генетичного алгоритму
                 AddSolToDict(solEstimateByParametersDict, selectedSolOfFunc.Solution.id_solution, sum);
             }
 

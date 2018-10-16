@@ -303,16 +303,6 @@ namespace MorphAnalysis.GeneticAlgorithm
 
                     generationBestValueDict.Add(_ga.GenerationsNumber, bestFitness);
                     generationBestChromosomeDict.Add(_ga.GenerationsNumber, viewChromosome);
-
-                    ////Пытаемся отобразить данные в таблице
-                    //
-                    //string viewChromosome = "";
-                    //foreach (GeneticSharp.Domain.Chromosomes.Gene g in phenotype)
-                    //{
-                    //    viewChromosome += g.Value.ToString();
-                    //}
-                    //int[] solutionsNumber = converter.ConvertFromChromosome(viewChromosome, managerGA.GetCountFunctions);
-                    //Console.WriteLine();
                     
                 }
             };
