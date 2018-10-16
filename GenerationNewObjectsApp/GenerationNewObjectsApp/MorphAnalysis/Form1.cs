@@ -20,12 +20,14 @@ namespace MorphAnalysis
         private CacheData cacheData = CacheData.GetInstance();
 
         //для зберігання номерів  поколінь, їх кращих хромосом та оцінок
-        private Dictionary<int, double> resultGAValueDict       = new Dictionary<int, double>();
-        private Dictionary<int, string> resultGAChromosomeDict  = new Dictionary<int, string>();
+        private Dictionary<int, double> resultGAValueDict      ;// = new Dictionary<int, double>();
+        private Dictionary<int, string> resultGAChromosomeDict ;// = new Dictionary<int, string>();
 
         public Form1()
         {
             InitializeComponent();
+            resultGAValueDict = new Dictionary<int, double>();
+            resultGAChromosomeDict = new Dictionary<int, string>();
         }
 
         #region Таблиці ініціалізації даних
@@ -363,6 +365,8 @@ namespace MorphAnalysis
                 MessageBox.Show("Робота генетичного алгоритму завершена!");
                 showResultGAButton.Enabled = true;
             }
+
+
         }
 
         //Показати результати роботу алгоритму
@@ -370,6 +374,9 @@ namespace MorphAnalysis
         {
             HelperForms.ShowResultGA showResultGA = new HelperForms.ShowResultGA(resultGAValueDict, resultGAChromosomeDict);
             showResultGA.Show();
+            resultGAValueDict.Clear();
+            resultGAChromosomeDict.Clear();
+            showResultGAButton.Enabled = false;
         }
 
         private List<RadioButton> GetCheckedRadioButtons()
