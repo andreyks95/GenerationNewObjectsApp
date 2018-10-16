@@ -125,6 +125,10 @@ namespace MorphAnalysis.HelperClasses
                     if (FindSimiliarParamOrSolOfFunc<T>(_dictionary[nameKey], element))
                         return false;
                 }
+                else if (element is ParametersGoalsForSolution)
+                {
+                    success = true;
+                }
                 else
                 {
                     if (FindSimiliarElement<T>(element, nameKey))
