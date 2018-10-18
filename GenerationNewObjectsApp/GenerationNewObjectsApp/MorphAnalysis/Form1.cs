@@ -23,11 +23,17 @@ namespace MorphAnalysis
         private Dictionary<int, double> resultGAValueDict      ;// = new Dictionary<int, double>();
         private Dictionary<int, string> resultGAChromosomeDict ;// = new Dictionary<int, string>();
 
+        //зберігання налаштувань генетичного алгоритму для зберігання в xml-документ
+        //де ключ - анг. назва, значення - укр.
+        private Dictionary<string, string> settingsGA;
+
         public Form1()
         {
             InitializeComponent();
             resultGAValueDict = new Dictionary<int, double>();
             resultGAChromosomeDict = new Dictionary<int, string>();
+
+            settingsGA = new Dictionary<string, string>();
         }
 
         #region Таблиці ініціалізації даних
@@ -321,38 +327,17 @@ namespace MorphAnalysis
                 SetOperationGA(rb, builderGA);
             }
 
- 
-            /*builderGA.Fitness = new FuncFitness(c =>
-            {
-                var fc = c as BinaryChromosome;
-                double result = 0.0;
-                string viewChromosome = "";
+            //Додаємо останні налаштування ГА до словника
+            settingsGA.Add("min", minSizePopulation.ToString());
+            settingsGA.Add("max", maxSizePopulation.ToString());
+            settingsGA.Add("countEpochs", textBox1.Text);
 
-                foreach (GeneticSharp.Domain.Chromosomes.Gene gene in fc.GetGenes())
-                {
-                    viewChromosome += gene.Value.ToString();
-                }
-
-               int[] solutionsNumber = converter.ConvertFromChromosome(viewChromosome, managerGA.GetCountFunctions);
-
-               result = Convert.ToDouble(managerGA.FitnessFunction(solutionsNumber));
-
-
-                return result;
-            });*/
-
-            //GeneticSharp.Domain.GeneticAlgorithm ga = builderGA.GetGA;
 
             builderGA.BuildFitnessFunction(managerGA, converter);
 
             builderGA.BuildGA();
 
             //для показу значень в таблиці
-
-            //List<SolutionsOfFunction> solOfFuncList = cacheData.GetListElements<SolutionsOfFunction>(true);
-            //
-            //List<Function> funcList = cacheData.GetListElements<Function>(true);
-
 
 
             builderGA.GenerationRan(resultGAValueDict, resultGAChromosomeDict); //ga);
@@ -372,7 +357,7 @@ namespace MorphAnalysis
         //Показати результати роботу алгоритму
         private void showResultGAButton_Click(object sender, EventArgs e)
         {
-            HelperForms.ShowResultGA showResultGA = new HelperForms.ShowResultGA(resultGAValueDict, resultGAChromosomeDict);
+            HelperForms.ShowResultGA showResultGA = new HelperForms.ShowResultGA(resultGAValueDict, resultGAChromosomeDict, settingsGA);
             showResultGA.Show();
             resultGAValueDict.Clear();
             resultGAChromosomeDict.Clear();
@@ -418,6 +403,7 @@ namespace MorphAnalysis
         private void SetOperationGA(RadioButton rb, BuildGeneticAlgorithm builderGA)
         {
             string tag = rb.Tag.ToString();
+
             switch (tag)
             {
                 //block selection
@@ -425,7 +411,7 @@ namespace MorphAnalysis
                 case "TournamentSelection":
                 case "RouletteWheelSelection":
                 case "StochasticUniversalSamplingSelection":
-                    SetSelection(tag, builderGA);
+                    SetSelection(tag, builderGA, rb.Text);
                     break;
 
                 //block crossover
@@ -433,7 +419,7 @@ namespace MorphAnalysis
                 case "OnePointCrossover":
                 case "TwoPointCrossover":
                 case "ThreeParentCrossover":
-                    SetCrossover(tag, builderGA);
+                    SetCrossover(tag, builderGA, rb.Text);
                     break;
 
                 //block mutation
@@ -441,7 +427,7 @@ namespace MorphAnalysis
                 case "UniformMutation":
                 case "TworsMutation":
                 case "ReverseSequenceMutation":
-                    SetMutation(tag, builderGA);
+                    SetMutation(tag, builderGA, rb.Text);
                     break;
 
                 //block termination
@@ -449,7 +435,7 @@ namespace MorphAnalysis
                 case "FitnessStagnationTermination":
                 case "FitnessThresholdTermination":
                 case "TimeEvolvingTermination":
-                    SetTermination(tag, builderGA);
+                    SetTermination(tag, builderGA, rb.Text);
                     break;
 
                 default: break;
@@ -460,14 +446,18 @@ namespace MorphAnalysis
 
 
         //block selection
-        private void SetSelection(string tag, BuildGeneticAlgorithm builderGA)
+        private void SetSelection(string tag, BuildGeneticAlgorithm builderGA, string textRadioButton)
         {
             Selection selection = 0;
+
+
+            string keyForSettingsDictionary;
+            string valueForSettingsDictionary;
 
             switch (tag)
             {
                 case "EliteSelection":
-                    selection = Selection.EliteSelection;
+                    selection = Selection.EliteSelection;                    
                     break;
 
                 case "TournamentSelection":
@@ -487,10 +477,13 @@ namespace MorphAnalysis
                     break;
             }
             builderGA.SetSelection(selection);
+
+            //додаємо налаштування до словнику
+            settingsGA.Add(tag, textRadioButton);
         }
 
         //block crossover
-        private void SetCrossover(string tag, BuildGeneticAlgorithm builderGA)
+        private void SetCrossover(string tag, BuildGeneticAlgorithm builderGA, string textRadioButton)
         {
             Crossover crossover = 0;
             switch (tag)
@@ -516,10 +509,13 @@ namespace MorphAnalysis
                     break;
             }
             builderGA.SetCrossover(crossover);
+
+            //додаємо налаштування до словнику
+            settingsGA.Add(tag, textRadioButton);
         }
 
         //block mutation
-        private void SetMutation(string tag, BuildGeneticAlgorithm builderGA)
+        private void SetMutation(string tag, BuildGeneticAlgorithm builderGA, string textRadioButton)
         {
             Mutation mutation = 0;
             switch (tag)
@@ -543,10 +539,13 @@ namespace MorphAnalysis
                     break;
             }
             builderGA.SetMutation(mutation);
+
+            //додаємо налаштування до словнику
+            settingsGA.Add(tag, textRadioButton);
         }
 
         //block termination
-        private void SetTermination(string tag, BuildGeneticAlgorithm builderGA)
+        private void SetTermination(string tag, BuildGeneticAlgorithm builderGA, string textRadioButton)
         {
             Termination termination = 0;
             switch (tag)
@@ -569,6 +568,9 @@ namespace MorphAnalysis
                     break;
             }
             builderGA.SetTermination(termination, Convert.ToDouble(textBox1.Text));
+
+            //додаємо налаштування до словнику
+            settingsGA.Add(tag, textRadioButton);
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)

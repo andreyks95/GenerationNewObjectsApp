@@ -53,6 +53,12 @@
             this.buttonSols = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.showResultGAButton = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.maxSizePopLabel = new System.Windows.Forms.Label();
+            this.minSisePopLabel = new System.Windows.Forms.Label();
+            this.maxSizePopulationTextBox = new System.Windows.Forms.TextBox();
+            this.minSizePopulationTextBox = new System.Windows.Forms.TextBox();
             this.StartGAButton = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.labelCount = new System.Windows.Forms.Label();
@@ -76,12 +82,6 @@
             this.TournamentSelection_RB = new System.Windows.Forms.RadioButton();
             this.RouletteWheelSelection_RB = new System.Windows.Forms.RadioButton();
             this.StochasticUniversalSamplingSelection_RB = new System.Windows.Forms.RadioButton();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.minSizePopulationTextBox = new System.Windows.Forms.TextBox();
-            this.maxSizePopulationTextBox = new System.Windows.Forms.TextBox();
-            this.minSisePopLabel = new System.Windows.Forms.Label();
-            this.maxSizePopLabel = new System.Windows.Forms.Label();
-            this.showResultGAButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -91,11 +91,11 @@
             this.panel1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -354,6 +354,66 @@
             this.panel2.Size = new System.Drawing.Size(615, 373);
             this.panel2.TabIndex = 0;
             // 
+            // showResultGAButton
+            // 
+            this.showResultGAButton.Enabled = false;
+            this.showResultGAButton.Location = new System.Drawing.Point(242, 335);
+            this.showResultGAButton.Name = "showResultGAButton";
+            this.showResultGAButton.Size = new System.Drawing.Size(125, 23);
+            this.showResultGAButton.TabIndex = 6;
+            this.showResultGAButton.Text = "Показати результат";
+            this.showResultGAButton.UseVisualStyleBackColor = true;
+            this.showResultGAButton.Click += new System.EventHandler(this.showResultGAButton_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.maxSizePopLabel);
+            this.groupBox6.Controls.Add(this.minSisePopLabel);
+            this.groupBox6.Controls.Add(this.maxSizePopulationTextBox);
+            this.groupBox6.Controls.Add(this.minSizePopulationTextBox);
+            this.groupBox6.Location = new System.Drawing.Point(8, 277);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(599, 51);
+            this.groupBox6.TabIndex = 5;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Розмір популяції";
+            // 
+            // maxSizePopLabel
+            // 
+            this.maxSizePopLabel.AutoSize = true;
+            this.maxSizePopLabel.Location = new System.Drawing.Point(253, 23);
+            this.maxSizePopLabel.Name = "maxSizePopLabel";
+            this.maxSizePopLabel.Size = new System.Drawing.Size(84, 13);
+            this.maxSizePopLabel.TabIndex = 3;
+            this.maxSizePopLabel.Text = "Максимальний";
+            // 
+            // minSisePopLabel
+            // 
+            this.minSisePopLabel.AutoSize = true;
+            this.minSisePopLabel.Location = new System.Drawing.Point(9, 23);
+            this.minSisePopLabel.Name = "minSisePopLabel";
+            this.minSisePopLabel.Size = new System.Drawing.Size(70, 13);
+            this.minSisePopLabel.TabIndex = 2;
+            this.minSisePopLabel.Text = "Мінімальний";
+            // 
+            // maxSizePopulationTextBox
+            // 
+            this.maxSizePopulationTextBox.Location = new System.Drawing.Point(342, 19);
+            this.maxSizePopulationTextBox.Name = "maxSizePopulationTextBox";
+            this.maxSizePopulationTextBox.Size = new System.Drawing.Size(100, 20);
+            this.maxSizePopulationTextBox.TabIndex = 1;
+            this.maxSizePopulationTextBox.Text = "10";
+            this.maxSizePopulationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            // 
+            // minSizePopulationTextBox
+            // 
+            this.minSizePopulationTextBox.Location = new System.Drawing.Point(82, 19);
+            this.minSizePopulationTextBox.Name = "minSizePopulationTextBox";
+            this.minSizePopulationTextBox.Size = new System.Drawing.Size(100, 20);
+            this.minSizePopulationTextBox.TabIndex = 0;
+            this.minSizePopulationTextBox.Text = "2";
+            this.minSizePopulationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
+            // 
             // StartGAButton
             // 
             this.StartGAButton.Location = new System.Drawing.Point(8, 335);
@@ -405,7 +465,6 @@
             this.TimeEvolvingTermination_RB.Name = "TimeEvolvingTermination_RB";
             this.TimeEvolvingTermination_RB.Size = new System.Drawing.Size(102, 30);
             this.TimeEvolvingTermination_RB.TabIndex = 3;
-            this.TimeEvolvingTermination_RB.TabStop = true;
             this.TimeEvolvingTermination_RB.Tag = "TimeEvolvingTermination";
             this.TimeEvolvingTermination_RB.Text = "По закінченню \r\nчасу (в сек.)";
             this.TimeEvolvingTermination_RB.UseVisualStyleBackColor = true;
@@ -417,7 +476,6 @@
             this.FitnessThresholdTermination_RB.Name = "FitnessThresholdTermination_RB";
             this.FitnessThresholdTermination_RB.Size = new System.Drawing.Size(143, 30);
             this.FitnessThresholdTermination_RB.TabIndex = 2;
-            this.FitnessThresholdTermination_RB.TabStop = true;
             this.FitnessThresholdTermination_RB.Tag = "FitnessThresholdTermination";
             this.FitnessThresholdTermination_RB.Text = "Припинення при \r\nдосягненні придатності";
             this.FitnessThresholdTermination_RB.UseVisualStyleBackColor = true;
@@ -429,7 +487,6 @@
             this.FitnessStagnationTermination_RB.Name = "FitnessStagnationTermination_RB";
             this.FitnessStagnationTermination_RB.Size = new System.Drawing.Size(160, 43);
             this.FitnessStagnationTermination_RB.TabIndex = 1;
-            this.FitnessStagnationTermination_RB.TabStop = true;
             this.FitnessStagnationTermination_RB.Tag = "FitnessStagnationTermination";
             this.FitnessStagnationTermination_RB.Text = "При припиненні зростання\r\nфітнес функції / \r\nфункції пристосування";
             this.FitnessStagnationTermination_RB.UseVisualStyleBackColor = true;
@@ -437,6 +494,7 @@
             // GenerationNumberTermination_RB
             // 
             this.GenerationNumberTermination_RB.AutoSize = true;
+            this.GenerationNumberTermination_RB.Checked = true;
             this.GenerationNumberTermination_RB.Location = new System.Drawing.Point(12, 22);
             this.GenerationNumberTermination_RB.Name = "GenerationNumberTermination_RB";
             this.GenerationNumberTermination_RB.Size = new System.Drawing.Size(147, 17);
@@ -466,7 +524,6 @@
             this.TworsMutation_RB.Name = "TworsMutation_RB";
             this.TworsMutation_RB.Size = new System.Drawing.Size(113, 30);
             this.TworsMutation_RB.TabIndex = 3;
-            this.TworsMutation_RB.TabStop = true;
             this.TworsMutation_RB.Tag = "TworsMutation";
             this.TworsMutation_RB.Text = "Обмін позиціями \r\nдвух генів";
             this.TworsMutation_RB.UseVisualStyleBackColor = true;
@@ -478,7 +535,6 @@
             this.ReverseSequenceMutation_RB.Name = "ReverseSequenceMutation_RB";
             this.ReverseSequenceMutation_RB.Size = new System.Drawing.Size(133, 30);
             this.ReverseSequenceMutation_RB.TabIndex = 2;
-            this.ReverseSequenceMutation_RB.TabStop = true;
             this.ReverseSequenceMutation_RB.Tag = "ReverseSequenceMutation";
             this.ReverseSequenceMutation_RB.Text = "Мутація реверсивної \r\nпослідовності (RSM)";
             this.ReverseSequenceMutation_RB.UseVisualStyleBackColor = true;
@@ -490,7 +546,6 @@
             this.UniformMutation_RB.Name = "UniformMutation_RB";
             this.UniformMutation_RB.Size = new System.Drawing.Size(121, 17);
             this.UniformMutation_RB.TabIndex = 1;
-            this.UniformMutation_RB.TabStop = true;
             this.UniformMutation_RB.Tag = "UniformMutation";
             this.UniformMutation_RB.Text = "Рівномірна мутація";
             this.UniformMutation_RB.UseVisualStyleBackColor = true;
@@ -498,6 +553,7 @@
             // FlipBitMutation_RB
             // 
             this.FlipBitMutation_RB.AutoSize = true;
+            this.FlipBitMutation_RB.Checked = true;
             this.FlipBitMutation_RB.Location = new System.Drawing.Point(12, 21);
             this.FlipBitMutation_RB.Name = "FlipBitMutation_RB";
             this.FlipBitMutation_RB.Size = new System.Drawing.Size(123, 17);
@@ -527,7 +583,6 @@
             this.ThreeParentCrossover_RB.Name = "ThreeParentCrossover_RB";
             this.ThreeParentCrossover_RB.Size = new System.Drawing.Size(105, 30);
             this.ThreeParentCrossover_RB.TabIndex = 3;
-            this.ThreeParentCrossover_RB.TabStop = true;
             this.ThreeParentCrossover_RB.Tag = "ThreeParentCrossover";
             this.ThreeParentCrossover_RB.Text = "Кросовер трьох\r\nбатьків";
             this.ThreeParentCrossover_RB.UseVisualStyleBackColor = true;
@@ -539,7 +594,6 @@
             this.TwoPointCrossover_RB.Name = "TwoPointCrossover_RB";
             this.TwoPointCrossover_RB.Size = new System.Drawing.Size(92, 30);
             this.TwoPointCrossover_RB.TabIndex = 2;
-            this.TwoPointCrossover_RB.TabStop = true;
             this.TwoPointCrossover_RB.Tag = "TwoPointCrossover";
             this.TwoPointCrossover_RB.Text = "Двухточкове\r\nсхрещування";
             this.TwoPointCrossover_RB.UseVisualStyleBackColor = true;
@@ -551,7 +605,6 @@
             this.OnePointCrossover_RB.Name = "OnePointCrossover_RB";
             this.OnePointCrossover_RB.Size = new System.Drawing.Size(92, 30);
             this.OnePointCrossover_RB.TabIndex = 1;
-            this.OnePointCrossover_RB.TabStop = true;
             this.OnePointCrossover_RB.Tag = "OnePointCrossover";
             this.OnePointCrossover_RB.Text = "Одноточкове\r\nсхрещування";
             this.OnePointCrossover_RB.UseVisualStyleBackColor = true;
@@ -559,6 +612,7 @@
             // UniformCrossover_RB
             // 
             this.UniformCrossover_RB.AutoSize = true;
+            this.UniformCrossover_RB.Checked = true;
             this.UniformCrossover_RB.Location = new System.Drawing.Point(12, 19);
             this.UniformCrossover_RB.Name = "UniformCrossover_RB";
             this.UniformCrossover_RB.Size = new System.Drawing.Size(96, 30);
@@ -589,7 +643,6 @@
             this.EliteSelection_RB.Name = "EliteSelection_RB";
             this.EliteSelection_RB.Size = new System.Drawing.Size(119, 17);
             this.EliteSelection_RB.TabIndex = 3;
-            this.EliteSelection_RB.TabStop = true;
             this.EliteSelection_RB.Tag = "EliteSelection";
             this.EliteSelection_RB.Text = "Елітарна стратегія";
             this.EliteSelection_RB.UseVisualStyleBackColor = true;
@@ -601,7 +654,6 @@
             this.TournamentSelection_RB.Name = "TournamentSelection_RB";
             this.TournamentSelection_RB.Size = new System.Drawing.Size(116, 17);
             this.TournamentSelection_RB.TabIndex = 2;
-            this.TournamentSelection_RB.TabStop = true;
             this.TournamentSelection_RB.Tag = "TournamentSelection";
             this.TournamentSelection_RB.Text = "Турнірна селекція";
             this.TournamentSelection_RB.UseVisualStyleBackColor = true;
@@ -609,6 +661,7 @@
             // RouletteWheelSelection_RB
             // 
             this.RouletteWheelSelection_RB.AutoSize = true;
+            this.RouletteWheelSelection_RB.Checked = true;
             this.RouletteWheelSelection_RB.Location = new System.Drawing.Point(4, 26);
             this.RouletteWheelSelection_RB.Name = "RouletteWheelSelection_RB";
             this.RouletteWheelSelection_RB.Size = new System.Drawing.Size(105, 17);
@@ -625,68 +678,9 @@
             this.StochasticUniversalSamplingSelection_RB.Name = "StochasticUniversalSamplingSelection_RB";
             this.StochasticUniversalSamplingSelection_RB.Size = new System.Drawing.Size(205, 30);
             this.StochasticUniversalSamplingSelection_RB.TabIndex = 0;
-            this.StochasticUniversalSamplingSelection_RB.TabStop = true;
             this.StochasticUniversalSamplingSelection_RB.Tag = "StochasticUniversalSamplingSelection";
             this.StochasticUniversalSamplingSelection_RB.Text = "Стохастична універсальна селекція\r\n(різновид колеса рулетки)";
             this.StochasticUniversalSamplingSelection_RB.UseVisualStyleBackColor = true;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.maxSizePopLabel);
-            this.groupBox6.Controls.Add(this.minSisePopLabel);
-            this.groupBox6.Controls.Add(this.maxSizePopulationTextBox);
-            this.groupBox6.Controls.Add(this.minSizePopulationTextBox);
-            this.groupBox6.Location = new System.Drawing.Point(8, 277);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(599, 51);
-            this.groupBox6.TabIndex = 5;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Розмір популяції";
-            // 
-            // minSizePopulationTextBox
-            // 
-            this.minSizePopulationTextBox.Location = new System.Drawing.Point(82, 19);
-            this.minSizePopulationTextBox.Name = "minSizePopulationTextBox";
-            this.minSizePopulationTextBox.Size = new System.Drawing.Size(100, 20);
-            this.minSizePopulationTextBox.TabIndex = 0;
-            this.minSizePopulationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            // 
-            // maxSizePopulationTextBox
-            // 
-            this.maxSizePopulationTextBox.Location = new System.Drawing.Point(342, 19);
-            this.maxSizePopulationTextBox.Name = "maxSizePopulationTextBox";
-            this.maxSizePopulationTextBox.Size = new System.Drawing.Size(100, 20);
-            this.maxSizePopulationTextBox.TabIndex = 1;
-            this.maxSizePopulationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
-            // 
-            // minSisePopLabel
-            // 
-            this.minSisePopLabel.AutoSize = true;
-            this.minSisePopLabel.Location = new System.Drawing.Point(9, 23);
-            this.minSisePopLabel.Name = "minSisePopLabel";
-            this.minSisePopLabel.Size = new System.Drawing.Size(70, 13);
-            this.minSisePopLabel.TabIndex = 2;
-            this.minSisePopLabel.Text = "Мінімальний";
-            // 
-            // maxSizePopLabel
-            // 
-            this.maxSizePopLabel.AutoSize = true;
-            this.maxSizePopLabel.Location = new System.Drawing.Point(253, 23);
-            this.maxSizePopLabel.Name = "maxSizePopLabel";
-            this.maxSizePopLabel.Size = new System.Drawing.Size(84, 13);
-            this.maxSizePopLabel.TabIndex = 3;
-            this.maxSizePopLabel.Text = "Максимальний";
-            // 
-            // showResultGAButton
-            // 
-            this.showResultGAButton.Enabled = false;
-            this.showResultGAButton.Location = new System.Drawing.Point(242, 335);
-            this.showResultGAButton.Name = "showResultGAButton";
-            this.showResultGAButton.Size = new System.Drawing.Size(125, 23);
-            this.showResultGAButton.TabIndex = 6;
-            this.showResultGAButton.Text = "Показати результат";
-            this.showResultGAButton.UseVisualStyleBackColor = true;
-            this.showResultGAButton.Click += new System.EventHandler(this.showResultGAButton_Click);
             // 
             // Form1
             // 
@@ -711,6 +705,8 @@
             this.panel1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -719,8 +715,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
