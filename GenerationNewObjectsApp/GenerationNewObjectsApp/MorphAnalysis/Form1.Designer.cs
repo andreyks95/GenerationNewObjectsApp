@@ -82,6 +82,15 @@
             this.TournamentSelection_RB = new System.Windows.Forms.RadioButton();
             this.RouletteWheelSelection_RB = new System.Windows.Forms.RadioButton();
             this.StochasticUniversalSamplingSelection_RB = new System.Windows.Forms.RadioButton();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.winChartViewer1 = new ChartDirector.WinChartViewer();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox3DScatterChart = new System.Windows.Forms.GroupBox();
+            this.FuncEpochRatingXYZ_RB = new System.Windows.Forms.RadioButton();
+            this.FuncPopulationRatingXYZ_RB = new System.Windows.Forms.RadioButton();
+            this.EpochPopulationRatingXYZ_RB = new System.Windows.Forms.RadioButton();
+            this.buildChartButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -96,6 +105,10 @@
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.winChartViewer1)).BeginInit();
+            this.panel3.SuspendLayout();
+            this.groupBox3DScatterChart.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -200,6 +213,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -682,6 +696,103 @@
             this.StochasticUniversalSamplingSelection_RB.Text = "Стохастична універсальна селекція\r\n(різновид колеса рулетки)";
             this.StochasticUniversalSamplingSelection_RB.UseVisualStyleBackColor = true;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.panel3);
+            this.tabPage4.Controls.Add(this.winChartViewer1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(621, 379);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Аналіз роботи генетичного алгоритму";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // winChartViewer1
+            // 
+            this.winChartViewer1.Location = new System.Drawing.Point(163, 179);
+            this.winChartViewer1.Name = "winChartViewer1";
+            this.winChartViewer1.Size = new System.Drawing.Size(300, 200);
+            this.winChartViewer1.TabIndex = 0;
+            this.winChartViewer1.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(17, 118);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.buildChartButton);
+            this.panel3.Controls.Add(this.groupBox3DScatterChart);
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(615, 155);
+            this.panel3.TabIndex = 2;
+            // 
+            // groupBox3DScatterChart
+            // 
+            this.groupBox3DScatterChart.Controls.Add(this.EpochPopulationRatingXYZ_RB);
+            this.groupBox3DScatterChart.Controls.Add(this.FuncPopulationRatingXYZ_RB);
+            this.groupBox3DScatterChart.Controls.Add(this.FuncEpochRatingXYZ_RB);
+            this.groupBox3DScatterChart.Location = new System.Drawing.Point(5, 13);
+            this.groupBox3DScatterChart.Name = "groupBox3DScatterChart";
+            this.groupBox3DScatterChart.Size = new System.Drawing.Size(605, 88);
+            this.groupBox3DScatterChart.TabIndex = 0;
+            this.groupBox3DScatterChart.TabStop = false;
+            this.groupBox3DScatterChart.Text = "3D точкова діаграма";
+            // 
+            // FuncEpochRatingXYZ_RB
+            // 
+            this.FuncEpochRatingXYZ_RB.AutoSize = true;
+            this.FuncEpochRatingXYZ_RB.Location = new System.Drawing.Point(29, 23);
+            this.FuncEpochRatingXYZ_RB.Name = "FuncEpochRatingXYZ_RB";
+            this.FuncEpochRatingXYZ_RB.Size = new System.Drawing.Size(158, 43);
+            this.FuncEpochRatingXYZ_RB.TabIndex = 0;
+            this.FuncEpochRatingXYZ_RB.TabStop = true;
+            this.FuncEpochRatingXYZ_RB.Text = "х  - кількість функцій\r\ny - кількість епох (ітерацій)\r\nz - найкраща оцінка";
+            this.FuncEpochRatingXYZ_RB.UseVisualStyleBackColor = true;
+            // 
+            // FuncPopulationRatingXYZ_RB
+            // 
+            this.FuncPopulationRatingXYZ_RB.AutoSize = true;
+            this.FuncPopulationRatingXYZ_RB.Location = new System.Drawing.Point(215, 23);
+            this.FuncPopulationRatingXYZ_RB.Name = "FuncPopulationRatingXYZ_RB";
+            this.FuncPopulationRatingXYZ_RB.Size = new System.Drawing.Size(165, 43);
+            this.FuncPopulationRatingXYZ_RB.TabIndex = 1;
+            this.FuncPopulationRatingXYZ_RB.TabStop = true;
+            this.FuncPopulationRatingXYZ_RB.Text = "x - кількість функцій\r\ny - макс. кількість популяції\r\nz - найкраща оцінка";
+            this.FuncPopulationRatingXYZ_RB.UseVisualStyleBackColor = true;
+            // 
+            // EpochPopulationRatingXYZ_RB
+            // 
+            this.EpochPopulationRatingXYZ_RB.AutoSize = true;
+            this.EpochPopulationRatingXYZ_RB.Location = new System.Drawing.Point(408, 23);
+            this.EpochPopulationRatingXYZ_RB.Name = "EpochPopulationRatingXYZ_RB";
+            this.EpochPopulationRatingXYZ_RB.Size = new System.Drawing.Size(168, 43);
+            this.EpochPopulationRatingXYZ_RB.TabIndex = 2;
+            this.EpochPopulationRatingXYZ_RB.TabStop = true;
+            this.EpochPopulationRatingXYZ_RB.Text = "x - кількість епох (ітерацій)\r\ny - макс. кількість популяції \r\nz - найкраща оцінк" +
+    "а";
+            this.EpochPopulationRatingXYZ_RB.UseVisualStyleBackColor = true;
+            // 
+            // buildChartButton
+            // 
+            this.buildChartButton.Location = new System.Drawing.Point(149, 118);
+            this.buildChartButton.Name = "buildChartButton";
+            this.buildChartButton.Size = new System.Drawing.Size(75, 23);
+            this.buildChartButton.TabIndex = 2;
+            this.buildChartButton.Text = "Побудувати";
+            this.buildChartButton.UseVisualStyleBackColor = true;
+            this.buildChartButton.Click += new System.EventHandler(this.buildChartButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -715,6 +826,11 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.winChartViewer1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.groupBox3DScatterChart.ResumeLayout(false);
+            this.groupBox3DScatterChart.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -775,6 +891,15 @@
         private System.Windows.Forms.TextBox maxSizePopulationTextBox;
         private System.Windows.Forms.TextBox minSizePopulationTextBox;
         private System.Windows.Forms.Button showResultGAButton;
+        private System.Windows.Forms.TabPage tabPage4;
+        private ChartDirector.WinChartViewer winChartViewer1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button buildChartButton;
+        private System.Windows.Forms.GroupBox groupBox3DScatterChart;
+        private System.Windows.Forms.RadioButton EpochPopulationRatingXYZ_RB;
+        private System.Windows.Forms.RadioButton FuncPopulationRatingXYZ_RB;
+        private System.Windows.Forms.RadioButton FuncEpochRatingXYZ_RB;
     }
 }
 
