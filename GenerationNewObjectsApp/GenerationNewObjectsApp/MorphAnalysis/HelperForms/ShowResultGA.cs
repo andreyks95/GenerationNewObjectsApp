@@ -100,6 +100,8 @@ namespace MorphAnalysis.HelperForms
         {
             string pathFile = @"resultGA.xml";
             string projectName = projectNameComboBox.Text;
+            if (projectName == null || projectName == "")
+                projectName = "NoName";
             try
             {
                 XMLDoc.XMLDocWriter.AddRecordToXMLDoc(pathFile, projectName, settingsGA, resultGA_DGV);
