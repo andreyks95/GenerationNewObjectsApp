@@ -44,15 +44,37 @@ namespace MorphAnalysis.XMLDoc
         //отримаємо дані по кожному проекту
         private void QueryResults(XDocument doc)
         {
-            var items = from xe in doc.Element("GA").Elements("resultGA")
+            var BestResultGACollection = from xe in doc.Element("GA").Elements("resultGA")
                         select new BestResultGA
                         {
+                            //Назва проекту
                             ProjectName = xe.Element("project").Value,
+                            //Найкраща оцінка проекту
                             Estimate = Convert.ToDouble(xe.Element("result").Element("estimate").Value),
+                            //Максимальний розмір популяції
                             MaxPopulation = Convert.ToInt32(xe.Element("settings").Element("population").Element("max").Value),
+                            //Кількість функцій
                             CountFunction = Convert.ToInt32(xe.Element("result").Element("functions").Attribute("count").Value),
+                            //Мінімальне покоління при якому був отриманий найкращий результат 
                             BestEpoch = Convert.ToInt32(xe.Element("result").Element("generationNumber").Value)
                         };
+
+            var result = from resultGA in BestResultGACollection
+                         group resultGA by resultGA.ProjectName into r
+                         select new
+                         {
+                             ProjectName = r.Key,
+                             BestResultGA = from item in r select item
+                         };
+
+            foreach (var group in result)
+            {
+                Console.WriteLine("{0}", group.ProjectName);
+                foreach (BestResultGA resultGA in group.BestResultGA)
+                    Console.WriteLine(resultGA.BestEpoch + " " + resultGA.CountFunction + " " + resultGA.Estimate + " " + resultGA.MaxPopulation);
+                Console.WriteLine();
+            }
+
         }
 
         //TODO: Получить группирированный словарь по проектам с оценками проектов
