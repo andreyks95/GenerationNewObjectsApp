@@ -18,7 +18,7 @@ namespace MorphAnalysis
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
-                Application.Run(new Form1());
+               Application.Run(new Form1());
             }
             catch (Exception ex)
             {

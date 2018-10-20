@@ -44,6 +44,9 @@
     <Reference Include="GeneticSharp.Infrastructure.Framework, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GeneticSharp.2.0.0\lib\net462\GeneticSharp.Infrastructure.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="netchartdir">
+      <HintPath>..\..\..\..\..\Desktop\chartdir_net\ChartDirector\lib\standard\netchartdir.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -69,6 +72,12 @@
     <Compile Include="HelperClasses\Expert.cs" />
     <Compile Include="HelperClasses\FinalSolutionEstimate.cs" />
     <Compile Include="HelperClasses\Normalizer.cs" />
+    <Compile Include="HelperForms\ChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperForms\ChartForm.Designer.cs">
+      <DependentUpon>ChartForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelperForms\ShowResultGA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +162,9 @@
     <Compile Include="TablesExpertEvaluation\TableParametersOfGoals.Designer.cs">
       <DependentUpon>TableParametersOfGoals.cs</DependentUpon>
     </Compile>
+    <Compile Include="XMLDoc\BestResultGA.cs" />
+    <Compile Include="XMLDoc\XMLDocReader.cs" />
+    <Compile Include="XMLDoc\XMLDocWriter.cs" />
     <Compile Include="ЕntityСlasses\Classification.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -174,6 +186,9 @@
     <Compile Include="ЕntityСlasses\SolutionsOfFunction.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperForms\ChartForm.resx">
+      <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelperForms\ShowResultGA.resx">
       <DependentUpon>ShowResultGA.cs</DependentUpon>
