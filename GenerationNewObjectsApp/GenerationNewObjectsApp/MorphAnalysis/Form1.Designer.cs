@@ -83,7 +83,6 @@
             this.RouletteWheelSelection_RB = new System.Windows.Forms.RadioButton();
             this.StochasticUniversalSamplingSelection_RB = new System.Windows.Forms.RadioButton();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.winChartViewer1 = new ChartDirector.WinChartViewer();
             this.button1 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox3DScatterChart = new System.Windows.Forms.GroupBox();
@@ -106,7 +105,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.winChartViewer1)).BeginInit();
+            //((System.ComponentModel.ISupportInitialize)(this.winChartViewer1)).BeginInit();
             this.panel3.SuspendLayout();
             this.groupBox3DScatterChart.SuspendLayout();
             this.SuspendLayout();
@@ -699,7 +698,7 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.panel3);
-            this.tabPage4.Controls.Add(this.winChartViewer1);
+
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -707,14 +706,6 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Аналіз роботи генетичного алгоритму";
             this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // winChartViewer1
-            // 
-            this.winChartViewer1.Location = new System.Drawing.Point(163, 179);
-            this.winChartViewer1.Name = "winChartViewer1";
-            this.winChartViewer1.Size = new System.Drawing.Size(300, 200);
-            this.winChartViewer1.TabIndex = 0;
-            this.winChartViewer1.TabStop = false;
             // 
             // button1
             // 
@@ -827,7 +818,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.winChartViewer1)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(this.winChartViewer1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.groupBox3DScatterChart.ResumeLayout(false);
             this.groupBox3DScatterChart.PerformLayout();
@@ -892,7 +883,7 @@
         private System.Windows.Forms.TextBox minSizePopulationTextBox;
         private System.Windows.Forms.Button showResultGAButton;
         private System.Windows.Forms.TabPage tabPage4;
-        private ChartDirector.WinChartViewer winChartViewer1;
+       // private ChartDirector.WinChartViewer winChartViewer1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button buildChartButton;

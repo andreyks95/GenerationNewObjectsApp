@@ -1,4 +1,4 @@
-﻿using ChartDirector;
+﻿
 using GeneticSharp.Domain.Fitnesses;
 using MorphAnalysis.GeneticAlgorithm;
 using MorphAnalysis.HelperClasses;
@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+//using ChartDirector;
 
 namespace MorphAnalysis
 {
@@ -596,6 +597,7 @@ namespace MorphAnalysis
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            /*
                 // The random XYZ data for the first 3D scatter group
                 RanSeries r0 = new RanSeries(7);
                 double[] xData0 = r0.getSeries2(100, 100, -10, 10);
@@ -645,7 +647,7 @@ namespace MorphAnalysis
 
                 // Output the chart
                 winChartViewer1.Chart = c;
-            
+            */
         }
 
         private void buildChartButton_Click(object sender, EventArgs e)
