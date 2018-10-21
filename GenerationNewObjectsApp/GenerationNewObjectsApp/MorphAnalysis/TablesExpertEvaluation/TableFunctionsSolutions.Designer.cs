@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableFunctionsSolutions));
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonSaveResultFuncs = new System.Windows.Forms.Button();
@@ -225,9 +226,10 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "TableFunctionsSolutions";
-            this.Text = "TableFunctionsSolutions";
+            this.Text = "Таблиця функцій та їх рішень";
             this.Load += new System.EventHandler(this.TableFunctionsSolutions_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

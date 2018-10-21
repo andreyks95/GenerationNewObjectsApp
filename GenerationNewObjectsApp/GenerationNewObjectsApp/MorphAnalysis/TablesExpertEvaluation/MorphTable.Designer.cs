@@ -30,11 +30,12 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MorphTable));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSaveRating = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +51,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 50);
             this.panel1.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label5.Location = new System.Drawing.Point(424, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(340, 30);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Оцінки слід виставляти в відсотковому співвідношенні \r\nв залежності наскільки тех" +
+    ". рішення задовільняє  функції";
             // 
             // label1
             // 
@@ -102,17 +114,6 @@
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dataGridView1_CellValidating);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.label5.Location = new System.Drawing.Point(424, 7);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(340, 30);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Оцінки слід виставляти в відсотковому співвідношенні \r\nв залежності наскільки тех" +
-    ". рішення задовільняє  функції";
-            // 
             // MorphTable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,8 +121,9 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MorphTable";
-            this.Text = "MorphTable";
+            this.Text = "Морфологічна таблиця";
             this.Load += new System.EventHandler(this.MorphTable_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

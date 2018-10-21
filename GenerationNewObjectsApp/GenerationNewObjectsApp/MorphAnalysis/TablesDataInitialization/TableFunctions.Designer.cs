@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableFunctions));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -56,7 +57,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(104, 108);
+            this.textBox2.Location = new System.Drawing.Point(104, 87);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(156, 20);
             this.textBox2.TabIndex = 1;
@@ -73,7 +74,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 108);
+            this.label2.Location = new System.Drawing.Point(12, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 3;
@@ -153,9 +154,9 @@
             // 
             // buttonAddFuncToList
             // 
-            this.buttonAddFuncToList.Location = new System.Drawing.Point(12, 288);
+            this.buttonAddFuncToList.Location = new System.Drawing.Point(12, 255);
             this.buttonAddFuncToList.Name = "buttonAddFuncToList";
-            this.buttonAddFuncToList.Size = new System.Drawing.Size(75, 23);
+            this.buttonAddFuncToList.Size = new System.Drawing.Size(75, 21);
             this.buttonAddFuncToList.TabIndex = 11;
             this.buttonAddFuncToList.Text = "Занести";
             this.buttonAddFuncToList.UseVisualStyleBackColor = true;
@@ -164,7 +165,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 240);
+            this.label4.Location = new System.Drawing.Point(3, 207);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(216, 39);
             this.label4.TabIndex = 10;
@@ -175,7 +176,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(58, 9);
+            this.label3.Location = new System.Drawing.Point(62, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(146, 20);
             this.label3.TabIndex = 9;
@@ -186,9 +187,9 @@
             this.groupBox1.Controls.Add(this.buttonEdit);
             this.groupBox1.Controls.Add(this.buttonDelete);
             this.groupBox1.Controls.Add(this.buttonAdd);
-            this.groupBox1.Location = new System.Drawing.Point(3, 157);
+            this.groupBox1.Location = new System.Drawing.Point(3, 124);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(257, 79);
+            this.groupBox1.Size = new System.Drawing.Size(257, 77);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Операції над даними";
@@ -200,9 +201,10 @@
             this.ClientSize = new System.Drawing.Size(804, 326);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(820, 335);
             this.Name = "TableFunctions";
-            this.Text = "TableFunctions";
+            this.Text = "Таблиця функцій";
             this.Load += new System.EventHandler(this.TableFunctions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);

@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowResultGA));
             this.resultGA_DGV = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.projectNameComboBox = new System.Windows.Forms.ComboBox();
+            this.nameLabel = new System.Windows.Forms.Label();
             this.textLabel = new System.Windows.Forms.Label();
             this.saveToFileButton = new System.Windows.Forms.Button();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.projectNameComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.resultGA_DGV)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +62,23 @@
             this.panel1.Size = new System.Drawing.Size(800, 60);
             this.panel1.TabIndex = 1;
             // 
+            // projectNameComboBox
+            // 
+            this.projectNameComboBox.FormattingEnabled = true;
+            this.projectNameComboBox.Location = new System.Drawing.Point(130, 35);
+            this.projectNameComboBox.Name = "projectNameComboBox";
+            this.projectNameComboBox.Size = new System.Drawing.Size(300, 21);
+            this.projectNameComboBox.TabIndex = 3;
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Location = new System.Drawing.Point(13, 38);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(82, 13);
+            this.nameLabel.TabIndex = 2;
+            this.nameLabel.Text = "Назва проекту";
+            // 
             // textLabel
             // 
             this.textLabel.AutoSize = true;
@@ -80,23 +98,6 @@
             this.saveToFileButton.UseVisualStyleBackColor = true;
             this.saveToFileButton.Click += new System.EventHandler(this.saveToFileButton_Click);
             // 
-            // nameLabel
-            // 
-            this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(13, 38);
-            this.nameLabel.Name = "nameLabel";
-            this.nameLabel.Size = new System.Drawing.Size(82, 13);
-            this.nameLabel.TabIndex = 2;
-            this.nameLabel.Text = "Назва проекту";
-            // 
-            // projectNameComboBox
-            // 
-            this.projectNameComboBox.FormattingEnabled = true;
-            this.projectNameComboBox.Location = new System.Drawing.Point(130, 35);
-            this.projectNameComboBox.Name = "projectNameComboBox";
-            this.projectNameComboBox.Size = new System.Drawing.Size(300, 21);
-            this.projectNameComboBox.TabIndex = 3;
-            // 
             // ShowResultGA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -104,8 +105,9 @@
             this.ClientSize = new System.Drawing.Size(638, 450);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.resultGA_DGV);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ShowResultGA";
-            this.Text = "ShowResultGA";
+            this.Text = "Результат роботи генетичного алгоритму";
             this.Load += new System.EventHandler(this.ShowResultGA_Load);
             ((System.ComponentModel.ISupportInitialize)(this.resultGA_DGV)).EndInit();
             this.panel1.ResumeLayout(false);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableParametersOfGoals));
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.buttonSaveResultGoals = new System.Windows.Forms.Button();
@@ -226,9 +227,10 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1000, 600);
             this.Name = "TableParametersOfGoals";
-            this.Text = "TableParametersOfGoals";
+            this.Text = "Таблиця параметри цілей";
             this.Load += new System.EventHandler(this.TableParametersOfGoals_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

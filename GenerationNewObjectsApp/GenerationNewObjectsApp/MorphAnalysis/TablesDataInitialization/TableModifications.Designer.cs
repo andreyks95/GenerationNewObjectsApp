@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableModifications));
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonAddModToList = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -129,7 +130,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(57, 9);
+            this.label1.Location = new System.Drawing.Point(42, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(192, 20);
             this.label1.TabIndex = 8;
@@ -198,8 +199,9 @@
             this.ClientSize = new System.Drawing.Size(800, 321);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TableModifications";
-            this.Text = "TableModifications";
+            this.Text = "Таблиця модифікацій";
             this.Load += new System.EventHandler(this.TableModifications_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

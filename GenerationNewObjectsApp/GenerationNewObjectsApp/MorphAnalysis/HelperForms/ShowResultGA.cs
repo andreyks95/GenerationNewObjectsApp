@@ -104,7 +104,8 @@ namespace MorphAnalysis.HelperForms
                 projectName = "NoName";
             try
             {
-                XMLDoc.XMLDocWriter.AddRecordToXMLDoc(pathFile, projectName, settingsGA, resultGA_DGV);
+                XMLDoc.XMLDocWriter doc = new XMLDoc.XMLDocWriter();
+                doc.AddRecordToXMLDoc(pathFile, projectName, settingsGA, resultGA_DGV);
                 MessageBox.Show("Найкращий результат роботи генетичного алгоритму збережено в xml-файл: resultGA.xml");
             }
             catch(Exception ex)

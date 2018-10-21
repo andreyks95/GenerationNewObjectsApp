@@ -73,6 +73,12 @@
     <Compile Include="HelperClasses\Expert.cs" />
     <Compile Include="HelperClasses\FinalSolutionEstimate.cs" />
     <Compile Include="HelperClasses\Normalizer.cs" />
+    <Compile Include="HelperForms\AboutProgram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelperForms\AboutProgram.Designer.cs">
+      <DependentUpon>AboutProgram.cs</DependentUpon>
+    </Compile>
     <Compile Include="HelperForms\ChartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,12 @@
     <Compile Include="ЕntityСlasses\SolutionsOfFunction.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperForms\AboutProgram.resx">
+      <DependentUpon>AboutProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelperForms\ChartForm.resx">
+      <DependentUpon>ChartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelperForms\ShowResultGA.resx">
       <DependentUpon>ShowResultGA.cs</DependentUpon>
