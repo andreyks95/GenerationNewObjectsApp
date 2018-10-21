@@ -15,15 +15,23 @@ namespace MorphAnalysis.XMLDoc
 
         private string path;
 
+        private Dictionary<string, List<BestResultGA>> _dictGroup;
+
         public XMLDocReader(string path)
         {
             this.path = path;
+            XDocument doc = LoadXMLDoc(path);
+            _dictGroup = GetGroupResult(doc);
         }
 
-        private void GetResults()
+        public Dictionary<string, List<BestResultGA>> GetProjectGroup
         {
-
+            get
+            {
+                return _dictGroup;
+            }
         }
+
 
         //завантажуємо xml-документ, якщо такий є
         private XDocument LoadXMLDoc(string path)
@@ -41,8 +49,8 @@ namespace MorphAnalysis.XMLDoc
             }
         }
 
-        //отримаємо дані по кожному проекту
-        private void QueryResults(XDocument doc)
+        //отримаємо згруповані дані по кожному проекту
+        private Dictionary<string, List<BestResultGA>> GetGroupResult(XDocument doc)
         {
             var BestResultGACollection = from xe in doc.Element("GA").Elements("resultGA")
                         select new BestResultGA
@@ -59,7 +67,7 @@ namespace MorphAnalysis.XMLDoc
                             BestEpoch = Convert.ToInt32(xe.Element("result").Element("generationNumber").Value)
                         };
 
-            var result = from resultGA in BestResultGACollection
+            var groupResult = from resultGA in BestResultGACollection
                          group resultGA by resultGA.ProjectName into r
                          select new
                          {
@@ -67,16 +75,18 @@ namespace MorphAnalysis.XMLDoc
                              BestResultGA = from item in r select item
                          };
 
-            foreach (var group in result)
-            {
-                Console.WriteLine("{0}", group.ProjectName);
-                foreach (BestResultGA resultGA in group.BestResultGA)
-                    Console.WriteLine(resultGA.BestEpoch + " " + resultGA.CountFunction + " " + resultGA.Estimate + " " + resultGA.MaxPopulation);
-                Console.WriteLine();
-            }
+            Dictionary<string, List<BestResultGA>> resultDictionary = groupResult
+                        .ToDictionary(element => element.ProjectName, element => element.BestResultGA.ToList<BestResultGA>());
 
+            //foreach (var group in groupResult)
+            //{
+            //    Console.WriteLine("{0}", group.ProjectName);
+            //    foreach (BestResultGA resultGA in group.BestResultGA)
+            //        Console.WriteLine(resultGA.BestEpoch + " " + resultGA.CountFunction + " " + resultGA.Estimate + " " + resultGA.MaxPopulation);
+            //    Console.WriteLine();
+            //}
+
+            return resultDictionary;
         }
-
-        //TODO: Получить группирированный словарь по проектам с оценками проектов
     }
 }
