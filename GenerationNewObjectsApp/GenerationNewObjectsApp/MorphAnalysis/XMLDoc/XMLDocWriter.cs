@@ -12,7 +12,7 @@ namespace MorphAnalysis.XMLDoc
     {
         private string pathFile = @"resultGA.xml";
 
-        public static void AddRecordToXMLDoc(string path, string projectName, Dictionary<string, string> settingsGA, DataGridView dgv)
+        public void AddRecordToXMLDoc(string path, string projectName, Dictionary<string, string> settingsGA, DataGridView dgv)
         {
             string pathFile = path;
             System.IO.FileInfo fileInfo = new System.IO.FileInfo(pathFile);
