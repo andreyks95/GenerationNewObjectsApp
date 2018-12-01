@@ -22,7 +22,7 @@ namespace MorphAnalysis
         [StringLength(4000)]
         public string name { get; set; }
 
-        [StringLength(20)]
+        [StringLength(1000)]
         public string unit { get; set; }
 
         public decimal? avg { get; set; }
