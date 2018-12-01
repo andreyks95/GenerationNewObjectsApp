@@ -99,7 +99,7 @@ namespace MorphAnalysis.HelperForms
         private void saveToFileButton_Click(object sender, EventArgs e)
         {
             string pathFile = @"resultGA.xml";
-            string projectName = projectNameComboBox.Text;
+            string projectName = projectNameComboBox.Text.Trim();
             if (projectName == null || projectName == "")
                 projectName = "NoName";
             try

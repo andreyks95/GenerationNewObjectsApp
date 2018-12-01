@@ -43,9 +43,11 @@
             // 
             this.resultGA_DGV.AllowUserToAddRows = false;
             this.resultGA_DGV.AllowUserToDeleteRows = false;
+            this.resultGA_DGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.resultGA_DGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.resultGA_DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.resultGA_DGV.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.resultGA_DGV.Location = new System.Drawing.Point(0, 62);
             this.resultGA_DGV.Name = "resultGA_DGV";
             this.resultGA_DGV.Size = new System.Drawing.Size(638, 388);
@@ -59,7 +61,7 @@
             this.panel1.Controls.Add(this.saveToFileButton);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 60);
+            this.panel1.Size = new System.Drawing.Size(638, 60);
             this.panel1.TabIndex = 1;
             // 
             // projectNameComboBox
