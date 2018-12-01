@@ -37,7 +37,7 @@ namespace MorphAnalysis
             resultGAValueDict = new Dictionary<int, double>();
             resultGAChromosomeDict = new Dictionary<int, string>();
 
-            settingsGA = new Dictionary<string, string>();
+           // settingsGA = new Dictionary<string, string>();
         }
 
         #region Таблиці ініціалізації даних
@@ -92,6 +92,7 @@ namespace MorphAnalysis
         private void Form1_Load(object sender, EventArgs e)
         {
             DisabledEnabledButtons();
+           // settingsGA = new Dictionary<string, string>();
         }
 
         #region 1-ша вкладка (Експертна оцінка)
@@ -302,6 +303,7 @@ namespace MorphAnalysis
 
         private void StartGAButton_Click(object sender, EventArgs e)
         {
+            settingsGA = new Dictionary<string, string>();
             //Керує отриманням даних для розрахунку фітнес функції 
             ManagerGA managerGA = ManagerGA.GetInstance();
 
