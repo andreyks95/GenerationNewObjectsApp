@@ -86,9 +86,27 @@ namespace MorphAnalysis.GeneticAlgorithm
         //Для потрібненння хромосоми на рівні шматки
         private IEnumerable<string> Split(string str, int chunkSize)
         {
-            return Enumerable.Range(0, str.Length / chunkSize)
-                .Select(i => str.Substring(i * chunkSize, chunkSize));
+            int chunk = str.Length / chunkSize;
+            return Enumerable.Range(0, chunkSize)//str.Length / chunkSize)
+                .Select(i => str.Substring(i * chunk, chunk));
         }
+
+
+        //Для потрібненння хромосоми на рівні шматки
+        //private string[] Split(string str, int chunkSize)
+        //{
+        //    string[] strArr = new string[chunkSize];
+
+        //    int chunk = str.Length / chunkSize;
+        //    string s = default(string);
+        //    for(int i = 0; i < chunkSize; i++)
+        //    {
+        //        s = str.Substring(i * chunk, chunk);
+        //        strArr[i] = s;
+        //    }
+        //    return strArr;
+        //}
+
 
         //old methods
         #region Старі методи
