@@ -62,8 +62,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             Function func = new Function
             {
-                name = textBox1.Text,
-                characteristics = textBox2.Text 
+                name = textBox1.Text.Trim(),
+                characteristics = textBox2.Text.Trim()
             };
 
             db.Functions.Add(func);
@@ -83,8 +83,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             if (func == null) return;
 
-            func.name = textBox1.Text;
-            func.characteristics = textBox2.Text;
+            func.name = textBox1.Text.Trim();
+            func.characteristics = textBox2.Text.Trim();
 
             db.Functions.AddOrUpdate(func);
 
@@ -117,8 +117,8 @@ namespace MorphAnalysis.TablesDataInitialization
             if (func == null) return;
 
             id = Convert.ToString(func.id_function);
-            textBox1.Text = func.name;
-            textBox2.Text = Convert.ToString(func.characteristics);
+            textBox1.Text = func.name.Trim();
+            textBox2.Text = Convert.ToString(func.characteristics).Trim();
         }
 
         private void buttonAddFuncToList_Click(object sender, EventArgs e)

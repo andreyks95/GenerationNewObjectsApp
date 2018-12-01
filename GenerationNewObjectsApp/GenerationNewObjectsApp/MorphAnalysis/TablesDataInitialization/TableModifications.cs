@@ -58,8 +58,8 @@ namespace MorphAnalysis.TablesDataInitialization
             if (mod == null) return;
 
             id = Convert.ToString(mod.id_modification);
-            textBox1.Text = mod.name;
-            textBox2.Text = mod.characteristic;
+            textBox1.Text = mod.name.Trim();
+            textBox2.Text = mod.characteristic.Trim();
         }
 
         //Add
@@ -73,8 +73,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             Modification mod = new Modification
             {
-                name = textBox1.Text,
-                characteristic = textBox2.Text,
+                name = textBox1.Text.Trim(),
+                characteristic = textBox2.Text.Trim()
             };
 
             db.Modifications.Add(mod);
@@ -94,8 +94,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             if (mod == null) return;
 
-            mod.name = textBox1.Text;
-            mod.characteristic = textBox2.Text;
+            mod.name = textBox1.Text.Trim();
+            mod.characteristic = textBox2.Text.Trim();
 
             db.Modifications.AddOrUpdate(mod);
 

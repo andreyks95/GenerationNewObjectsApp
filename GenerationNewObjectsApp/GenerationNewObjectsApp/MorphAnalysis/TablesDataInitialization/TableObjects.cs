@@ -50,8 +50,8 @@ namespace MorphAnalysis.TablesDataInitialization
             if (obj == null) return;
 
             id = Convert.ToString(obj.id_object);
-            textBox1.Text = obj.name;
-            textBox2.Text = obj.characteristic;
+            textBox1.Text = obj.name.Trim();
+            textBox2.Text = obj.characteristic.Trim();
         }
 
         //Add
@@ -65,8 +65,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             MorphObject obj = new MorphObject
             {
-                name = textBox1.Text,
-                characteristic = textBox2.Text,
+                name = textBox1.Text.Trim(),
+                characteristic = textBox2.Text.Trim()
             };
 
             db.MorphObjects.Add(obj);
@@ -86,8 +86,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             if (obj == null) return;
 
-            obj.name = textBox1.Text;
-            obj.characteristic = textBox2.Text;
+            obj.name = textBox1.Text.Trim();
+            obj.characteristic = textBox2.Text.Trim();
 
             db.MorphObjects.AddOrUpdate(obj);
 

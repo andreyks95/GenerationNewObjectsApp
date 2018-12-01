@@ -67,8 +67,8 @@ namespace MorphAnalysis.TablesDataInitialization
             if (paramGoal == null) return;
 
             id = Convert.ToString(paramGoal.id_parameter);
-            textBox1.Text = paramGoal.name;
-            textBox2.Text = paramGoal.unit;
+            textBox1.Text = paramGoal.name.Trim();
+            textBox2.Text = paramGoal.unit.Trim();
         }
 
         //Add
@@ -82,8 +82,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             ParametersGoal paramGoal = new ParametersGoal
             {
-                name = textBox1.Text,
-                unit = textBox2.Text,
+                name = textBox1.Text.Trim(),
+                unit = textBox2.Text.Trim(),
             };
 
             db.ParametersGoals.Add(paramGoal);
@@ -103,8 +103,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             if (paramGoal == null) return;
 
-            paramGoal.name = textBox1.Text;
-            paramGoal.unit = textBox2.Text;
+            paramGoal.name = textBox1.Text.Trim();
+            paramGoal.unit = textBox2.Text.Trim();
 
             db.ParametersGoals.AddOrUpdate(paramGoal);
 

@@ -56,8 +56,8 @@ namespace MorphAnalysis.TablesDataInitialization
             if (classification == null) return;
 
             id = Convert.ToString(classification.id_classification);
-            textBox1.Text = classification.name;
-            textBox2.Text = classification.description;
+            textBox1.Text = classification.name.Trim();
+            textBox2.Text = classification.description.Trim();
         }
 
         //Add
@@ -71,8 +71,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             Classification classification = new Classification
             {
-                name = textBox1.Text,
-                description = textBox2.Text,
+                name = textBox1.Text.Trim(),
+                description = textBox2.Text.Trim()
             };
 
             db.Classifications.Add(classification);
@@ -92,8 +92,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             if (classification == null) return;
 
-            classification.name = textBox1.Text;
-            classification.description = textBox2.Text;
+            classification.name = textBox1.Text.Trim();
+            classification.description = textBox2.Text.Trim();
 
             db.Classifications.AddOrUpdate(classification);
 

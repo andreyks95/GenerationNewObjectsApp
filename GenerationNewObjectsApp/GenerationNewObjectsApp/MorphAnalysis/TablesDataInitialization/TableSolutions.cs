@@ -72,9 +72,9 @@ namespace MorphAnalysis.TablesDataInitialization
 
             Solution sol = new Solution
             {
-                name = textBox1.Text,
-                characteristic = textBox2.Text,
-                bibliographic_description = textBox3.Text
+                name = textBox1.Text.Trim(),
+                characteristic = textBox2.Text.Trim(),
+                bibliographic_description = textBox3.Text.Trim()
             };
 
             db.Solutions.Add(sol);
@@ -95,9 +95,9 @@ namespace MorphAnalysis.TablesDataInitialization
 
             if (sol == null) return;
 
-            sol.name = textBox1.Text;
-            sol.characteristic = textBox2.Text;
-            sol.bibliographic_description = textBox3.Text;
+            sol.name = textBox1.Text.Trim();
+            sol.characteristic = textBox2.Text.Trim();
+            sol.bibliographic_description = textBox3.Text.Trim();
 
             db.Solutions.AddOrUpdate(sol);
 
@@ -128,9 +128,9 @@ namespace MorphAnalysis.TablesDataInitialization
             if (sol == null) return;
 
             id = Convert.ToString(sol.id_solution);
-            textBox1.Text = sol.name;
-            textBox2.Text = sol.characteristic;
-            textBox3.Text = sol.bibliographic_description;
+            textBox1.Text = sol.name.Trim();
+            textBox2.Text = sol.characteristic.Trim();
+            textBox3.Text = sol.bibliographic_description.Trim();
         }
 
         //Додавання функцій та їх технічних рішень

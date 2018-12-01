@@ -56,8 +56,8 @@ namespace MorphAnalysis.TablesDataInitialization
             if (goal == null) return;
 
             id = Convert.ToString(goal.id_goal);
-            textBox1.Text = goal.name;
-            textBox2.Text = goal.characteristic;
+            textBox1.Text = goal.name.Trim();
+            textBox2.Text = goal.characteristic.Trim();
         }
 
         //Add
@@ -71,8 +71,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             Goal goal = new Goal
             {
-                name = textBox1.Text,
-                characteristic = textBox2.Text,
+                name = textBox1.Text.Trim(),
+                characteristic = textBox2.Text.Trim()
             };
 
             db.Goals.Add(goal);
@@ -92,8 +92,8 @@ namespace MorphAnalysis.TablesDataInitialization
 
             if (goal == null) return;
 
-            goal.name = textBox1.Text;
-            goal.characteristic = textBox2.Text;
+            goal.name = textBox1.Text.Trim();
+            goal.characteristic = textBox2.Text.Trim();
 
             db.Goals.AddOrUpdate(goal);
 
