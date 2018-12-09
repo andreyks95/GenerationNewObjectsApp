@@ -118,12 +118,12 @@ namespace MorphAnalysis.GeneticAlgorithm
                     break;
                 case Mutation.UniformMutation:
                     {
-                        if (!allGenesMutableUniformMutation && mutableGenesIndexesUniformMutation == null)
-                            _mutation = new GeneticSharp.Domain.Mutations.UniformMutation();
-                        else if (allGenesMutableUniformMutation && mutableGenesIndexesUniformMutation == null)
+                        if (allGenesMutableUniformMutation && mutableGenesIndexesUniformMutation == null)
                             _mutation = new GeneticSharp.Domain.Mutations.UniformMutation(allGenesMutableUniformMutation);
                         else if (mutableGenesIndexesUniformMutation.Length > 0)
                             _mutation = new GeneticSharp.Domain.Mutations.UniformMutation(mutableGenesIndexesUniformMutation);
+                       else
+                           _mutation = new GeneticSharp.Domain.Mutations.UniformMutation();
                         break;
                     }
                 case Mutation.TworsMutation:
