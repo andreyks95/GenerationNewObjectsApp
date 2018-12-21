@@ -323,6 +323,7 @@ namespace MorphAnalysis
             settingsGA = new Dictionary<string, string>();
             //Керує отриманням даних для розрахунку фітнес функції 
             ManagerGA managerGA = ManagerGA.GetInstance();
+            managerGA.IsUseWeightSolution = IsUseWeightSolution();
 
             //Конвертує з / в хромосому
             ConverterToFromChromosome converter = new ConverterToFromChromosome();

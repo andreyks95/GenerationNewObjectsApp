@@ -14,23 +14,23 @@ namespace MorphAnalysis.GeneticAlgorithm
 
         //для фітнес функції (функція приспособленності)
         //Для назви і ваги функції
-        List<Function>                              funcList;
+        List<Function> funcList;
 
         //для фітнес функції (функція приспособленності)
         //Для назви 
-        List<SolutionsOfFunction>                   solOfFuncList;
+        List<SolutionsOfFunction> solOfFuncList;
         //Рішення і його вага
         Dictionary<int, decimal> solWeightDict = new Dictionary<int, decimal>();
 
         //для розміру бінарного блоку генів в функції
-        int                                         countSolutions;
+        int countSolutions;
 
         //для розміру хромосоми. Кількість функцій
         private int countFunctions;
 
         //для фітнес функції (функція приспособленності)
         //Оцінка кожного рішення згідно функції 
-        Dictionary<int, Dictionary<int, decimal>>   solByFuncValuesFromMorphTableDict;
+        Dictionary<int, Dictionary<int, decimal>> solByFuncValuesFromMorphTableDict;
 
         //для фітнес функції (функція приспособленності)
         //List<ParametersGoalsForSolution> parametersGoalsForSolutionsList;
@@ -41,12 +41,21 @@ namespace MorphAnalysis.GeneticAlgorithm
         //сума всії модифікацій
         decimal modsSum;
 
+        //для фітнес функції
+        //формула з / без ваги технічного рішення
+        bool useWeightSolution = false;
+
         #endregion
 
         private ManagerGA()
         {
 
         }
+
+        public bool IsUseWeightSolution {
+            set { useWeightSolution = value;  }
+        }
+
 
         public static ManagerGA GetInstance()
         {
@@ -183,10 +192,21 @@ namespace MorphAnalysis.GeneticAlgorithm
             //[idSol][idFunc] - отримаємо оцінку рішення за функцією, де: 
             //[idSol] - пошук по id рішення, [idFunc] - пошук по id функції в вкладеному словнику,
 
-            decimal estimateSolution = solWeightDict[idSol] *
-                                       (funcList[i].weight ?? 0 * solByFuncValuesFromMorphTableDict[idSol][idFunc]) +
-                                        (solByParametersDict[idSol]) + modsSum;
+            decimal estimateSolution = default(decimal);
 
+            decimal partEstimate = (funcList[i].weight ?? 0 * solByFuncValuesFromMorphTableDict[idSol][idFunc]) +
+                                            (solByParametersDict[idSol]) + modsSum;
+
+            //fitness function with / no weight of solution 
+            if (useWeightSolution)
+            {
+
+                estimateSolution = solWeightDict[idSol] * partEstimate;
+            }
+            else
+            {
+                estimateSolution = partEstimate;
+            }
 
             //funcList[i].weight; //знаходимо вагу функції
 
