@@ -38,6 +38,7 @@
             this.таблицяПараметриЦілейToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяОбєктівToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.таблицяКласифікаційToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.проПрограмуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonSolsFuncs = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -90,7 +91,9 @@
             this.EpochPopulationRatingXYZ_RB = new System.Windows.Forms.RadioButton();
             this.FuncPopulationRatingXYZ_RB = new System.Windows.Forms.RadioButton();
             this.FuncEpochRatingXYZ_RB = new System.Windows.Forms.RadioButton();
-            this.проПрограмуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.withWeightSol_RB = new System.Windows.Forms.RadioButton();
+            this.noWeightSol_RB = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -108,6 +111,7 @@
             this.tabPage4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox3DScatterChart.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -186,6 +190,13 @@
             this.таблицяКласифікаційToolStripMenuItem.Visible = false;
             this.таблицяКласифікаційToolStripMenuItem.Click += new System.EventHandler(this.таблицяКласифікаційToolStripMenuItem_Click);
             // 
+            // проПрограмуToolStripMenuItem
+            // 
+            this.проПрограмуToolStripMenuItem.Name = "проПрограмуToolStripMenuItem";
+            this.проПрограмуToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.проПрограмуToolStripMenuItem.Text = "Про програму";
+            this.проПрограмуToolStripMenuItem.Click += new System.EventHandler(this.проПрограмуToolStripMenuItem_Click);
+            // 
             // buttonSolsFuncs
             // 
             this.buttonSolsFuncs.Location = new System.Drawing.Point(16, 29);
@@ -228,6 +239,7 @@
             this.tabPage1.Controls.Add(this.buttonMorphTable);
             this.tabPage1.Controls.Add(this.textBoxCountExpert);
             this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.groupBox7);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -238,7 +250,7 @@
             // 
             // buttonModParamTable
             // 
-            this.buttonModParamTable.Location = new System.Drawing.Point(398, 175);
+            this.buttonModParamTable.Location = new System.Drawing.Point(399, 296);
             this.buttonModParamTable.Name = "buttonModParamTable";
             this.buttonModParamTable.Size = new System.Drawing.Size(216, 51);
             this.buttonModParamTable.TabIndex = 11;
@@ -249,11 +261,11 @@
             // buttonSolParamTable
             // 
             this.buttonSolParamTable.Enabled = false;
-            this.buttonSolParamTable.Location = new System.Drawing.Point(142, 175);
+            this.buttonSolParamTable.Location = new System.Drawing.Point(145, 296);
             this.buttonSolParamTable.Name = "buttonSolParamTable";
             this.buttonSolParamTable.Size = new System.Drawing.Size(228, 51);
             this.buttonSolParamTable.TabIndex = 10;
-            this.buttonSolParamTable.Text = "Оцінювання тех. рішень відповідно до параметрів цілей";
+            this.buttonSolParamTable.Text = "Оцінювання технічних рішень відповідно \r\nдо параметрів цілей";
             this.buttonSolParamTable.UseVisualStyleBackColor = true;
             this.buttonSolParamTable.Click += new System.EventHandler(this.buttonSolParamTable_Click);
             // 
@@ -281,7 +293,7 @@
             // buttonMorphTable
             // 
             this.buttonMorphTable.Enabled = false;
-            this.buttonMorphTable.Location = new System.Drawing.Point(11, 175);
+            this.buttonMorphTable.Location = new System.Drawing.Point(11, 296);
             this.buttonMorphTable.Name = "buttonMorphTable";
             this.buttonMorphTable.Size = new System.Drawing.Size(102, 51);
             this.buttonMorphTable.TabIndex = 7;
@@ -609,7 +621,7 @@
             this.TwoPointCrossover_RB.Size = new System.Drawing.Size(92, 30);
             this.TwoPointCrossover_RB.TabIndex = 2;
             this.TwoPointCrossover_RB.Tag = "TwoPointCrossover";
-            this.TwoPointCrossover_RB.Text = "Двухточкове\r\nсхрещування";
+            this.TwoPointCrossover_RB.Text = "Двоточкове\r\nсхрещування";
             this.TwoPointCrossover_RB.UseVisualStyleBackColor = true;
             // 
             // OnePointCrossover_RB
@@ -776,12 +788,38 @@
     "цінка";
             this.FuncEpochRatingXYZ_RB.UseVisualStyleBackColor = true;
             // 
-            // проПрограмуToolStripMenuItem
+            // groupBox7
             // 
-            this.проПрограмуToolStripMenuItem.Name = "проПрограмуToolStripMenuItem";
-            this.проПрограмуToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-            this.проПрограмуToolStripMenuItem.Text = "Про програму";
-            this.проПрограмуToolStripMenuItem.Click += new System.EventHandler(this.проПрограмуToolStripMenuItem_Click);
+            this.groupBox7.Controls.Add(this.noWeightSol_RB);
+            this.groupBox7.Controls.Add(this.withWeightSol_RB);
+            this.groupBox7.Location = new System.Drawing.Point(11, 163);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(601, 100);
+            this.groupBox7.TabIndex = 12;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Конфігурація мат. моделей";
+            // 
+            // withWeightSol_RB
+            // 
+            this.withWeightSol_RB.AutoSize = true;
+            this.withWeightSol_RB.Checked = true;
+            this.withWeightSol_RB.Location = new System.Drawing.Point(14, 26);
+            this.withWeightSol_RB.Name = "withWeightSol_RB";
+            this.withWeightSol_RB.Size = new System.Drawing.Size(129, 30);
+            this.withWeightSol_RB.TabIndex = 0;
+            this.withWeightSol_RB.TabStop = true;
+            this.withWeightSol_RB.Text = "З урахуванням ваги \r\nтехнічного рішення";
+            this.withWeightSol_RB.UseVisualStyleBackColor = true;
+            // 
+            // noWeightSol_RB
+            // 
+            this.noWeightSol_RB.AutoSize = true;
+            this.noWeightSol_RB.Location = new System.Drawing.Point(180, 26);
+            this.noWeightSol_RB.Name = "noWeightSol_RB";
+            this.noWeightSol_RB.Size = new System.Drawing.Size(133, 30);
+            this.noWeightSol_RB.TabIndex = 1;
+            this.noWeightSol_RB.Text = "Без урахування ваги \r\nтехнічного рішення";
+            this.noWeightSol_RB.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -821,6 +859,8 @@
             this.panel3.ResumeLayout(false);
             this.groupBox3DScatterChart.ResumeLayout(false);
             this.groupBox3DScatterChart.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -889,6 +929,9 @@
         private System.Windows.Forms.RadioButton FuncPopulationRatingXYZ_RB;
         private System.Windows.Forms.RadioButton FuncEpochRatingXYZ_RB;
         private System.Windows.Forms.ToolStripMenuItem проПрограмуToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.RadioButton noWeightSol_RB;
+        private System.Windows.Forms.RadioButton withWeightSol_RB;
     }
 }
 

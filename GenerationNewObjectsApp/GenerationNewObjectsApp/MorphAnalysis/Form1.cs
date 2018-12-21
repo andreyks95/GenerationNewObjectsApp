@@ -31,6 +31,8 @@ namespace MorphAnalysis
         //де ключ - анг. назва, значення - укр.
         private Dictionary<string, string> settingsGA;
 
+        private bool useWeightSolutionForMathModel = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -171,16 +173,22 @@ namespace MorphAnalysis
         //Відображення морфологічної таблиці
         private void buttonMorphTable_Click(object sender, EventArgs e)
         {
+            bool useWeightSolution = IsUseWeightSolution(); 
+
             if (cacheData.GetListElements<SolutionsOfFunction>(true).Count > 0
                 || cacheData.GetListElements<Function>(true).Count > 0)
-                new MorphTable().Show();
+                new MorphTable(useWeightSolution).Show();
+                //new MorphTable().Show();
         }
 
         //Відображення таблиці оцінювання тех. рішень відповідно до параметрів цілей
         private void buttonSolParamTable_Click(object sender, EventArgs e)
         {
+            bool useWeightSolution = IsUseWeightSolution();
+
             if (cacheData.GetListElements<ParametersGoal>(true).Count > 0
                 || cacheData.GetListElements<SolutionsOfFunction>(true).Count > 0)
+                //new TableParametersGoalsSolutions(useWeightSolution).Show();
                 new TableParametersGoalsSolutions().Show();
         }
 
@@ -194,6 +202,15 @@ namespace MorphAnalysis
 
 
         #endregion
+
+        bool IsUseWeightSolution()
+        {
+            if (withWeightSol_RB.Checked)
+                useWeightSolutionForMathModel = true;
+            if (noWeightSol_RB.Checked)
+                useWeightSolutionForMathModel = false;
+            return useWeightSolutionForMathModel;
+        }
 
         #endregion
 
@@ -595,7 +612,6 @@ namespace MorphAnalysis
 
 
         #endregion
-
 
         #region 4-а вкладка (Аналіз ГА)
 
