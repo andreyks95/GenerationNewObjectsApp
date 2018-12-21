@@ -31,6 +31,11 @@ namespace MorphAnalysis.TablesExpertEvaluation
         List<decimal> ratings = new List<decimal>();
 
 
+        //для конфігурації мат. моделей. 
+        //Розрахувати оцінку з / без урахуванням ваги тех. рішення
+
+        bool useWeightSolution = false;
+
         public MorphTable()
         {
             InitializeComponent();
@@ -41,6 +46,12 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
             configDGV = new ConfigDGV();
         }
+
+        public MorphTable(bool useWeightSolution = true):this()
+        {
+            this.useWeightSolution = useWeightSolution;
+        }
+
 
         private void MorphTable_Load(object sender, EventArgs e)
         {
@@ -99,7 +110,11 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 SolutionsOfFunction selectedSolOfFunc = solOfFuncList.FirstOrDefault(s => (s.Solution.name == solutionNameInTable) && (s.Function.name == functionNameInTable));
                 if (selectedSolOfFunc is null) return;
 
-                decimal estimateSol = selectedSolOfFunc.Solution.weight ?? 0;
+                
+                decimal estimateSol = 1;
+                //якщо враховувати математичну модель с вагою технічних рішень
+                if (useWeightSolution)
+                    estimateSol = selectedSolOfFunc.Solution.weight ?? 0;
 
                 int index = 0;
                 decimal sum = 0;
