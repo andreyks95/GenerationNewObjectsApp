@@ -49,6 +49,19 @@
             this.buttonParamsGoals = new System.Windows.Forms.Button();
             this.buttonMorphTable = new System.Windows.Forms.Button();
             this.textBoxCountExpert = new System.Windows.Forms.TextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.wModByGoal_textBox = new System.Windows.Forms.TextBox();
+            this.wSolByGoal_textBox = new System.Windows.Forms.TextBox();
+            this.wSolByFunc_textBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.withWeightSol_RB = new System.Windows.Forms.RadioButton();
+            this.noWeightSol_RB = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -91,13 +104,15 @@
             this.EpochPopulationRatingXYZ_RB = new System.Windows.Forms.RadioButton();
             this.FuncPopulationRatingXYZ_RB = new System.Windows.Forms.RadioButton();
             this.FuncEpochRatingXYZ_RB = new System.Windows.Forms.RadioButton();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.withWeightSol_RB = new System.Windows.Forms.RadioButton();
-            this.noWeightSol_RB = new System.Windows.Forms.RadioButton();
+            this.InitializationTables_Button = new System.Windows.Forms.Button();
+            this.SaveWeightButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -111,7 +126,6 @@
             this.tabPage4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox3DScatterChart.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -201,7 +215,7 @@
             // 
             this.buttonSolsFuncs.Location = new System.Drawing.Point(16, 29);
             this.buttonSolsFuncs.Name = "buttonSolsFuncs";
-            this.buttonSolsFuncs.Size = new System.Drawing.Size(173, 41);
+            this.buttonSolsFuncs.Size = new System.Drawing.Size(173, 31);
             this.buttonSolsFuncs.TabIndex = 4;
             this.buttonSolsFuncs.Text = "Таблиця функцій та їх рішень";
             this.buttonSolsFuncs.UseVisualStyleBackColor = true;
@@ -228,11 +242,12 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(629, 405);
+            this.tabControl1.Size = new System.Drawing.Size(629, 474);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.InitializationTables_Button);
             this.tabPage1.Controls.Add(this.buttonModParamTable);
             this.tabPage1.Controls.Add(this.buttonSolParamTable);
             this.tabPage1.Controls.Add(this.groupBox1);
@@ -243,14 +258,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(621, 379);
+            this.tabPage1.Size = new System.Drawing.Size(621, 448);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Експертна оцінка";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // buttonModParamTable
             // 
-            this.buttonModParamTable.Location = new System.Drawing.Point(399, 296);
+            this.buttonModParamTable.Enabled = false;
+            this.buttonModParamTable.Location = new System.Drawing.Point(399, 377);
             this.buttonModParamTable.Name = "buttonModParamTable";
             this.buttonModParamTable.Size = new System.Drawing.Size(216, 51);
             this.buttonModParamTable.TabIndex = 11;
@@ -261,7 +277,7 @@
             // buttonSolParamTable
             // 
             this.buttonSolParamTable.Enabled = false;
-            this.buttonSolParamTable.Location = new System.Drawing.Point(145, 296);
+            this.buttonSolParamTable.Location = new System.Drawing.Point(145, 377);
             this.buttonSolParamTable.Name = "buttonSolParamTable";
             this.buttonSolParamTable.Size = new System.Drawing.Size(228, 51);
             this.buttonSolParamTable.TabIndex = 10;
@@ -275,16 +291,16 @@
             this.groupBox1.Controls.Add(this.buttonSolsFuncs);
             this.groupBox1.Location = new System.Drawing.Point(8, 64);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(604, 93);
+            this.groupBox1.Size = new System.Drawing.Size(604, 71);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Таблиці для оцінювання експертами тех. рішень та цілей";
             // 
             // buttonParamsGoals
             // 
-            this.buttonParamsGoals.Location = new System.Drawing.Point(327, 29);
+            this.buttonParamsGoals.Location = new System.Drawing.Point(330, 29);
             this.buttonParamsGoals.Name = "buttonParamsGoals";
-            this.buttonParamsGoals.Size = new System.Drawing.Size(178, 41);
+            this.buttonParamsGoals.Size = new System.Drawing.Size(178, 31);
             this.buttonParamsGoals.TabIndex = 8;
             this.buttonParamsGoals.Text = "Таблиця цілей та їх параметрів";
             this.buttonParamsGoals.UseVisualStyleBackColor = true;
@@ -293,7 +309,7 @@
             // buttonMorphTable
             // 
             this.buttonMorphTable.Enabled = false;
-            this.buttonMorphTable.Location = new System.Drawing.Point(11, 296);
+            this.buttonMorphTable.Location = new System.Drawing.Point(11, 377);
             this.buttonMorphTable.Name = "buttonMorphTable";
             this.buttonMorphTable.Size = new System.Drawing.Size(102, 51);
             this.buttonMorphTable.TabIndex = 7;
@@ -309,6 +325,147 @@
             this.textBoxCountExpert.TabIndex = 6;
             this.textBoxCountExpert.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxCountExpert_KeyDown);
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.groupBox9);
+            this.groupBox7.Controls.Add(this.groupBox8);
+            this.groupBox7.Location = new System.Drawing.Point(8, 141);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(601, 201);
+            this.groupBox7.TabIndex = 12;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Конфігурація мат. моделей";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.SaveWeightButton);
+            this.groupBox9.Controls.Add(this.radioButton2);
+            this.groupBox9.Controls.Add(this.radioButton1);
+            this.groupBox9.Controls.Add(this.label4);
+            this.groupBox9.Controls.Add(this.label3);
+            this.groupBox9.Controls.Add(this.wModByGoal_textBox);
+            this.groupBox9.Controls.Add(this.wSolByGoal_textBox);
+            this.groupBox9.Controls.Add(this.wSolByFunc_textBox);
+            this.groupBox9.Controls.Add(this.label2);
+            this.groupBox9.Location = new System.Drawing.Point(6, 90);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(589, 105);
+            this.groupBox9.TabIndex = 3;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Вага оцінок математичних моделей";
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(147, 20);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(89, 17);
+            this.radioButton2.TabIndex = 8;
+            this.radioButton2.Text = "Враховувати";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(25, 20);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(105, 17);
+            this.radioButton1.TabIndex = 7;
+            this.radioButton1.Text = "Не враховувати";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(341, 47);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(255, 26);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Вага оцінки технічного рішення з модифікаціями \r\nзгідно параметрів цілей";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(176, 46);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(164, 26);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Вага оцінки технічного рішення\r\nзгідно параметрам цілей";
+            // 
+            // wModByGoal_textBox
+            // 
+            this.wModByGoal_textBox.Enabled = false;
+            this.wModByGoal_textBox.Location = new System.Drawing.Point(344, 76);
+            this.wModByGoal_textBox.Name = "wModByGoal_textBox";
+            this.wModByGoal_textBox.Size = new System.Drawing.Size(100, 20);
+            this.wModByGoal_textBox.TabIndex = 3;
+            this.wModByGoal_textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxWeight);
+            this.wModByGoal_textBox.Leave += new System.EventHandler(this.textBoxWeight_Leave);
+            // 
+            // wSolByGoal_textBox
+            // 
+            this.wSolByGoal_textBox.Enabled = false;
+            this.wSolByGoal_textBox.Location = new System.Drawing.Point(179, 76);
+            this.wSolByGoal_textBox.Name = "wSolByGoal_textBox";
+            this.wSolByGoal_textBox.Size = new System.Drawing.Size(100, 20);
+            this.wSolByGoal_textBox.TabIndex = 2;
+            this.wSolByGoal_textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxWeight);
+            this.wSolByGoal_textBox.Leave += new System.EventHandler(this.textBoxWeight_Leave);
+            // 
+            // wSolByFunc_textBox
+            // 
+            this.wSolByFunc_textBox.Enabled = false;
+            this.wSolByFunc_textBox.Location = new System.Drawing.Point(15, 75);
+            this.wSolByFunc_textBox.Name = "wSolByFunc_textBox";
+            this.wSolByFunc_textBox.Size = new System.Drawing.Size(100, 20);
+            this.wSolByFunc_textBox.TabIndex = 1;
+            this.wSolByFunc_textBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxWeight);
+            this.wSolByFunc_textBox.Leave += new System.EventHandler(this.textBoxWeight_Leave);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(164, 26);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Вага оцінки технічного рішення\r\nзгідно функціям";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.withWeightSol_RB);
+            this.groupBox8.Controls.Add(this.noWeightSol_RB);
+            this.groupBox8.Location = new System.Drawing.Point(6, 19);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(344, 64);
+            this.groupBox8.TabIndex = 2;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Урахування ваги технічних рішень";
+            // 
+            // withWeightSol_RB
+            // 
+            this.withWeightSol_RB.AutoSize = true;
+            this.withWeightSol_RB.Checked = true;
+            this.withWeightSol_RB.Location = new System.Drawing.Point(20, 21);
+            this.withWeightSol_RB.Name = "withWeightSol_RB";
+            this.withWeightSol_RB.Size = new System.Drawing.Size(129, 30);
+            this.withWeightSol_RB.TabIndex = 0;
+            this.withWeightSol_RB.TabStop = true;
+            this.withWeightSol_RB.Text = "З урахуванням ваги \r\nтехнічного рішення";
+            this.withWeightSol_RB.UseVisualStyleBackColor = true;
+            // 
+            // noWeightSol_RB
+            // 
+            this.noWeightSol_RB.AutoSize = true;
+            this.noWeightSol_RB.Location = new System.Drawing.Point(171, 21);
+            this.noWeightSol_RB.Name = "noWeightSol_RB";
+            this.noWeightSol_RB.Size = new System.Drawing.Size(133, 30);
+            this.noWeightSol_RB.TabIndex = 1;
+            this.noWeightSol_RB.Text = "Без урахування ваги \r\nтехнічного рішення";
+            this.noWeightSol_RB.UseVisualStyleBackColor = true;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.dataGridView1);
@@ -316,7 +473,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(621, 379);
+            this.tabPage2.Size = new System.Drawing.Size(621, 448);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Оцінки рішень";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -360,7 +517,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(621, 379);
+            this.tabPage3.Size = new System.Drawing.Size(621, 448);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Генетичний алгоритм";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -714,7 +871,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(621, 379);
+            this.tabPage4.Size = new System.Drawing.Size(621, 448);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Аналіз роботи генетичного алгоритму";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -788,44 +945,33 @@
     "цінка";
             this.FuncEpochRatingXYZ_RB.UseVisualStyleBackColor = true;
             // 
-            // groupBox7
+            // InitializationTables_Button
             // 
-            this.groupBox7.Controls.Add(this.noWeightSol_RB);
-            this.groupBox7.Controls.Add(this.withWeightSol_RB);
-            this.groupBox7.Location = new System.Drawing.Point(11, 163);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(601, 100);
-            this.groupBox7.TabIndex = 12;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Конфігурація мат. моделей";
+            this.InitializationTables_Button.Enabled = false;
+            this.InitializationTables_Button.Location = new System.Drawing.Point(14, 349);
+            this.InitializationTables_Button.Name = "InitializationTables_Button";
+            this.InitializationTables_Button.Size = new System.Drawing.Size(176, 23);
+            this.InitializationTables_Button.TabIndex = 13;
+            this.InitializationTables_Button.Text = "Проініціалізувати таблиці";
+            this.InitializationTables_Button.UseVisualStyleBackColor = true;
+            this.InitializationTables_Button.Click += new System.EventHandler(this.InitializationTables_Button_Click);
             // 
-            // withWeightSol_RB
+            // SaveWeightButton
             // 
-            this.withWeightSol_RB.AutoSize = true;
-            this.withWeightSol_RB.Checked = true;
-            this.withWeightSol_RB.Location = new System.Drawing.Point(14, 26);
-            this.withWeightSol_RB.Name = "withWeightSol_RB";
-            this.withWeightSol_RB.Size = new System.Drawing.Size(129, 30);
-            this.withWeightSol_RB.TabIndex = 0;
-            this.withWeightSol_RB.TabStop = true;
-            this.withWeightSol_RB.Text = "З урахуванням ваги \r\nтехнічного рішення";
-            this.withWeightSol_RB.UseVisualStyleBackColor = true;
-            // 
-            // noWeightSol_RB
-            // 
-            this.noWeightSol_RB.AutoSize = true;
-            this.noWeightSol_RB.Location = new System.Drawing.Point(180, 26);
-            this.noWeightSol_RB.Name = "noWeightSol_RB";
-            this.noWeightSol_RB.Size = new System.Drawing.Size(133, 30);
-            this.noWeightSol_RB.TabIndex = 1;
-            this.noWeightSol_RB.Text = "Без урахування ваги \r\nтехнічного рішення";
-            this.noWeightSol_RB.UseVisualStyleBackColor = true;
+            this.SaveWeightButton.Enabled = false;
+            this.SaveWeightButton.Location = new System.Drawing.Point(476, 72);
+            this.SaveWeightButton.Name = "SaveWeightButton";
+            this.SaveWeightButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveWeightButton.TabIndex = 9;
+            this.SaveWeightButton.Text = "Занести";
+            this.SaveWeightButton.UseVisualStyleBackColor = true;
+            this.SaveWeightButton.Click += new System.EventHandler(this.SaveWeightButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 431);
+            this.ClientSize = new System.Drawing.Size(629, 500);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -840,6 +986,11 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -859,8 +1010,6 @@
             this.panel3.ResumeLayout(false);
             this.groupBox3DScatterChart.ResumeLayout(false);
             this.groupBox3DScatterChart.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -932,6 +1081,18 @@
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.RadioButton noWeightSol_RB;
         private System.Windows.Forms.RadioButton withWeightSol_RB;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox wModByGoal_textBox;
+        private System.Windows.Forms.TextBox wSolByGoal_textBox;
+        private System.Windows.Forms.TextBox wSolByFunc_textBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Button InitializationTables_Button;
+        private System.Windows.Forms.Button SaveWeightButton;
     }
 }
 

@@ -24,8 +24,8 @@ namespace MorphAnalysis
         private CacheData cacheData = CacheData.GetInstance();
 
         //для зберігання номерів  поколінь, їх кращих хромосом та оцінок
-        private Dictionary<int, double> resultGAValueDict      ;// = new Dictionary<int, double>();
-        private Dictionary<int, string> resultGAChromosomeDict ;// = new Dictionary<int, string>();
+        private Dictionary<int, double> resultGAValueDict;// = new Dictionary<int, double>();
+        private Dictionary<int, string> resultGAChromosomeDict;// = new Dictionary<int, string>();
 
         //зберігання налаштувань генетичного алгоритму для зберігання в xml-документ
         //де ключ - анг. назва, значення - укр.
@@ -33,13 +33,23 @@ namespace MorphAnalysis
 
         private bool useWeightSolutionForMathModel = false;
 
+        MorphTable morphTable;
+        TableParametersGoalsSolutions tableParametersGoalsSolutions;
+        TableParametersGoalsModifications tableParametersGoalsModifications;
+
         public Form1()
         {
             InitializeComponent();
             resultGAValueDict = new Dictionary<int, double>();
             resultGAChromosomeDict = new Dictionary<int, string>();
 
-           // settingsGA = new Dictionary<string, string>();
+            // settingsGA = new Dictionary<string, string>();
+
+            //Створення оціночних таблиць
+            //morphTable = new MorphTable();
+            //tableParametersGoalsSolutions = new TableParametersGoalsSolutions();
+            //tableParametersGoalsModifications = new TableParametersGoalsModifications();
+
         }
 
         #region Таблиці ініціалізації даних
@@ -94,7 +104,7 @@ namespace MorphAnalysis
         private void Form1_Load(object sender, EventArgs e)
         {
             DisabledEnabledButtons();
-           // settingsGA = new Dictionary<string, string>();
+            // settingsGA = new Dictionary<string, string>();
         }
 
         #region 1-ша вкладка (Експертна оцінка)
@@ -106,8 +116,8 @@ namespace MorphAnalysis
         {
             int value = int.Parse(textBoxCountExpert.Text);
             new TableFunctionsSolutions(value).Show();
-            buttonSolsFuncs.Enabled = false;
-            buttonMorphTable.Enabled = true;
+            //buttonSolsFuncs.Enabled = false;
+            //buttonMorphTable.Enabled = true;
         }
 
         //Відображення таблиці для оцінювання експертами цілей та їх параметрів
@@ -115,9 +125,9 @@ namespace MorphAnalysis
         {
             int value = int.Parse(textBoxCountExpert.Text);
             new TableParametersOfGoals(value).Show();
-            buttonParamsGoals.Enabled = false;
-            buttonSolParamTable.Enabled = true;
-            buttonModParamTable.Enabled = true;
+            //buttonParamsGoals.Enabled = false;
+            //buttonSolParamTable.Enabled = true;
+            //buttonModParamTable.Enabled = true;
         }
 
         #endregion
@@ -131,30 +141,31 @@ namespace MorphAnalysis
             if (e.KeyCode == Keys.Enter)
             {
                 if (textBoxCountExpert.Text is null || textBoxCountExpert.Text == "")
-                {
-                    MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                    DisabledEnabledButtons();
-                }
+                    goto ErrorExpert;
                 else
                 {
                     if (!int.TryParse(textBoxCountExpert.Text, out value))
-                    {
-                        MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                        DisabledEnabledButtons();
-                    }
+                        goto ErrorExpert;
                     else
                     {
                         if (value > 0 && value <= 10)
-                        {
-                            DisabledEnabledButtons(true);
-                        }
+                            goto ExitExpert;
                         else
-                        {
-                            MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
-                            DisabledEnabledButtons();
-                        }
+                            goto ErrorExpert;
                     }
                 }
+            }
+
+            ErrorExpert:
+            {
+                MessageBox.Show("Кількість експертів повинно бути числом і знаходитися в діапазоні: (0;10]", "Помилка введення");
+                DisabledEnabledButtons();
+            }
+
+            ExitExpert:
+            {
+                DisabledEnabledButtons(true);
+                return;
             }
 
         }
@@ -163,7 +174,7 @@ namespace MorphAnalysis
         {
             buttonSolsFuncs.Enabled = enabled;
             buttonParamsGoals.Enabled = enabled;
-            buttonModParamTable.Enabled = enabled;
+           // buttonModParamTable.Enabled = enabled;
         }
 
         #endregion
@@ -173,23 +184,31 @@ namespace MorphAnalysis
         //Відображення морфологічної таблиці
         private void buttonMorphTable_Click(object sender, EventArgs e)
         {
-            bool useWeightSolution = IsUseWeightSolution(); 
+            bool useWeightSolution = IsUseWeightSolution();
 
             if (cacheData.GetListElements<SolutionsOfFunction>(true).Count > 0
                 || cacheData.GetListElements<Function>(true).Count > 0)
-                new MorphTable(useWeightSolution).Show();
-                //new MorphTable().Show();
+            {
+                //morphTable = new MorphTable(useWeightSolution);
+                morphTable.UseWeightSolution = useWeightSolution;
+                //morphTable.SetWeightMathModel = Convert.ToDecimal(wSolByFunc_textBox.Text);
+                morphTable.Show();
+            }
+            //new MorphTable().Show();
         }
 
         //Відображення таблиці оцінювання тех. рішень відповідно до параметрів цілей
         private void buttonSolParamTable_Click(object sender, EventArgs e)
         {
-            bool useWeightSolution = IsUseWeightSolution();
 
             if (cacheData.GetListElements<ParametersGoal>(true).Count > 0
                 || cacheData.GetListElements<SolutionsOfFunction>(true).Count > 0)
-                //new TableParametersGoalsSolutions(useWeightSolution).Show();
-                new TableParametersGoalsSolutions().Show();
+            //new TableParametersGoalsSolutions(useWeightSolution).Show();
+            {
+                //tableParametersGoalsSolutions = new TableParametersGoalsSolutions();
+                //tableParametersGoalsSolutions.SetWeightMathModel = Convert.ToDecimal(wSolByGoal_textBox.Text);
+                tableParametersGoalsSolutions.Show();
+            }
         }
 
         //Відображення таблиці оцінювання модифікацій відповідно до параметрів цілей
@@ -197,12 +216,100 @@ namespace MorphAnalysis
         {
             if (cacheData.GetListElements<ParametersGoal>(true).Count > 0
                 || cacheData.GetListElements<Modification>().Count > 0)
-                new TableParametersGoalsModifications().Show();
+            {
+                // tableParametersGoalsModifications = new TableParametersGoalsModifications();
+               // tableParametersGoalsModifications.SetWeightMathModel = Convert.ToDecimal(wModByGoal_textBox.Text);
+                tableParametersGoalsModifications.Show();
+            }
+ 
         }
-
 
         #endregion
 
+        #region Робота з вагою для мат моделей
+
+        //Не враховувати вагу мат. моделей
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            SwitchEnabledTextBoxForWeight(radioButton1, false);
+            InitializeTables();
+
+            SetWeightMathModelToTables("1", "1", "1");
+
+            InitializationTables_Button.Enabled = true;
+        }
+
+        //Враховувати вагу мат. моделей
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            SwitchEnabledTextBoxForWeight(radioButton2, true);
+            InitializeTables();
+
+            //из-за этого ошибка
+           // SetWeightMathModelToTables(wSolByFunc_textBox.Text, wSolByGoal_textBox.Text, wModByGoal_textBox.Text);
+
+            InitializationTables_Button.Enabled = true;
+
+            SaveWeightButton.Enabled = true;
+        }
+
+        private void InitializeTables()
+        {
+           morphTable = new MorphTable();
+           tableParametersGoalsSolutions = new TableParametersGoalsSolutions();
+           tableParametersGoalsModifications = new TableParametersGoalsModifications();
+        }
+
+        private void SwitchEnabledTextBoxForWeight(RadioButton rb, bool state)
+        {
+            if (rb.Checked)
+            {
+                wModByGoal_textBox.Enabled = state;
+                wSolByFunc_textBox.Enabled = state;
+                wSolByGoal_textBox.Enabled = state;
+            }
+        }
+
+        private void textBoxWeight(object sender, KeyEventArgs e)
+        {
+            decimal value;
+
+            TextBox txtBox = sender as TextBox;
+            if (txtBox is null) return;
+
+            if (txtBox.Text is null || txtBox.Text == "")
+                goto Error;
+            else
+            {
+                if (!Decimal.TryParse(txtBox.Text, out value))
+                    goto Error;
+                else
+                {
+                    if (value >= 0 && value <= 1)
+                        goto Exit;
+                    else
+                        goto Error;
+                }
+            }
+
+            Exit:
+            return;
+
+            Error:
+            {
+                MessageBox.Show("Введене значення повинно бути числом і знаходитися в діапазоні: [0;1]", "Помилка введення");
+                txtBox.Text = "0";
+            }
+        }
+
+        private void textBoxWeight_Leave(object sender, EventArgs e)
+        {
+            textBoxWeight(sender, null);
+        }
+
+        #endregion
+
+        //Чи використовувати вагу технічного рішення 
         bool IsUseWeightSolution()
         {
             if (withWeightSol_RB.Checked)
@@ -212,8 +319,33 @@ namespace MorphAnalysis
             return useWeightSolutionForMathModel;
         }
 
-        #endregion
+        private void InitializationTables_Button_Click(object sender, EventArgs e)
+        {
+            buttonMorphTable.Enabled = true;
+            buttonSolParamTable.Enabled = true;
+            buttonModParamTable.Enabled = true;
 
+            InitializationTables_Button.Enabled = false;
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+        }
+
+        private void SaveWeightButton_Click(object sender, EventArgs e)
+        {
+            SetWeightMathModelToTables(wSolByFunc_textBox.Text, wSolByGoal_textBox.Text, wModByGoal_textBox.Text);
+            MessageBox.Show("Вагу мат. моделей збережено!", "Вага мат. моделей");
+        }
+
+        private void SetWeightMathModelToTables(string first, string second, string third)
+        {
+            morphTable.SetWeightMathModel = Convert.ToDecimal                           (first);
+            tableParametersGoalsSolutions.SetWeightMathModel = Convert.ToDecimal        (second);
+            tableParametersGoalsModifications.SetWeightMathModel = Convert.ToDecimal    (third);
+        }
+
+
+
+        #endregion
 
         #region 2-га вкладка (Оцінки рішень) 
 
@@ -332,9 +464,9 @@ namespace MorphAnalysis
 
             //отримаємо діапазон розміру популяції
             int minSizePopulation = Convert.ToInt32(minSizePopulationTextBox.Text.ToString());
-            if(minSizePopulation < 2)
+            if (minSizePopulation < 2)
             {
-                MessageBox.Show("Мінімальний розмір популяції повинен бути 2 та більше осіб","Помилка введення");
+                MessageBox.Show("Мінімальний розмір популяції повинен бути 2 та більше осіб", "Помилка введення");
                 return;
             }
             int maxSizePopulation = Convert.ToInt32(maxSizePopulationTextBox.Text.ToString());
@@ -365,7 +497,7 @@ namespace MorphAnalysis
 
 
             builderGA.GenerationRan(resultGAValueDict, resultGAChromosomeDict); //ga);
-                                      
+
 
             builderGA.Start();//ga);
 
@@ -481,7 +613,7 @@ namespace MorphAnalysis
             switch (tag)
             {
                 case "EliteSelection":
-                    selection = Selection.EliteSelection;                    
+                    selection = Selection.EliteSelection;
                     break;
 
                 case "TournamentSelection":
@@ -629,7 +761,7 @@ namespace MorphAnalysis
             if (selectedRB == null) return;
 
             string[] titleAxisXYZ = new string[3];
-            int chooseItem = 1; 
+            int chooseItem = 1;
 
             switch (selectedRB.Tag)
             {
@@ -641,7 +773,7 @@ namespace MorphAnalysis
                     break;
 
                 case "2":
-                    
+
                     titleAxisXYZ[0] = "x - кількість функцій";
                     titleAxisXYZ[1] = "y - макс.кількість популяції";
                     titleAxisXYZ[2] = "z - найкраща оцінка";
@@ -670,5 +802,7 @@ namespace MorphAnalysis
         {
             new AboutProgram().Show();
         }
+
+
     }
 }
