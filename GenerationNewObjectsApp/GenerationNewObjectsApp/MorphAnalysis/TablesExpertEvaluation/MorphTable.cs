@@ -52,6 +52,16 @@ namespace MorphAnalysis.TablesExpertEvaluation
             this.useWeightSolution = useWeightSolution;
         }
 
+        public bool UseWeightSolution
+        {
+            set { this.useWeightSolution = value; }
+        }
+
+        public decimal SetWeightMathModel
+        {
+            private get;
+            set;
+        } = 1;
 
         private void MorphTable_Load(object sender, EventArgs e)
         {
@@ -142,6 +152,9 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
 
                 decimal finalEstimate = estimateSol * sum;
+
+                //з урахуванням ваги мат. моделі
+                finalEstimate *= SetWeightMathModel;
 
                 selectedSolOfFunc.rating = finalEstimate;
                 dataGridView1[dataGridView1.Columns.Count - 1, i].Value = finalEstimate;

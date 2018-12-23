@@ -42,6 +42,11 @@ namespace MorphAnalysis.TablesExpertEvaluation
             configDGV = new ConfigDGV();
         }
 
+        public decimal SetWeightMathModel
+        {
+            private get;
+            set;
+        } = 1;
 
         private void TableParametersGoalsModifications_Load(object sender, EventArgs e)
         {
@@ -140,6 +145,10 @@ namespace MorphAnalysis.TablesExpertEvaluation
                 
                 //накопичуємо оцінку всіх модифікацій
                 sumAllMods += sum;
+
+
+                //з урахуванням ваги мат. моделі
+                sumAllMods *= SetWeightMathModel;
             }
 
             dataGridView1.Columns[dataGridView1.Columns.Count - 1].Visible = true;

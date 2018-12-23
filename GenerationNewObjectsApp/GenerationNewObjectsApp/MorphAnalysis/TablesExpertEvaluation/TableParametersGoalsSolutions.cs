@@ -42,6 +42,12 @@ namespace MorphAnalysis.TablesExpertEvaluation
 
         }
 
+        public decimal SetWeightMathModel
+        {
+            private get;
+            set;
+        } = 1;
+
         private void TableParametersGoalsSolutions_Load(object sender, EventArgs e)
         {
 
@@ -139,6 +145,9 @@ namespace MorphAnalysis.TablesExpertEvaluation
                     //cacheData.AddParamGoalForSolToList(parameterGoalForSolution);
                     cacheData.AddElement<ParametersGoalsForSolution>(parameterGoalForSolution);
                 }
+
+                //з урахуванням ваги мат. моделі
+                sum *= SetWeightMathModel;
 
                 dataGridView1[dataGridView1.Columns.Count - 1, i].Value = sum;
 
